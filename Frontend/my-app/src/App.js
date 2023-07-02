@@ -3,7 +3,7 @@ import Home from "./pages/home/Home.jsx";
 import Compras from "./pages/compras/Compras.jsx";
 import Login from "./pages/login/Login.jsx";
 import Ventas from "./pages/ventas/Ventas.jsx";
-import NavBar from "./components/navbar/NavBar.jsx";
+import NavBar from "./components/Navbar/NavBar.jsx";
 
 const App = () => {
   return (
