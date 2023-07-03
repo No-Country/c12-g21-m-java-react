@@ -3,9 +3,6 @@ import Home from "./pages/home/Home.jsx";
 import Compras from "./pages/compras/Compras.jsx";
 import Login from "./pages/login/Login.jsx";
 import Ventas from "./pages/ventas/Ventas.jsx";
-<<<<<<< HEAD
-import NavBar from "./components/Navbar/NavBar.jsx";
-=======
 import Navbar from "./components/navbar/Navbar.jsx";
 import HomeIcon from "@mui/icons-material/Home";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
@@ -34,7 +31,6 @@ const navLinks = [
     icon: <LoginIcon />,
   },
 ];
->>>>>>> front-pablo
 
 const App = () => {
   return (
