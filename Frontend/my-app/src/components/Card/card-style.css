@@ -1,0 +1,14 @@
+.main-container {
+    height: 20em;
+    display: flex;
+}
+
+.main-description {
+    background-color: #D9D9D9;
+    width: 70%;
+}
+
+.main-image img {
+    max-height: 100%;
+    object-fit: fill;
+}
