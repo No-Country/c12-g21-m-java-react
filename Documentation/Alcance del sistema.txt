@@ -1,0 +1,29 @@
+Alcance del sistema:
+Crear un sitio web de e-commerce circular para poder comprar y vender muebles usados. En donde sea posible:
+buscar muebles por tipo (sofas, mesas, sillas, etc.) y categoría (living, comedor, cocina, baño), rango de precios y ubicación.
+como comprador, poder contactar directamente con el vendedor (opcional)
+como vendedor, poder publicar mis muebles usados con fotos, descripción, precio, categoría, tipo, mi ubicación, estado, condición, color.
+como comprador, agregar a favoritos muebles de su interés.
+como comprador, ver las calificaciones y reseñas de otros usuarios sobre los vendedores y sus muebles.
+como vendedor, poder quitar los muebles del sitio (ya sea por arrepentimiento o porque se vendió)
+
+Lista de funcionalidades a detalle:
+
+-Registro usuario segun roles (roles: Vendedor - Comprador)
+-Login usuario
+-Filtrar muebles publicados según las categorías establecidas:
+         Las categorías son: -condición (Sin uso- impecable- etc)-precio (rango de precios)-categoría (comedor, cocina)-tipo (mesa, sillas, armario, etc)
+-Ver detalle de un producto y sus datos. Asi como tambien, poder ver -la calificación de ese usuario como vendedor si la tiene.
+
+Rol Vendedor:
+-Cagar un mueble con los datos solicitados y fotos.
+-Publicarlo para vender/ despublicarlo.
+-Ver los muebles vendidos (grilla con acciones).
+-Ver y responder mensajes de compradores (opcional).
+
+Rol Comprador:
+-Cagar un mueble con los datos solicitados y fotos
+-Publicarlo para vender/ despublicarlo
+-Ver los muebles comprados (grilla con acciones).
+-Ver y responder mensajes de compradores(opcional)
+-Comprar un mueble, pago con pasarela de pago  (opcional)
