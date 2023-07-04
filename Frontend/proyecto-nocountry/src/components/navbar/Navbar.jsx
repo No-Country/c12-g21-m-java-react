@@ -10,6 +10,7 @@ import NavListDrawer from "./NavListDrawer";
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 
 export default function Navbar({ navLinks }) {
   const [open, setOpen] = useState(false);
@@ -57,3 +58,6 @@ export default function Navbar({ navLinks }) {
     </>
   );
 }
+Navbar.propTypes = {
+  navLinks: PropTypes.array.isRequired,
+};
