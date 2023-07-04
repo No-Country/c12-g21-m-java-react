@@ -1,78 +1,24 @@
-.ventasMain {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.ventas-main {
+    max-width: 1320px;
+    padding: 0 10px;
+    margin: 0 auto;
 }
-
-.tituloVentasContainer {
-    margin: 60px;
-    width: 1280px;
-    height: 163px;
-    background-color: #cccccc;
+.title {
+    background-color: #d9d9d9;
+    padding: 2rem;
+    margin: 2.5rem 0;
 }
-
-.tituloPaginaVentas {
-    font-size: 64px;
-    text-align: center;
-}
-
-.containerVentaProducto {
-    width: 100%;
-    height: 190px;
-    background-color: #cccccc;
+.btn-venta-container {
+    background-color: #d9d9d9;
+    padding: 2.5rem;
+    margin-bottom: 2.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-.btnVentaProducto {
-    background-color: #a7a7a7;
-    border: none;
-    width: 620px;
-    height: 108px;
-    font-size: 40px;
-    cursor: pointer;
+.btn-venta-container button {
+    padding: 1rem 2rem;
 }
-
-.btnVentaProducto:hover {
-    background-color: #7b7b7b;
-}
-
-.consejosContainer {
-    margin: 120px 0;
-    background-color: #cccccc;
-    width: 1280px;
-    height: 378px;
-    display: flex;
-}
-
-.consejosLeft {
-    width: 60%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.consejosLeft h3 {
-    font-size: 64px;
-}
-
-.consejosLeft p {
-    font-size: 24px;
-}
-
-.consejosLeft h3, p {
-    padding: 0 30px;
-}
-
-.consejosRight {
-    width: 40%;
-    height: 100%;
-}
-
-.consejosRight img {
-    width: 100%;
-    height: 100%;
+.consejo-venta card {
+    padding: 1rem;
 }

@@ -3,7 +3,7 @@ const Card = ({title, description, img}) => {
   return (
       <div className="main-container">
           <div className="main-description">
-              <h1>{title}</h1>
+              <h2>{title}</h2>
               <p>{description}</p>
           </div>
           <div className="main-image">
