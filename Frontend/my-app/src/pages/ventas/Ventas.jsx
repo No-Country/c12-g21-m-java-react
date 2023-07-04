@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import './ventas-style.css';
 
 const Ventas = () => {
