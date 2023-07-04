@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import Card from '../../components/Card/Card';
+import '../ventas/ventas-style.css'
 
 const Ventas = () => {
   return (
