@@ -9,17 +9,23 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Favorite {
+public class Product_Image {
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idFavorite;
+    private Integer idProductImage;
+
+    @Column(length = 300, nullable = false)
+    private String imagePath;
+
+    @Column(nullable = false)
+    private boolean first;
 
     @ManyToOne
-    @JoinColumn(name = "id_product", nullable = false, foreignKey = @ForeignKey(name= "FK_Favorite_Product"))
+    @JoinColumn(name = "id_product", nullable = false, foreignKey = @ForeignKey(name= "FK_Product_image_Product"))
     private Product product;
 
-    @ManyToOne
-    @JoinColumn(name = "id_user", nullable = false, foreignKey = @ForeignKey(name= "FK_Favorite_User"))
-    private User user;
+
+
+
 }
