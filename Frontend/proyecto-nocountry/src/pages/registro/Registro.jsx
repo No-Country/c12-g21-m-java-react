@@ -35,13 +35,13 @@ export default function Registro() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  console.log(nombre);
-  console.log(apellido);
-  console.log(provincia);
-  console.log(ciudad);
-  console.log(codigoPostal);
-  console.log(email);
-  console.log(password);
+  // console.log(nombre);
+  // console.log(apellido);
+  // console.log(provincia);
+  // console.log(ciudad);
+  // console.log(codigoPostal);
+  // console.log(email);
+  // console.log(password);
 
   const [error, setError] = useState({
     error: false,
