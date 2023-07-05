@@ -11,7 +11,7 @@ const Ventas = () => {
         <h2>Lorem, ipsum dolor sit amet</h2>
       </div>
       <div className="btn-venta-container">
-        <Link to="/quierovender"><Button variant="contained">VENDER MI PRODUCTO</Button></Link>
+        <Link to="/vender"><Button variant="contained">VENDER MI PRODUCTO</Button></Link>
       </div>
       <div className="consejo-venta">
         <Card title={"Consejos de venta para vos"}
