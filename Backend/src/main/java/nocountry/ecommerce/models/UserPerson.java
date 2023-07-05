@@ -32,4 +32,14 @@ public class UserPerson {
     @JoinColumn(name = "id_user", referencedColumnName = "idUser")
     private User user;
 
+    @Column(nullable = false)
+    private boolean newsletter;
+
+    @ManyToOne
+    @JoinColumn(name = "id_city", nullable = false, foreignKey = @ForeignKey(name= "FK_User_person_City"))
+    private City city;
+
+    @Column(length = 50, nullable = false)
+    private String postalCode;
+
 }
