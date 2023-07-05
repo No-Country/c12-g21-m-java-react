@@ -14,32 +14,31 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Order {
+public class Sale {
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idOrder;
+    private Integer idSale;
 
     @Column(nullable = false)
-    private LocalDateTime orderDate;
+    private LocalDateTime saleDate;
 
     @Column(nullable = false, length = 20)
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "id_user", nullable = false, foreignKey = @ForeignKey(name= "FK_Order_User"))
+    @JoinColumn(name = "id_user_buyer", nullable = false, foreignKey = @ForeignKey(name= "FK_Sale_User_Buyer"))
     private User user;
 
     @Column(columnDefinition = "decimal(6,2)", nullable = false)
     private double amount;
 
-    //@OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "id_rating")
-    //@JoinColumn(name = "id_rating")
-    //private Rating rating;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_rating", referencedColumnName = "idRating")
+    private Rating rating;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<OrderDetail> details;
+    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<SaleDetail> details;
 
 
 

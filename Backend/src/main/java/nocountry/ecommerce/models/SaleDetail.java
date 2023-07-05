@@ -11,18 +11,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class OrderDetail {
+public class SaleDetail {
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idOrderDetail;
+    private Integer idSaleDetail;
 
     @ManyToOne
-    @JoinColumn(name = "id_product", nullable = false, foreignKey = @ForeignKey(name= "FK_OrderDetail_Order"))
+    @JoinColumn(name = "id_product", nullable = false, foreignKey = @ForeignKey(name= "FK_SaleDetail_Product"))
     private Product product;
-
+    @Column(nullable = false)
+    private Integer quantity;
     @ManyToOne
-    @JoinColumn(name = "id_order", nullable = false)
-    private Order order;
+    @JoinColumn(name = "id_sale", nullable = false, foreignKey = @ForeignKey(name= "FK_SaleDetail_Sale"))
+    private Sale sale;
 
 }

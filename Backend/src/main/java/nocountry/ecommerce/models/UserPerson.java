@@ -9,12 +9,12 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "user_data")
-public class UserData {
+
+public class UserPerson {
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idUserData;
+    private Integer idUserPerson;
 
     @Column(length = 100, nullable = false)
     private String firstName;
