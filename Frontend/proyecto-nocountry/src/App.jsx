@@ -3,6 +3,7 @@ import Home from "./pages/home/Home.jsx";
 import Compras from "./pages/compras/Compras.jsx";
 import Login from "./pages/login/Login.jsx";
 import Ventas from "./pages/ventas/Ventas.jsx";
+import quieroVender from "./pages/quieroVender/quieroVender.jsx";
 import Navbar from "./components/navbar/Navbar.jsx";
 import HomeIcon from "@mui/icons-material/Home";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
@@ -41,6 +42,7 @@ const App = () => {
         <Route path="/compras" element={<Compras />} />
         <Route path="/ventas" element={<Ventas />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/quierovender" element={<quieroVender />} />
       </Routes>
     </>
   );
