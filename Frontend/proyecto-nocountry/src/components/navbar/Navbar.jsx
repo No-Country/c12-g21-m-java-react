@@ -17,7 +17,7 @@ export default function Navbar({ navLinks }) {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Toolbar>
           <Box display="flex" flexGrow={1} />
           <IconButton
