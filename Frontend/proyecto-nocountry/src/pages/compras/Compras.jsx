@@ -1,84 +1,46 @@
-import Card from '../../components/Card/Card';
-import { useRef } from 'react';
-
+import { FormGroup, FormControlLabel, Checkbox } from '@mui/material'
 import './compras-style.css'
+import CardProduct from '../../components/CardProduct/CardProduct';
 
 const Compras = () => {
 
-  const filaRef = useRef(null);
+  const items = [
+    { title: "Producto", description: "Lorem ipsum, dolor sit amet", price: 500, img: "" },
+    { title: "Producto", description: "Lorem ipsum, dolor sit amet", price: 500, img: "" },
+    { title: "Producto", description: "Lorem ipsum, dolor sit amet", price: 500, img: "" },
+    { title: "Producto", description: "Lorem ipsum, dolor sit amet", price: 500, img: "" },
+    { title: "Producto", description: "Lorem ipsum, dolor sit amet", price: 500, img: "" },
+    { title: "Producto", description: "Lorem ipsum, dolor sit amet", price: 500, img: "" },
+    { title: "Producto", description: "Lorem ipsum, dolor sit amet", price: 500, img: "" },
+    { title: "Producto", description: "Lorem ipsum, dolor sit amet", price: 500, img: "" },
+    { title: "Producto", description: "Lorem ipsum, dolor sit amet", price: 500, img: "" },
+    { title: "Producto", description: "Lorem ipsum, dolor sit amet", price: 500, img: "" },
+  ]
 
-  const scrollDerecha = () => {
-    const offsetWidth = filaRef.current.offsetWidth;
-    const scrollOffset = offsetWidth + filaRef.current.scrollLeft;
-    filaRef.current.scrollTo({
-      left: scrollOffset,
-      behavior: 'smooth',
-      block: 'nearest',
-    });
-  };
-
-  const scrollIzquierda = () => {
-    const offsetWidth = filaRef.current.offsetWidth;
-    const scrollOffset = filaRef.current.scrollLeft - offsetWidth;
-    filaRef.current.scrollTo({
-      left: scrollOffset,
-      behavior: 'smooth',
-      block: 'nearest',
-    });
-  };
 
   return (
-    <div className="container">
-      <div className="title-container">
-        <h1>Lorem ipsum, dolor sit amet</h1>
-      </div>
-      <Card title={"Consejos de compra para vos"}
-        description={"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa quaerat esse quo quae, earum officiis mollitia repellendus cupiditate dolorem sunt, iusto autem id. Consequuntur ipsum amet aliquam excepturi debitis modi."}
-        img={'https://www.unclaimedfurnitureupstate.com/wp-content/uploads/2023/03/Living-Room-Category-Page-Photo.webp'}
-        />
-      <div className="destacados-contenedor mt-5">
-        <h2>Destacados</h2>
-        <div className="contenedor-principal">
-          <button role="button" id="flecha-izquierda" onClick={scrollIzquierda} className="flecha-izquierda">{"<"}</button>
-          <div ref={filaRef} className="contenedor-carousel">
-            <div className="imagen">
-              <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-            </div>
-            <div className="imagen">
-              <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-            </div>
-            <div className="imagen">
-              <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-            </div>
-            <div className="imagen">
-              <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-            </div>
-            <div className="imagen">
-              <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-            </div>
-            <div className="imagen">
-              <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-            </div>
-            <div className="imagen">
-              <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-            </div>
-            <div className="imagen">
-              <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-            </div>
-            <div className="imagen">
-              <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-            </div>
-            <div className="imagen">
-              <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-            </div>
-            <div className="imagen">
-              <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-            </div>
+    <div className='compras-container'>
+      <div className="container">
+        <div className="title-container">
+          <h1>Lorem ipsum, dolor sit amet</h1>
+        </div>
+        <div className='row'>
+          <div className='filtro col-2'>
+            <h2 className='filtro-title'>Filtrar por:</h2>
+            <FormGroup>
+              <FormControlLabel control={<Checkbox />} label="Categoría" />
+              <FormControlLabel control={<Checkbox />} label="Ambiente" />
+              <FormControlLabel control={<Checkbox />} label="Tipo de mueble" />
+              <FormControlLabel control={<Checkbox />} label="Estado" />
+            </FormGroup>
           </div>
 
-          <button role="button" onClick={scrollDerecha} id="flecha-derecha" className="flecha-derecha">{">"}</button>
+          <div className='product-container col-10'>
+            {items.map((item, indice) => {
+              return <CardProduct title={item.title} price={item.price} description={item.description} img={item.img} key={indice} />
+            })}
+          </div>
         </div>
-
       </div>
     </div>
   )
