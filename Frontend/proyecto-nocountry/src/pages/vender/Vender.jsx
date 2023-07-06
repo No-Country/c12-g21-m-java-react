@@ -57,7 +57,7 @@ function Vender() {
 
                     <Box component="form" className="first-form">
                         <label htmlFor="form">Precio: </label>
-                        <Box component="input" className="linkBox" placeholder="USD | Escriba aquí la descripción de su producto"></Box>
+                        <Box component="input" className="linkBox" placeholder="USD | Escriba aquí el precio del producto"></Box>
                     </Box>
 
                     <Box component="form" className="first-form">
