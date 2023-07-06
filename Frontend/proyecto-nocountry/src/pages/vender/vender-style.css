@@ -1,0 +1,81 @@
+.tittle-vender {
+    background-color: #d9d9d9;
+    padding: 2rem;
+    margin: 2.5rem 0;
+    text-align: center;
+}
+
+.first-form {
+    max-width: 60%;
+    padding: 0 10px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.linkBox {
+    border: 6px solid #d9d9d9;
+    border-radius: 5px;
+    padding: .6rem;
+    margin: 2rem 0;
+}
+
+.linkBoxUsd {
+    border: 6px solid #d9d9d9;
+    border-radius: 5px;
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.linkBoxInput {
+    border: none;
+    width: 100%;
+}
+
+.fotoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fotoContainer p {
+    margin-bottom: 3rem;
+}
+
+.fotoContainer Button {
+    background-color: #9f9f9f;
+    color: white;
+    padding: .6rem 2rem;
+}
+
+.fotoContainer Button:hover {
+    background-color: black;
+}
+
+.btnPublicar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btnPublicar Button {
+    background-color: #9f9f9f;
+    color: white;
+    padding: .6rem 13rem;
+    margin: 4rem 0;
+}
+
+.btnPublicar Button:hover {
+    background-color: black;
+}
+
+.infoLegal {
+    background-color: #d9d9d9;
+    padding: 1rem 2.5rem;
+}
+
+.infoLegal p {
+    margin: 0;
+}
