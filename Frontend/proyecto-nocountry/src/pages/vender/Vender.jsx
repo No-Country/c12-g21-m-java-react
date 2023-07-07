@@ -31,7 +31,6 @@ function Vender() {
                         {labelLinkCat}
                     </Box>
                 </Box>
-
                 <Box component="form" className="first-form">
                     <label htmlFor="form">Ubicación del producto: </label>
                     <Box component="input" className="linkBox" placeholder="Escriba aquí la ubicación del producto"></Box>
@@ -42,24 +41,20 @@ function Vender() {
                         <label htmlFor="form">Titulo: </label>
                         <Box component="input" className="linkBox" placeholder="Escriba aquí el titulo de su publicación"></Box>
                     </Box>
-
                     <Box component="form" className="first-form">
                         <label htmlFor="form">Descripción del producto: </label>
                         <Box component="input" className="linkBox" placeholder="Escriba aquí la descripción de su producto"></Box>
                     </Box>
-
                     <Box component="form" className="first-form">
                         <label htmlFor="form">Estado del producto: </label>
                         <Box component="text" className="linkBox">
                             {labelLinkEstado}
                         </Box>
                     </Box>
-
                     <Box component="form" className="first-form">
                         <label htmlFor="form">Precio: </label>
                         <Box component="input" className="linkBox" placeholder="USD | Escriba aquí el precio del producto"></Box>
                     </Box>
-
                     <Box component="form" className="first-form">
                         <label htmlFor="form">Imagen: </label>
                         <Box className="fotoContainer"
@@ -68,19 +63,19 @@ function Vender() {
                                 backgroundColor: '#d9d9d9',
                             }} >
                             <p>Añadir hasta 6 fotografías</p>
-                            <Button>Examinar</Button>
+                            <Button>
+                                <p>EXAMIMAR</p>
+                                <input type="file" name="examinar" id="examinar" />
+                            </Button>
                         </Box>
                     </Box>
-
                     <div className="btnPublicar">
                         <Button>Publicar</Button>
                     </div>
-
                     <div className="infoLegal">
                         <p>Información legal</p>
                         <p>Dirección</p>
                     </div>
-
                 </Box>
             </div>
         </Container>
