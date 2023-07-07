@@ -1,9 +1,9 @@
 #
 # Build stage
 #
-FROM maven:4-openjdk-17 AS build
-COPY . .
-RUN mvn clean package -DskipTests
+#FROM maven:4-openjdk-17 AS build
+#COPY . .
+#RUN mvn clean package -DskipTests
 
 #
 # Package stage
