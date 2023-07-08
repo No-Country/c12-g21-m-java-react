@@ -9,7 +9,7 @@
 # Package stage
 #
 FROM adoptopenjdk:17-jdk-alpine
-COPY --from=build  /out/artifacts/Backend_jar/Backend.jar demo.jar
+COPY --from=build  /out/Backend.jar demo.jar
 # ENV PORT=8080
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","demo.jar"]
