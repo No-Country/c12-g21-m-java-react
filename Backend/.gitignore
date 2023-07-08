@@ -70,7 +70,7 @@ local.properties
 .buildpath
 
 # sbteclipse plugin
-.target
+#.target
 
 # Tern plugin
 .tern-project
@@ -169,7 +169,7 @@ cmake-build-*/
 *.iws
 
 # IntelliJ
-#out/
+out/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
