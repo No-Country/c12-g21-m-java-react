@@ -1,14 +1,14 @@
 #
 # Build stage
 #
-#FROM maven:4-openjdk-17 AS build
+FROM maven:4-openjdk-17 AS build
 #COPY . .
-#RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 #
 # Package stage
 #
-FROM openjdk:17-jdk-slim
+FROM amazoncorretto:17-alpine-jdk
 COPY --from=build  /out/artifacts/Backend_jar/Backend.jar demo.jar
 # ENV PORT=8080
 EXPOSE 8080
