@@ -5,13 +5,17 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.css";
 import { CssBaseline } from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <CssBaseline>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </CssBaseline>
     </BrowserRouter>
   </React.StrictMode>
