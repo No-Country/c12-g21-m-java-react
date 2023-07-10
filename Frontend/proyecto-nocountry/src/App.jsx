@@ -11,6 +11,9 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import LoginIcon from "@mui/icons-material/Login";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+import { Container } from "@mui/material";
+import ItemDetailContainer from "./components/itemDetailContainer/ItemDetailContainer.jsx";
+
 
 const navLinks = [
   {
@@ -44,14 +47,17 @@ const App = () => {
   return (
     <>
       <Navbar navLinks={navLinks} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/compras" element={<Compras />} />
-        <Route path="/ventas" element={<Ventas />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/vender" element={<Vender />} />
-        <Route path="/registro" element={<Registro />} />
-      </Routes>
+      <Container maxWidth="xs" sx={{ mt: 2 }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/compras" element={<Compras />} />
+          <Route path="/ventas" element={<Ventas />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registro" element={<Registro />} />
+          <Route path="/detail/:id" element={<ItemDetailContainer/>}/>
+        </Routes>
+      </Container>
+
     </>
   );
 };
