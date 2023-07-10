@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 import Card from '../../components/Card/Card';
 import '../ventas/ventas-style.css'
 import { Container } from "react-bootstrap";
@@ -10,7 +11,7 @@ const Ventas = () => {
         <h2>Lorem, ipsum dolor sit amet</h2>
       </div>
       <div className="btn-venta-container">
-        <Button variant="contained" disableElevation>VENDER MI PRODUCTO</Button>
+        <Link to="/vender"><Button variant="contained">VENDER MI PRODUCTO</Button></Link>
       </div>
       <div className="consejo-venta">
         <Card title={"Consejos de venta para vos"}
