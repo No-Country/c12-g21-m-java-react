@@ -13,6 +13,7 @@ import StorefrontIcon from "@mui/icons-material/Storefront";
 import LoginIcon from "@mui/icons-material/Login";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import ItemDetailContainer from "./components/itemDetailContainer/ItemDetailContainer.jsx";
+import AcordarCompra from "./pages/acordar-compra/AcordarCompra.jsx";
 
 const navLinks = [
   {
@@ -56,6 +57,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/detail/:id" element={<ItemDetailContainer />} />
+        <Route path="/acordar-compra" element={<AcordarCompra />} />
       </Routes>
     </>
   );
