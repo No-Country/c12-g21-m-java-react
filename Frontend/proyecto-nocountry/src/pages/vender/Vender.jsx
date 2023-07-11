@@ -20,7 +20,7 @@ const labelLinkEstado = <Link
 
 function Vender() {
     return (
-        <Container maxWidth="md" className="main-vender">
+        <Container maxWidth="lg" className="main-vender">
             <div className='tittle-vender'>
                 <h2>Vende tus productos usados de forma simple</h2>
             </div>

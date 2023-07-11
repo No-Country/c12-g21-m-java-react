@@ -4,6 +4,7 @@ import Compras from "./pages/compras/Compras.jsx";
 import Login from "./pages/login/Login.jsx";
 import Ventas from "./pages/ventas/Ventas.jsx";
 import Vender from "./pages/vender/Vender.jsx";
+import ProductosVendidos from "./pages/productosVendidos/ProductosVendidos.jsx";
 import Navbar from "./components/navbar/Navbar.jsx";
 import Registro from "./pages/registro/Registro.jsx";
 import HomeIcon from "@mui/icons-material/Home";
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="/compras" element={<Compras />} />
         <Route path="/ventas" element={<Ventas />} />
         <Route path="/vender" element={<Vender />} />
+        <Route path="/productosVendidos" element={<ProductosVendidos />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/detail/:id" element={<ItemDetailContainer />} />
