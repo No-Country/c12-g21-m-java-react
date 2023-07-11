@@ -34,10 +34,9 @@ const ItemDetail = ({ item }) => {
               <p>{item.description}</p>
               <p>${item.price}</p>
               <div className="d-flex justify-content-between">
-                <Button variant='outlined'>Estado</Button>
-                <Button variant='outlined'>Ambiente</Button>
-                <Button variant='outlined'>Categoría</Button>
-                <Button variant='outlined'>Tipo</Button>
+                <Button variant='outlined'>Ambiente: {item.ambient}</Button>
+                <Button variant='outlined'>Categoría: {item.category}</Button>
+                <Button variant='outlined'>Condición: {item.condition}</Button>
               </div>
             </div>
             <div className='card_product-favorite' onClick={handleFavorite}>
