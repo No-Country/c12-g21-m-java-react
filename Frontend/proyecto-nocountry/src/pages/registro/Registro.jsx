@@ -7,40 +7,11 @@ import {
   Checkbox,
   Container,
 } from "@mui/material";
-import { useState } from "react";
-// import axios from "axios";
-
-const provincias = [
-  {
-    value: "Buenos Aires",
-  },
-  {
-    value: "Córdoba",
-  },
-];
-
-const ciudades = [
-  {
-    value: "La Plata",
-  },
-  {
-    value: "Villa Carlos Paz",
-  },
-];
-
-const paises = [
-  {
-    value: "Argentina",
-  },
-  {
-    value: "Uruguay",
-  },
-  {
-    value: "México",
-  },
-];
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Registro() {
+
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [pais, setPais] = useState("");
@@ -50,12 +21,60 @@ export default function Registro() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  
-
   const [error, setError] = useState({
     error: false,
     message: "",
   });
+
+const countriesURL = "https://c12-21-m-java-react-ecommerce.onrender.com/countries"
+const provincesURL = `https://c12-21-m-java-react-ecommerce.onrender.com/provinces/country/${pais}`
+const citiesURL = `https://c12-21-m-java-react-ecommerce.onrender.com/cities/province/${provincia}`
+
+  const [countries, setCountries] = useState([]);
+  const [provinces, setProvinces] = useState([]);
+  const [cities, setCities] = useState([]);
+
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(countriesURL);        
+        setCountries(response.data);        
+      } catch (error) {
+        console.error("Error al obtener los datos del servidor:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {        
+        const provincesResponse = await axios.get(provincesURL);        
+        setProvinces(provincesResponse.data);
+      } catch (error) {
+        console.error("Error al obtener los datos del servidor:", error);
+      }
+    }
+
+    fetchData();
+  }, [provincesURL]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {        
+        const citiesResponse = await axios.get(citiesURL);        
+        setCities(citiesResponse.data);
+      } catch (error) {
+        console.error("Error al obtener los datos del servidor:", error);
+      }
+    }
+
+    fetchData();
+  }, [citiesURL]);
+
+  
 
   const validateEmail = (email) => {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -82,16 +101,15 @@ export default function Registro() {
         message: "",
       });
 
-        // axios
-        // .post("url", datos)
-        // .then((response) => {
-        //   console.log("Datos enviados correctamente")
-        // })
-        // .catch((error) => {
-        //   console.error("Error al enviar los datos", error)
-        // })
-      
-      
+      // axios
+      // .post("url", datos)
+      // .then((response) => {
+      //   console.log("Datos enviados correctamente")
+      // })
+      // .catch((error) => {
+      //   console.error("Error al enviar los datos", error)
+      // })
+
       setNombre("");
       setApellido("");
       setPais("");
@@ -146,9 +164,9 @@ export default function Registro() {
             value={pais}
             onChange={(e) => setPais(e.target.value)}
           >
-            {paises.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.value}
+            {countries.map((option) => (
+              <MenuItem key={option.idCountry} value={option.idCountry}>
+                {option.title}
               </MenuItem>
             ))}
           </TextField>
@@ -160,9 +178,9 @@ export default function Registro() {
             value={provincia}
             onChange={(e) => setProvincia(e.target.value)}
           >
-            {provincias.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.value}
+            {provinces.map((option) => (
+              <MenuItem key={option.idProvince} value={option.idProvince}>
+                {option.title}
               </MenuItem>
             ))}
           </TextField>
@@ -174,9 +192,9 @@ export default function Registro() {
             value={ciudad}
             onChange={(e) => setCiudad(e.target.value)}
           >
-            {ciudades.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.value}
+            {cities.map((option) => (
+              <MenuItem key={option.idCity} value={option.idCity}>
+                {option.title}
               </MenuItem>
             ))}
           </TextField>
