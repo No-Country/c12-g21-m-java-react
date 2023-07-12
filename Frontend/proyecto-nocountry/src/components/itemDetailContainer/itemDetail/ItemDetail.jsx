@@ -7,13 +7,14 @@ import StarIcon from "@mui/icons-material/Star";
 import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment } from "../../../features/productSlice";
 import { Link, useNavigate } from "react-router-dom";
+import BasicModal from "../../basicModal/BasicModal";
 
 const ItemDetail = ({ item }) => {
   const [favorite, setFavorite] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector(state => state.user)
   const navigate = useNavigate()
-  const [error, setError] = useState(false)
+  const [open, setOpen] = useState(false)
   const handleFavorite = () => {
     if (favorite === false) {
       setFavorite(true);
@@ -25,10 +26,12 @@ const ItemDetail = ({ item }) => {
   };
 
   const handleAuthenticate = () => {
-    user.logueado? navigate('acordar-compra') : setError(true)
+    user.logueado? navigate('/acordar-compra') : setOpen(true)
   }
   return (
     <div className="detail-component m-5">
+      <BasicModal open={open} setOpen={setOpen} message={"No se encuentra logueado"} />
+
       <div className="detail-container">
         <div className="detail-img-container">
           <img
@@ -64,7 +67,6 @@ const ItemDetail = ({ item }) => {
               <Button variant="contained">Reseñas del vendedor</Button>
             </div>
             <div className="detail-owner-button">
-              {error ? <p>No se encuentra logueado</p> : ""}
 
                 <Button variant="contained" onClick={handleAuthenticate}>
                   Acordar compra con el vendedor

@@ -30,7 +30,6 @@ const Home = () => {
   };
   return (
     <div className="home-container">
-
       <div className="container">
         <div className="options-container">
           <Link to="/ventas"><Button variant="contained" className="options-button">QUIERO VENDER</Button></Link>

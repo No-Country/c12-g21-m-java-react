@@ -7,7 +7,6 @@ import { cerrarSesion } from '../../features/userSlice'
 
 const UserBadge = () => {
     const [open, setOpen] = useState(false);
-    const dispatch = useDispatch()
     const navLinks = [
         {
             title: "Mis productos publicados",
