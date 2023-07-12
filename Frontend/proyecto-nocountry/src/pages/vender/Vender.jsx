@@ -3,7 +3,7 @@ import InputLink from '../../components/inputs/InputLink'
 import InputText from '../../components/inputs/InputText'
 import InputLinkEstado from '../../components/inputs/InputLinkEstado'
 import InputPrice from '../../components/inputs/InputPrice'
-import BtnExaminarLocal from '../../components/buttons/btnExaminarLocal'
+import BtnExaminarLocal from '../../components/buttons/BtnExaminarLocal'
 import BtnPublicar from '../../components/buttons/BtnPublicar'
 
 const Vender = () => {
