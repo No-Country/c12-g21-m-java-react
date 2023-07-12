@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import './home-style.css'
 import { useRef } from 'react';
+import { products } from "../../database/products";
 
 const Home = () => {
 
@@ -27,7 +28,6 @@ const Home = () => {
       block: 'nearest',
     });
   };
-
   return (
     <div className="home-container">
       <div className="container">
@@ -48,39 +48,12 @@ const Home = () => {
           <div className="contenedor-principal">
             <button role="button" id="flecha-izquierda" onClick={scrollIzquierda} className="flecha-izquierda">{"<"}</button>
             <div ref={filaRef} className="contenedor-carousel">
-              <div className="imagen">
-                <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-              </div>
-              <div className="imagen">
-                <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-              </div>
-              <div className="imagen">
-                <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-              </div>
-              <div className="imagen">
-                <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-              </div>
-              <div className="imagen">
-                <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-              </div>
-              <div className="imagen">
-                <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-              </div>
-              <div className="imagen">
-                <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-              </div>
-              <div className="imagen">
-                <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-              </div>
-              <div className="imagen">
-                <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-              </div>
-              <div className="imagen">
-                <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-              </div>
-              <div className="imagen">
-                <img src='https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg' alt=''></img>
-              </div>
+              {products.map((element) => (
+                <Link to={`/detail/${element.id}`} key={element.id} className="imagen link" style={{ textDecoration: "none", color: 'black' }}>
+                  <h4>{element.title}</h4>
+                    <img src="https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg" alt="" />
+                </Link>
+              ))}
             </div>
 
             <button role="button" onClick={scrollDerecha} id="flecha-derecha" className="flecha-derecha">{">"}</button>
