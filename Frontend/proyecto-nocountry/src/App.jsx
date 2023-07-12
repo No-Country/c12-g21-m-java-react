@@ -14,6 +14,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import ItemDetailContainer from "./components/itemDetailContainer/ItemDetailContainer.jsx";
 import AcordarCompra from "./pages/acordar-compra/AcordarCompra.jsx";
+import CerrarSesion from "./pages/cerrar-sesion/CerrarSesion.jsx";
 
 const navLinks = [
   {
@@ -58,6 +59,7 @@ const App = () => {
         <Route path="/registro" element={<Registro />} />
         <Route path="/detail/:id" element={<ItemDetailContainer />} />
         <Route path="/acordar-compra" element={<AcordarCompra />} />
+        <Route path='/cerrarsesion' element={<CerrarSesion />} />
       </Routes>
     </>
   );

@@ -4,14 +4,16 @@ import "./itemDetail-style.css";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment } from "../../../features/productSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ItemDetail = ({ item }) => {
   const [favorite, setFavorite] = useState(false);
   const dispatch = useDispatch();
-
+  const user = useSelector(state => state.user)
+  const navigate = useNavigate()
+  const [error, setError] = useState(false)
   const handleFavorite = () => {
     if (favorite === false) {
       setFavorite(true);
@@ -21,8 +23,12 @@ const ItemDetail = ({ item }) => {
       dispatch(decrement());
     }
   };
+
+  const handleAuthenticate = () => {
+    user.logueado? navigate('acordar-compra') : setError(true)
+  }
   return (
-    <div className="detail-component">
+    <div className="detail-component m-5">
       <div className="detail-container">
         <div className="detail-img-container">
           <img
@@ -58,15 +64,17 @@ const ItemDetail = ({ item }) => {
               <Button variant="contained">Reseñas del vendedor</Button>
             </div>
             <div className="detail-owner-button">
-              <Link to="/acordar-compra">
-                <Button variant="contained">
+              {error ? <p>No se encuentra logueado</p> : ""}
+
+                <Button variant="contained" onClick={handleAuthenticate}>
                   Acordar compra con el vendedor
-                </Button>
-              </Link>
+              </Button>
             </div>
           </div>
         </div>
+
       </div>
+
     </div>
   );
 };

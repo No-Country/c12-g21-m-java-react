@@ -10,14 +10,15 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from 'react-redux';
-import { registrarse } from "../../features/registroSlice";
+import { registrarse } from "../../features/userSlice";
 
 export default function Registro() {
 
 
+  const [modal, setModal] = useState(false)
+
   /* REDUX */
   const dispatch = useDispatch()
-
   const handleRegistro = () => {
     const user = {
       nombre: nombre,
@@ -29,19 +30,12 @@ export default function Registro() {
       email: email,
       password: password
     }
-   
- 
-      dispatch(registrarse(user))
-
-   
-
+    dispatch(registrarse({user}))
+    setModal(true)
   }
-
-
-
-
-
   /////////////////////////////////
+
+
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [pais, setPais] = useState("");
@@ -278,8 +272,11 @@ const citiesURL = `https://c12-21-m-java-react-ecommerce.onrender.com/cities/pro
           <Button type="submit" variant="outlined" sx={{ mt: 2 }} onClick={handleRegistro}>
             Crear cuenta
           </Button>
+          {modal ? <p>¡Se ha registrado con éxito!</p> : ""}
         </Box>
       </Container>
+        
+      
     </>
   );
 }
