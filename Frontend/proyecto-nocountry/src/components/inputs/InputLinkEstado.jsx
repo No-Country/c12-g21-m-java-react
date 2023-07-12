@@ -10,7 +10,7 @@ const linkEstado = <Link
 const InputLinkEstado = () => {
     return (
         <div>
-            <Box component="form" sx={{ borderRadius: "none", border: ".4rem solid #d9d9d9", maxWidth: "90%", margin: "2rem auto" }}>
+            <Box component="form" sx={{ borderRadius: "none", border: ".4rem solid #d9d9d9", maxWidth: "90%", margin: "2rem auto", padding: ".3rem" }}>
                 <Box component="text">
                     {linkEstado}
                 </Box>
