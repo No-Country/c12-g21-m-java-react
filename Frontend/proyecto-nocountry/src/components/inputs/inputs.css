@@ -1,4 +1,9 @@
-#inputText {
+#inputText,
+#inputPrice {
     border: none;
     width: 100%;
+    ::-webkit-inner-spin-button,
+    ::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+    }
 }

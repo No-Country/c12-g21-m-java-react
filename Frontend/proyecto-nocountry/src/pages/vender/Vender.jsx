@@ -2,6 +2,7 @@ import { CssBaseline, Box, Container } from '@mui/material'
 import InputLink from '../../components/inputs/inputLink'
 import InputText from '../../components/inputs/inputText'
 import InputLinkEstado from '../../components/inputs/InputLinkEstado'
+import InputPrice from '../../components/inputs/InputPrice'
 
 const Vender = () => {
     return (
@@ -22,6 +23,8 @@ const Vender = () => {
                         <InputText />
                         <label htmlFor="text">Estado del producto: </label>
                         <InputLinkEstado/>
+                        <label htmlFor="text">Precio: </label>
+                        <InputPrice/>
                     </Box>
                 </Container>
             </CssBaseline>
