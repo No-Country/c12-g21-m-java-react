@@ -9,16 +9,16 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { registrarse } from "../../features/userSlice";
 
 export default function Registro() {
-
-
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState(false);
+  const [condicionesChecked, setCondicionesChecked] = useState(false);
+  const [promocionesChecked, setPromocionesChecked] = useState(false);
 
   /* REDUX */
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleRegistro = () => {
     const user = {
       nombre: nombre,
@@ -28,13 +28,14 @@ export default function Registro() {
       ciudad: ciudad,
       codigoPostal: codigoPostal,
       email: email,
-      password: password
+      password: password,
+    };
+    if(condicionesChecked && user.email && user.password){
+    dispatch(registrarse({ user }));
+    setModal(true);
     }
-    dispatch(registrarse({user}))
-    setModal(true)
-  }
+  };
   /////////////////////////////////
-
 
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
@@ -45,26 +46,25 @@ export default function Registro() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  
   const [error, setError] = useState({
     error: false,
     message: "",
   });
 
-const countriesURL = "https://c12-21-m-java-react-ecommerce.onrender.com/countries"
-const provincesURL = `https://c12-21-m-java-react-ecommerce.onrender.com/provinces/country/${pais}`
-const citiesURL = `https://c12-21-m-java-react-ecommerce.onrender.com/cities/province/${provincia}`
+  const countriesURL =
+    "https://c12-21-m-java-react-ecommerce.onrender.com/countries";
+  const provincesURL = `https://c12-21-m-java-react-ecommerce.onrender.com/provinces/country/${pais}`;
+  const citiesURL = `https://c12-21-m-java-react-ecommerce.onrender.com/cities/province/${provincia}`;
 
   const [countries, setCountries] = useState([]);
   const [provinces, setProvinces] = useState([]);
   const [cities, setCities] = useState([]);
 
-
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get(countriesURL);        
-        setCountries(response.data);        
+        const response = await axios.get(countriesURL);
+        setCountries(response.data);
       } catch (error) {
         console.error("Error al obtener los datos del servidor:", error);
       }
@@ -75,8 +75,8 @@ const citiesURL = `https://c12-21-m-java-react-ecommerce.onrender.com/cities/pro
 
   useEffect(() => {
     async function fetchData() {
-      try {        
-        const provincesResponse = await axios.get(provincesURL);        
+      try {
+        const provincesResponse = await axios.get(provincesURL);
         setProvinces(provincesResponse.data);
       } catch (error) {
         console.error("Error al obtener los datos del servidor:", error);
@@ -88,8 +88,8 @@ const citiesURL = `https://c12-21-m-java-react-ecommerce.onrender.com/cities/pro
 
   useEffect(() => {
     async function fetchData() {
-      try {        
-        const citiesResponse = await axios.get(citiesURL);        
+      try {
+        const citiesResponse = await axios.get(citiesURL);
         setCities(citiesResponse.data);
       } catch (error) {
         console.error("Error al obtener los datos del servidor:", error);
@@ -98,8 +98,6 @@ const citiesURL = `https://c12-21-m-java-react-ecommerce.onrender.com/cities/pro
 
     fetchData();
   }, [citiesURL]);
-
-  
 
   const validateEmail = (email) => {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -143,6 +141,8 @@ const citiesURL = `https://c12-21-m-java-react-ecommerce.onrender.com/cities/pro
       setCodigoPostal("");
       setEmail("");
       setPassword("");
+      setCondicionesChecked(false);
+      setPromocionesChecked(false);
     } else {
       setError({
         error: true,
@@ -184,6 +184,7 @@ const citiesURL = `https://c12-21-m-java-react-ecommerce.onrender.com/cities/pro
 
           <TextField
             id="pais"
+            required
             select
             label="País"
             value={pais}
@@ -198,6 +199,7 @@ const citiesURL = `https://c12-21-m-java-react-ecommerce.onrender.com/cities/pro
 
           <TextField
             id="provincia"
+            required
             select
             label="Provincia"
             value={provincia}
@@ -212,6 +214,7 @@ const citiesURL = `https://c12-21-m-java-react-ecommerce.onrender.com/cities/pro
 
           <TextField
             id="ciudad"
+            required
             select
             label="Ciudad"
             value={ciudad}
@@ -261,22 +264,35 @@ const citiesURL = `https://c12-21-m-java-react-ecommerce.onrender.com/cities/pro
 
           <FormControlLabel
             required
-            control={<Checkbox />}
-            label="He leído y acepto las condiciones las condiciones de *****"
+            control={
+              <Checkbox
+                checked={condicionesChecked}
+                onChange={(e) => setCondicionesChecked(e.target.checked)}
+              />
+            }
+            label="He leído y acepto las condiciones de usos del sitio"
           />
           <FormControlLabel
-            control={<Checkbox />}
+            control={
+              <Checkbox
+                checked={promocionesChecked}
+                onChange={(e) => setPromocionesChecked(e.target.checked)}
+              />
+            }
             label="Deseo recibir emails y promociones en mi correo electrónico"
           />
 
-          <Button type="submit" variant="outlined" sx={{ mt: 2 }} onClick={handleRegistro}>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ mt: 2 }}
+            onClick={handleRegistro}
+          >
             Crear cuenta
           </Button>
           {modal ? <p>¡Se ha registrado con éxito!</p> : ""}
         </Box>
       </Container>
-        
-      
     </>
   );
 }
