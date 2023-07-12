@@ -1,6 +1,6 @@
 import { CssBaseline, Box, Container } from '@mui/material'
-import InputLink from '../../components/inputs/inputLink'
-import InputText from '../../components/inputs/inputText'
+import InputLink from '../../components/inputs/InputLink'
+import InputText from '../../components/inputs/InputText'
 import InputLinkEstado from '../../components/inputs/InputLinkEstado'
 import InputPrice from '../../components/inputs/InputPrice'
 import BtnExaminarLocal from '../../components/buttons/btnExaminarLocal'
