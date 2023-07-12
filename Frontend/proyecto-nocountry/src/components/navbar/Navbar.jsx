@@ -12,6 +12,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import FavoriteBadge from "../favoriteBadge/FavoriteBadge";
+import UserBadge from "../userBadge/UserBadge";
 
 export default function Navbar({ navLinks }) {
   const [open, setOpen] = useState(false);
@@ -41,6 +42,7 @@ export default function Navbar({ navLinks }) {
               </Button>
             ))}
           </Box>
+          <UserBadge/>
           <FavoriteBadge />
 
         </Toolbar>

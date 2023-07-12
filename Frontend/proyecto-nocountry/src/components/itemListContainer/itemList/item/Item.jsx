@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
 import {increment, decrement} from '../../../../features/productSlice'
 
-const Item = ({ title, description, price, img, id }) => {
+const Item = ({ title, description, price, img, id, ambient, category, condition }) => {
     const [favorite, setFavorite] = useState(false);
     const dispatch = useDispatch()
 
@@ -23,7 +23,7 @@ const Item = ({ title, description, price, img, id }) => {
     }
 
     return (
-        <div className='item-component'>
+        <div className='item-component my-5'>
             <div className='item-favorite' onClick={handleFavorite}>
                 {favorite == false ? <StarBorderIcon></StarBorderIcon> : <StarIcon></StarIcon>}
             </div>
@@ -33,7 +33,9 @@ const Item = ({ title, description, price, img, id }) => {
                 </div>
                 <div className='item-text'>
                     <h2>{title}</h2>
-                    <p>{description}</p>
+                    <p>Categoría: {category}</p>
+                    <p>Ambiente: {ambient}</p>
+                    <p>Condición: {condition}</p>
                     <p>${price}</p>
                 </div>
             </Link>
