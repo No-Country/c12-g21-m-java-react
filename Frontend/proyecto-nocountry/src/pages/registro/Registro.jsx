@@ -9,9 +9,39 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch } from 'react-redux';
+import { registrarse } from "../../features/registroSlice";
 
 export default function Registro() {
 
+
+  /* REDUX */
+  const dispatch = useDispatch()
+
+  const handleRegistro = () => {
+    const user = {
+      nombre: nombre,
+      apellido: apellido,
+      pais: pais,
+      provincia: provincia,
+      ciudad: ciudad,
+      codigoPostal: codigoPostal,
+      email: email,
+      password: password
+    }
+   
+ 
+      dispatch(registrarse(user))
+
+   
+
+  }
+
+
+
+
+
+  /////////////////////////////////
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [pais, setPais] = useState("");
@@ -21,6 +51,7 @@ export default function Registro() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  
   const [error, setError] = useState({
     error: false,
     message: "",
@@ -244,7 +275,7 @@ const citiesURL = `https://c12-21-m-java-react-ecommerce.onrender.com/cities/pro
             label="Deseo recibir emails y promociones en mi correo electrónico"
           />
 
-          <Button type="submit" variant="outlined" sx={{ mt: 2 }}>
+          <Button type="submit" variant="outlined" sx={{ mt: 2 }} onClick={handleRegistro}>
             Crear cuenta
           </Button>
         </Box>
