@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import NavListDrawer from '../navbar/NavListDrawer'
 import { NavLink } from 'react-router-dom'
+import ProductosVendidos from '../../pages/productosVendidos/ProductosVendidos'
 import { cerrarSesion } from '../../features/userSlice'
 
 const UserBadge = () => {
@@ -10,7 +11,7 @@ const UserBadge = () => {
     const navLinks = [
         {
             title: "Mis productos publicados",
-            path: "/",
+            path: "/ProductosVendidos",
             icon: "",
         },
         {
