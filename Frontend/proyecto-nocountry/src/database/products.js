@@ -6,7 +6,9 @@ export const products = [{
         id: 1,
         category: "Mesadas",
         ambient: "Living",
-        condition: "Buena"
+        condition: "Buena",
+        location: "agregar ubicacion",
+        userId: 1
     },
     {
         title: "Mesada de Granito",

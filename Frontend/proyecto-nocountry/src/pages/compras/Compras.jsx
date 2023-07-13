@@ -3,11 +3,12 @@ import ItemListContainer from '../../components/itemListContainer/ItemListContai
 import ProductFilter from '../../components/productFilter/ProductFilter';
 import ProductOrder from '../../components/productOrder/ProductOrder';
 import { useEffect, useState } from 'react';
-import { products } from '../../database/products';
-
+import { getFilteredProducts, getProducts } from '../../firebase/functions';
+/* import { products } from '../../database/products';
+ */
 const Compras = () => {
 
- 
+
 
   const [options, setOptions] = useState({
     category: '',
@@ -17,34 +18,40 @@ const Compras = () => {
 
   const [order, setOrder] = useState(2)
 
-  const [productsFiltered, setProductsFiltered] = useState(products)
-
-
+  const [productsFiltered, setProductsFiltered] = useState([])
   useEffect(() => {
-    let productosFiltrados = products
-    console.log(options)
-    if (options.ambient !== '' && options.ambient !== 'Todos') {
-      productosFiltrados = productosFiltrados.filter(
-        (product) => product.ambient === options.ambient
-      );
+    let productosFiltrados;
+
+    const fetchData = async () => {
+      try {
+        if (options.ambient !== '' && options.ambient !== 'Todos') {
+          productosFiltrados = await getFilteredProducts('ambient', options.ambient)
+
+        } else
+          if (options.category !== '' && options.category !== 'Todos') {
+            productosFiltrados = await getFilteredProducts('category', options.category)
+
+          } else
+            if (options.condition !== '' && options.condition !== 'Todos') {
+              productosFiltrados = await getFilteredProducts('condition', options.condition)
+
+            } else {
+              productosFiltrados = await getProducts()
+
+
+              console.log(productosFiltrados)
+            }
+        if (order == 0) {
+          productosFiltrados.sort((a, b) => a.price - b.price);
+        } else if (order == 1) {
+          productosFiltrados.sort((a, b) => b.price - a.price);
+        }
+        setProductsFiltered(productosFiltrados)
+      } catch (err) {
+        console.log(err)
+      }
     }
-    if (options.category !== '' && options.category !== 'Todos') {
-      productosFiltrados = productosFiltrados.filter(
-        (product) => product.category === options.category
-      );
-    }
-    if (options.condition !== '' && options.condition !== 'Todos') {
-      productosFiltrados = productosFiltrados.filter(
-        (product) => product.condition === options.condition
-      );
-    }
-    if (order == 0) {
-      productosFiltrados.sort((a, b) => a.price - b.price);
-    } else if (order == 1) {
-      productosFiltrados.sort((a, b) => b.price - a.price);
-    }
-    setProductsFiltered(productosFiltrados)
-    console.log(productsFiltered);
+    fetchData()
   }, [options, order]);
 
   return (
@@ -53,7 +60,7 @@ const Compras = () => {
         <div className="title-container">
           <h1>Lorem ipsum, dolor sit amet</h1>
         </div>
-        <ProductOrder order={order} setOrder={setOrder}/>
+        <ProductOrder order={order} setOrder={setOrder} />
         <div className="row">
           <div className="filtro col-md-2">
             <ProductFilter options={options} setOptions={setOptions} />

@@ -2,13 +2,13 @@ import { Button } from "@mui/material"
 import { Link } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import './home-style.css'
-import { useRef } from 'react';
-import { products } from "../../database/products";
+import { useEffect, useRef, useState } from 'react';
+import { getProducts } from "../../firebase/functions";
 
 const Home = () => {
 
   const filaRef = useRef(null);
-
+  const [products, setProducts] = useState([])
   const scrollDerecha = () => {
     const offsetWidth = filaRef.current.offsetWidth;
     const scrollOffset = offsetWidth + filaRef.current.scrollLeft;
@@ -28,6 +28,10 @@ const Home = () => {
       block: 'nearest',
     });
   };
+
+  useEffect(() => {
+    getProducts().then(items => setProducts(items))
+  }, [])
   return (
     <div className="home-container">
       <div className="container">
