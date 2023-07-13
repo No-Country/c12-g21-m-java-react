@@ -3,32 +3,29 @@ import { useState } from "react";
 
 const InputLink = () => {
     const [showOptions, setShowOptions] = useState(false);
+    const [selectedOption, setSelectedOption] = useState(null);
 
     const handleLinkClick = (event) => {
-        event.preventDefault(); // Evita la recarga de la página
+        event.preventDefault();
         setShowOptions(!showOptions);
         console.info("Link categoria");
     };
 
+    const handleOptionClick = (option) => {
+        setSelectedOption(option);
+        setShowOptions(false);
+    };
+
     const linkCat = (
-        <Link
-            component="button"
-            variant="body2"
-            onClick={handleLinkClick}
-        >
-            Seleccione categoría
+        <Link component="button" variant="body2" onClick={handleLinkClick}>
+            {selectedOption ? selectedOption : "Seleccione categoría"}
         </Link>
     );
 
-    //Funcion opciones
-    const option1 =
-        <Link>Opcion 1</Link>
-
-    const option2 =
-        <Link>Opcion 2</Link>
-
-    const option3 =
-        <Link>Opcion 3</Link>
+    //Opciones de categoria de productos
+    const option1 = <Link onClick={() => handleOptionClick("Opción 1")}>Opción 1</Link>;
+    const option2 = <Link onClick={() => handleOptionClick("Opción 2")}>Opción 2</Link>;
+    const option3 = <Link onClick={() => handleOptionClick("Opción 3")}>Opción 3</Link>;
 
     return (
         <div id="inputLink">
@@ -46,7 +43,6 @@ const InputLink = () => {
                     {linkCat}
                     {showOptions && (
                         <div id="optionsLinks">
-                            {/* Opciones a mostrar */}
                             <p>{option1}</p>
                             <p>{option2}</p>
                             <p>{option3}</p>

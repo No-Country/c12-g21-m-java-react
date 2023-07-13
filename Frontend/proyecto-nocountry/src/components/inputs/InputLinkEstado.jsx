@@ -1,37 +1,34 @@
 import { Box, Link } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const InputLinkEstado = () => {
     const [showOptions, setShowOptions] = useState(false);
+    const [selectedOption, setSelectedOption] = useState(null);
 
     const handleLinkClick = (event) => {
-        event.preventDefault(); // Evita la recarga de la página
+        event.preventDefault();
         setShowOptions(!showOptions);
-        console.info("Link estado de producto");
+        console.info("Link categoria");
     };
 
-    const linkEstado = (
-        <Link
-            component="button"
-            variant="body2"
-            onClick={handleLinkClick}
-        >
-            Seleccione estado del producto
+    const handleOptionClick = (option) => {
+        setSelectedOption(option);
+        setShowOptions(false);
+    };
+
+    const linkCat = (
+        <Link component="button" variant="body2" onClick={handleLinkClick}>
+            {selectedOption ? selectedOption : "Seleccione estado del producto"}
         </Link>
     );
 
-    //Funcion opciones
-    const option1st =
-        <Link>Estado 1</Link>
-
-    const option2st =
-        <Link>Estado 2</Link>
-
-    const option3st =
-        <Link>Estado 3</Link>
+    //Opciones de estado de productos
+    const option1st = <Link onClick={() => handleOptionClick("Estado 1")}>Estado 1</Link>;
+    const option2st = <Link onClick={() => handleOptionClick("Estado 2")}>Estado 2</Link>;
+    const option3st = <Link onClick={() => handleOptionClick("Estado 3")}>Estado 3</Link>;
 
     return (
-        <div>
+        <div id="inputLinkEstado">
             <Box
                 component="form"
                 sx={{
@@ -43,10 +40,9 @@ const InputLinkEstado = () => {
                 }}
             >
                 <Box component="text">
-                    {linkEstado}
+                    {linkCat}
                     {showOptions && (
                         <div id="optionsState">
-                            {/* Opciones a mostrar */}
                             <p>{option1st}</p>
                             <p>{option2st}</p>
                             <p>{option3st}</p>
