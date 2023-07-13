@@ -17,6 +17,7 @@ import AcordarCompra from "./pages/acordar-compra/AcordarCompra.jsx";
 import CerrarSesion from "./pages/cerrar-sesion/CerrarSesion.jsx";
 import { useSelector } from "react-redux";
 import LogoutIcon from "@mui/icons-material/Logout";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 const App = () => {
   const logueado = useSelector((state) => state.user.logueado);
@@ -38,14 +39,14 @@ const App = () => {
       icon: <StorefrontIcon />,
     },
     {
+      title: logueado ? "Mis productos publicados" : "Registrarse",
+      path: logueado ? "/productosVendidos" : "/registro",
+      icon: logueado ? <DashboardIcon /> : <AppRegistrationIcon />,
+    },
+    {
       title: logueado ? "Logout" : "Login",
       path: logueado ? "/cerrarsesion" : "/login",
       icon: logueado ? <LogoutIcon /> : <LoginIcon />,
-    },
-    {
-      title: logueado ? "" : "Registrarse",
-      path: "/registro",
-      icon: <AppRegistrationIcon />,
     },
   ];
 
