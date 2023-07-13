@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ItemDetail from './itemDetail/ItemDetail'
 import Spinner from '../spinner/Spinner'
-import { products } from '../../database/products'
+import { getProduct } from '../../firebase/functions'
 
 const ItemDetailContainer = () => {
 
@@ -13,8 +13,8 @@ const ItemDetailContainer = () => {
  
 
     useEffect(() => {
-        let product = products.find(prod => prod.id === parseInt(id))
-        setItem(product)
+        getProduct(id).then(product => setItem(product))
+
         setTimeout(() => {
             setIsLoading(false)
         }, 2000)

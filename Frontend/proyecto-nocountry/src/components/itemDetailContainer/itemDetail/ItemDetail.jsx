@@ -35,7 +35,7 @@ const ItemDetail = ({ item }) => {
       <div className="detail-container">
         <div className="detail-img-container">
           <img
-            src="https://d2oo5quzpsdib.cloudfront.net/Website/General/Standard-Product-Icon-500.png"
+            src={item.img[0]}
             alt="img 1"
           />
         </div>
