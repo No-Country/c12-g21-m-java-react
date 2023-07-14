@@ -9,16 +9,14 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch } from 'react-redux';
-import { registrarse } from "../../features/userSlice";
+import { postUser } from "../../firebase/functions";
+import BasicModal from "../../components/basicModal/BasicModal";
 
 export default function Registro() {
 
 
-  const [modal, setModal] = useState(false)
-
-  /* REDUX */
-  const dispatch = useDispatch()
+  const [openModal, setOpenModal] = useState(false)
+  const [messageModal, setMessageModal] = useState('')
   const handleRegistro = () => {
     const user = {
       nombre: nombre,
@@ -30,8 +28,18 @@ export default function Registro() {
       email: email,
       password: password
     }
-    dispatch(registrarse({user}))
-    setModal(true)
+    let registrado;
+    postUser(user).then(data => {
+      registrado = data
+      if (registrado) {
+        setMessageModal('Se ha registrado con éxito')
+      } else {
+        setMessageModal('email existente')
+      }
+      setOpenModal(true)
+     
+    });
+   
   }
   /////////////////////////////////
 
@@ -272,7 +280,7 @@ const citiesURL = `https://c12-21-m-java-react-ecommerce.onrender.com/cities/pro
           <Button type="submit" variant="outlined" sx={{ mt: 2 }} onClick={handleRegistro}>
             Crear cuenta
           </Button>
-          {modal ? <p>¡Se ha registrado con éxito!</p> : ""}
+          <BasicModal open={openModal} setOpen={setOpenModal} message={messageModal} />
         </Box>
       </Container>
         

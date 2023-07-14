@@ -3,6 +3,7 @@ import { Box, Button, Container, TextField, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { loguearse } from '../../features/userSlice';
 import { useNavigate } from "react-router-dom";
+import { getUserByEmail } from '../../firebase/functions';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -21,17 +22,24 @@ export default function Login() {
 
 
   const handleLogin = () => {
-    console.log(user)
     const usuario = {
       email: email || "",
       password: password || ""
     };
-    if (usuario.email === user.email && usuario.password === user.password) {
-      dispatch(loguearse())
-      navigate("/");
-    } else {
-      setError('false')
-    }
+    let usuarioExistente
+    getUserByEmail(usuario.email).then(data => {
+      usuarioExistente = data
+      console.log(usuarioExistente)
+      if (usuarioExistente?.password === usuario.password) {
+        dispatch(loguearse(usuarioExistente))
+        navigate("/");
+      } else {
+        setError(true)
+        setTimeout(() => {
+          setError(false)
+        }, 5000)
+      }
+    })
   };
 
   return (
