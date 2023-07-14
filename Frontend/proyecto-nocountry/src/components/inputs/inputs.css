@@ -44,3 +44,16 @@
     height: 100%;
     opacity: 0;
 }
+
+#optionsLinks,
+#optionsState {
+    margin-top: 1rem;
+    position: absolute;
+    background-color: #d9d9d9;
+    padding: .5rem 1rem;
+}
+
+#optionsLinks,
+#optionsState p {
+    cursor: pointer;
+}

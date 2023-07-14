@@ -19,6 +19,66 @@
     object-fit: fill;
 }
 
+.card-name-autorized {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-box-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: .5rem 1rem;
+}
+
+.card-publicacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.card-box {
+    display: grid;
+    grid-template-areas: 
+    "title link"
+    "nPublicacion nPublicacion"
+    "precio precio"
+    "estadoProd estadoProd";
+}
+
+.inputMnsj {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+    background-color: #C4C4C4;
+    padding: .5rem .5rem;
+}
+
+.inputMnsj input {
+    width: 90%;
+    border: none;
+    background-color: transparent;
+}
+
+.sendIcon {
+    cursor: pointer;
+}
+
+.sendIcon:hover {
+    color: white;
+}
+
+.card-box-Calif {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0 2rem;
+}
+
 @media only screen and (max-width: 768px) {
     .card-container {
         flex-direction: column;

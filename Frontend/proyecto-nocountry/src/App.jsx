@@ -15,36 +15,41 @@ import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import ItemDetailContainer from "./components/itemDetailContainer/ItemDetailContainer.jsx";
 import AcordarCompra from "./pages/acordar-compra/AcordarCompra.jsx";
 import CerrarSesion from "./pages/cerrar-sesion/CerrarSesion.jsx";
-
-const navLinks = [
-  {
-    title: "Home",
-    path: "/",
-    icon: <HomeIcon />,
-  },
-  {
-    title: "Ventas",
-    path: "/ventas",
-    icon: <MonetizationOnIcon />,
-  },
-  {
-    title: "Compras",
-    path: "/compras",
-    icon: <StorefrontIcon />,
-  },
-  {
-    title: "Login",
-    path: "/login",
-    icon: <LoginIcon />,
-  },
-  {
-    title: "Registrarse",
-    path: "/registro",
-    icon: <AppRegistrationIcon />,
-  },
-];
+import { useSelector } from "react-redux";
+import LogoutIcon from "@mui/icons-material/Logout";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 const App = () => {
+  const logueado = useSelector((state) => state.user.logueado);
+
+  const navLinks = [
+    {
+      title: "Home",
+      path: "/",
+      icon: <HomeIcon />,
+    },
+    {
+      title: "Ventas",
+      path: "/ventas",
+      icon: <MonetizationOnIcon />,
+    },
+    {
+      title: "Compras",
+      path: "/compras",
+      icon: <StorefrontIcon />,
+    },
+    {
+      title: logueado ? "Mis productos publicados" : "Registrarse",
+      path: logueado ? "/productosVendidos" : "/registro",
+      icon: logueado ? <DashboardIcon /> : <AppRegistrationIcon />,
+    },
+    {
+      title: logueado ? "Logout" : "Login",
+      path: logueado ? "/cerrarsesion" : "/login",
+      icon: logueado ? <LogoutIcon /> : <LoginIcon />,
+    },
+  ];
+
   return (
     <>
       <Navbar navLinks={navLinks} />
@@ -59,7 +64,7 @@ const App = () => {
         <Route path="/registro" element={<Registro />} />
         <Route path="/detail/:id" element={<ItemDetailContainer />} />
         <Route path="/acordar-compra" element={<AcordarCompra />} />
-        <Route path='/cerrarsesion' element={<CerrarSesion />} />
+        <Route path="/cerrarsesion" element={<CerrarSesion />} />
       </Routes>
     </>
   );
