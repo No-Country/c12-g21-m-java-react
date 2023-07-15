@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loguearse } from "../../features/userSlice";
 import { useNavigate } from "react-router-dom";
 import { getUserByEmail } from '../../firebase/functions';
@@ -9,9 +9,10 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  const user = useSelector((state) => state.user);
+  // const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleUsernameChange = (event) => {
     setEmail(event.target.value);
   };
@@ -25,12 +26,12 @@ export default function Login() {
       handleLogin();
     }
   };
-
+  
   const handleLogin = () => {
     const usuario = {
       email: email || "",
-      password: password || "",
-    };
+      password: password || "",     
+    };   
 
     let usuarioExistente
     getUserByEmail(usuario.email).then(data => {
