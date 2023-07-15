@@ -22,13 +22,11 @@ const UserBadge = () => {
         
     ];
 
-    const handleClick = () => {
-        dispatch(cerrarSesion())
-    }
-    const user = useSelector(state => state.user)
 
+    const user = useSelector(state => state.user)
+    console.log(user)
   return (
-      <div >{user?.logueado && <Button onClick={() => setOpen(true)} variant="contained">{user.nombre} {user.apellido}</Button>} 
+      <div >{user?.logueado && <Button onClick={() => setOpen(true)} variant="contained">{user.name} {user.surname}</Button>} 
           <Drawer
               open={open}
               anchor="right"

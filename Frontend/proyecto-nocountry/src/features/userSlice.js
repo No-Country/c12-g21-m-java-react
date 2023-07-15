@@ -4,12 +4,12 @@ import {
 
 
 const initialState = {
-    nombre: "",
-    apellido: "",
-    pais: "",
-    provincia: "",
-    ciudad: "",
-    codigoPostal: "",
+    name: "",
+    surname: "",
+    country: "",
+    province: "",
+    city: "",
+    postal: "",
     email: "",
     password: "",
     logueado: false
@@ -19,29 +19,27 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        registrarse: (state, action) => {
+        loguearse: (state, action) => {
             const {
-                nombre,
-                apellido,
-                pais,
-                provincia,
-                ciudad,
-                codigoPostal,
+                name,
+                surname,
+                country,
+                province,
+                city,
+                postal,
                 email,
                 password
-            } = action.payload.user;
-            state.nombre = nombre;
-            state.apellido = apellido;
-            state.pais = pais;
-            state.provincia = provincia;
-            state.ciudad = ciudad;
-            state.codigoPostal = codigoPostal;
+            } = action.payload;
+            state.name = name;
+            state.surname = surname;
+            state.country = country;
+            state.province = province;
+            state.city = city;
+            state.postal = postal;
             state.email = email;
             state.password = password;
-        },
-        loguearse: (state) => {
-            state.logueado = true
-
+            state.logueado = true;
+            console.log(state)
         },
         cerrarSesion: (state) => {
             state.logueado = false;
@@ -50,7 +48,6 @@ export const userSlice = createSlice({
 })
 
 export const {
-    registrarse,
     loguearse,
     cerrarSesion
 } = userSlice.actions
