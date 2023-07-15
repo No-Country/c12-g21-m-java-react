@@ -9,6 +9,7 @@ import {
 import {
     db
 } from './firebaseConfig.js'
+
 export const getProducts = async () => {
     const q = query(collection(db, 'products'))
     const querySnapshot = await getDocs(q)
@@ -90,3 +91,15 @@ export const postUser = async (values) => {
     }
 
 }
+
+export const postProduct = async (productData) => {
+    try {
+      await addDoc(collection(db, 'products'), productData);
+      console.log("Producto agregado exitosamente");
+      return true; // Indica que se pudo agregar el producto correctamente
+    } catch (error) {
+      console.error("Error al agregar el producto:", error);
+      return false; // Indica que hubo un error al agregar el producto
+    }
+  }
+  
