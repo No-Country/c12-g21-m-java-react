@@ -28,10 +28,14 @@ public class UserPerson {
     @Column(length = 50, nullable = false)
     private String phone;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_user", referencedColumnName = "idUser")
-    private User user;
+    //@OneToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "id_user", referencedColumnName = "idUser")
+    //private User user;
+    //@OneToOne(mappedBy = "userPerson", cascade=CascadeType.ALL)
 
+    /*@OneToOne(mappedBy = "userPerson")
+    private User user;
+*/
     @Column(nullable = false)
     private boolean newsletter;
 
