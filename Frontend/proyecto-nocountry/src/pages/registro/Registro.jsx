@@ -17,7 +17,8 @@ export default function Registro() {
 
   const [openModal, setOpenModal] = useState(false)
   const [messageModal, setMessageModal] = useState('')
-
+  const [condicionesChecked, setCondicionesChecked] = useState(false)
+  const [promocionesChecked, setPromocionesChecked] = useState(false)
   const handleRegistro = () => {
     const user = {
       nombre: nombre,
@@ -110,6 +111,7 @@ export default function Registro() {
 
     fetchData();
   }, [citiesURL]);
+  
 
   const validateEmail = (email) => {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
