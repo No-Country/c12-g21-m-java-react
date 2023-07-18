@@ -9,6 +9,11 @@ const UserBadge = () => {
     const [open, setOpen] = useState(false);
     const navLinks = [
         {
+            title: "Mi perfil",
+            path: "/profile",
+            icon: ''
+        },
+        {
             title: "Mis productos publicados",
             path: "/ProductosVendidos",
             icon: "",

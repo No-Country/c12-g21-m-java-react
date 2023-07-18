@@ -217,7 +217,7 @@ export default function Registro() {
 
           <TextField
             id="pais"
-            //required
+            required
             select
             label="País"
             value={pais}
@@ -232,7 +232,7 @@ export default function Registro() {
 
           <TextField
             id="provincia"
-            //required
+            required
             select
             label="Provincia"
             value={provincia}
@@ -247,7 +247,7 @@ export default function Registro() {
 
           <TextField
             id="ciudad"
-            //required
+            required
             select
             label="Ciudad"
             value={ciudad}

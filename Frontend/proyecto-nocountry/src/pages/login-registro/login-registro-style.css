@@ -1,0 +1,9 @@
+.login-registro-container {
+    text-align: center;
+    width: 100%;
+}
+
+.login-registro-button {
+    width: 200px;
+    border-radius: 0;
+}

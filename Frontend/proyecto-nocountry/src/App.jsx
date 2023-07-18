@@ -17,41 +17,41 @@ import AcordarCompra from "./pages/acordar-compra/AcordarCompra.jsx";
 import CerrarSesion from "./pages/cerrar-sesion/CerrarSesion.jsx";
 import { useSelector } from "react-redux";
 import LogoutIcon from "@mui/icons-material/Logout";
-import DashboardIcon from "@mui/icons-material/Dashboard";
+import Header from "./components/header/Header.jsx";
+import LoginRegistro from "./pages/login-registro/LoginRegistro.jsx";
+import Profile from "./pages/profile/Profile.jsx";
 
 const App = () => {
   const logueado = useSelector((state) => state.user.logueado);
 
   const navLinks = [
     {
-      title: "Home",
+      title: "Inicio",
       path: "/",
       icon: <HomeIcon />,
     },
     {
-      title: "Ventas",
+      title: "Vender",
       path: "/ventas",
       icon: <MonetizationOnIcon />,
     },
     {
-      title: "Compras",
+      title: "Comprar",
       path: "/compras",
       icon: <StorefrontIcon />,
     },
     {
-      title: logueado ? "Mis productos publicados" : "Registrarse",
-      path: logueado ? "/productosVendidos" : "/registro",
-      icon: logueado ? <DashboardIcon /> : <AppRegistrationIcon />,
-    },
-    {
       title: logueado ? "Logout" : "Login",
-      path: logueado ? "/cerrarsesion" : "/login",
+      path: logueado ? "/cerrarSesion" : "/login-registro",
       icon: logueado ? <LogoutIcon /> : <LoginIcon />,
+
     },
+
   ];
 
   return (
     <>
+    <Header />
       <Navbar navLinks={navLinks} />
 
       <Routes>
@@ -65,6 +65,8 @@ const App = () => {
         <Route path="/detail/:id" element={<ItemDetailContainer />} />
         <Route path="/acordar-compra" element={<AcordarCompra />} />
         <Route path="/cerrarsesion" element={<CerrarSesion />} />
+        <Route path="/login-registro" element={<LoginRegistro/>}/>
+        <Route path="/profile" element={<Profile/>}/>
       </Routes>
     </>
   );
