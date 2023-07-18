@@ -10,13 +10,11 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Toaster, toast } from 'sonner'
-import { useDispatch } from "react-redux";
 
 export default function Registro() {
 
   const [condicionesChecked, setCondicionesChecked] = useState(false)
   const [promocionesChecked, setPromocionesChecked] = useState(false)
-  const dispatch = useDispatch()
 
   const handleRegistro = () => {
     const user = {
@@ -28,25 +26,24 @@ export default function Registro() {
       postal: codigoPostal,
       email: email,
       password: password,
+      address: address,
+      phone: phone
     };
     if (condicionesChecked && user.email && user.password) {
       axios.post('https://c12-21-m-java-react-ecommerce.onrender.com/users/register', {
-        idUser: 0, //modificar
         email: user.email,
         password: user.password,
         userPerson: {
-          idUserPerson: 0, //modificar
           firstName: user.name,
           lastName: user.lastName,
-          address: "", //no hay
-          phone: "", //no hay
-          newsLetter: true,
-          idCity: user.city, // modificar
+          address: user.address, 
+          phone: user.phone, 
+          newsLetter: promocionesChecked,
+          idCity: user.city, 
           postalCode: user.postal
         }
       })
         .then((response) => {
-          console.log(response.data)
           toast.success('Se ha registrado con éxito')
 
         })
@@ -77,7 +74,8 @@ export default function Registro() {
   const [codigoPostal, setCodigoPostal] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("")
   const [error, setError] = useState({
     error: false,
     message: "",
@@ -176,6 +174,8 @@ export default function Registro() {
       setPassword("");
       setCondicionesChecked(false);
       setPromocionesChecked(false);
+      setAddress("");
+      setPhone("");
     } else {
       setError({
         error: true,
@@ -271,6 +271,28 @@ export default function Registro() {
             onChange={(e) => setCodigoPostal(e.target.value)}
           />
 
+          <TextField
+            id="address"
+            label="Domicilio"
+            type="text"
+            variant="outlined"
+            fullWidth
+            required
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+
+          <TextField
+            id="phone"
+            label="Teléfono"
+            type="text"
+            variant="outlined"
+            fullWidth
+            required
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          
           <TextField
             id="email"
             label="Email"
