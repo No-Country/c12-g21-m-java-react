@@ -9,43 +9,59 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { postUser } from "../../firebase/functions";
-import BasicModal from "../../components/basicModal/BasicModal";
+import { Toaster, toast } from 'sonner'
 
 export default function Registro() {
 
-
-  const [openModal, setOpenModal] = useState(false)
-  const [messageModal, setMessageModal] = useState('')
   const [condicionesChecked, setCondicionesChecked] = useState(false)
   const [promocionesChecked, setPromocionesChecked] = useState(false)
+
   const handleRegistro = () => {
     const user = {
-      nombre: nombre,
-      apellido: apellido,
-      pais: pais,
-      provincia: provincia,
-      ciudad: ciudad,
-      codigoPostal: codigoPostal,
+      name: nombre,
+      lastName: apellido,
+      country: pais,
+      province: provincia,
+      city: ciudad,
+      postal: codigoPostal,
       email: email,
       password: password,
+      address: address,
+      phone: phone
     };
-    if(condicionesChecked && user.email && user.password){
-    dispatch(registrarse({ user }));
-    setModal(true);
+    if (condicionesChecked && user.email && user.password) {
+      axios.post('https://c12-21-m-java-react-ecommerce.onrender.com/users/register', {
+        email: user.email,
+        password: user.password,
+        userPerson: {
+          firstName: user.name,
+          lastName: user.lastName,
+          address: user.address, 
+          phone: user.phone, 
+          newsLetter: promocionesChecked,
+          idCity: user.city, 
+          postalCode: user.postal
+        }
+      })
+        .then((response) => {
+          toast.success('Se ha registrado con éxito')
+
+        })
+        .catch((error) => {
+          console.log(error)
+          toast.error('email existente')
+
+        }) 
+        /* if (true) {
+          dispatch(registrarse(user));
+          toast.success('Se ha registrado con éxito')
+        } else {
+          toast.error('email existente')
+        } */
+
     }
-    let registrado;
-    postUser(user).then(data => {
-      registrado = data
-      if (registrado) {
-        setMessageModal('Se ha registrado con éxito')
-      } else {
-        setMessageModal('email existente')
-      }
-      setOpenModal(true)
-     
-    });
-   
+
+
   }
 
   /////////////////////////////////
@@ -58,7 +74,8 @@ export default function Registro() {
   const [codigoPostal, setCodigoPostal] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("")
   const [error, setError] = useState({
     error: false,
     message: "",
@@ -111,7 +128,7 @@ export default function Registro() {
 
     fetchData();
   }, [citiesURL]);
-  
+
 
   const validateEmail = (email) => {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -157,6 +174,8 @@ export default function Registro() {
       setPassword("");
       setCondicionesChecked(false);
       setPromocionesChecked(false);
+      setAddress("");
+      setPhone("");
     } else {
       setError({
         error: true,
@@ -198,7 +217,7 @@ export default function Registro() {
 
           <TextField
             id="pais"
-            required
+            //required
             select
             label="País"
             value={pais}
@@ -213,7 +232,7 @@ export default function Registro() {
 
           <TextField
             id="provincia"
-            required
+            //required
             select
             label="Provincia"
             value={provincia}
@@ -228,7 +247,7 @@ export default function Registro() {
 
           <TextField
             id="ciudad"
-            required
+            //required
             select
             label="Ciudad"
             value={ciudad}
@@ -252,6 +271,28 @@ export default function Registro() {
             onChange={(e) => setCodigoPostal(e.target.value)}
           />
 
+          <TextField
+            id="address"
+            label="Domicilio"
+            type="text"
+            variant="outlined"
+            fullWidth
+            required
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+
+          <TextField
+            id="phone"
+            label="Teléfono"
+            type="text"
+            variant="outlined"
+            fullWidth
+            required
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          
           <TextField
             id="email"
             label="Email"
@@ -304,7 +345,7 @@ export default function Registro() {
           >
             Crear cuenta
           </Button>
-          <BasicModal open={openModal} setOpen={setOpenModal} message={messageModal} />
+          <Toaster />
         </Box>
       </Container>
     </>

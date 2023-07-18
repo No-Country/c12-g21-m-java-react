@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import NavListDrawer from '../navbar/NavListDrawer'
 import { NavLink } from 'react-router-dom'
-import ProductosVendidos from '../../pages/productosVendidos/ProductosVendidos'
-import { cerrarSesion } from '../../features/userSlice'
+
 
 const UserBadge = () => {
     const [open, setOpen] = useState(false);
@@ -24,7 +23,6 @@ const UserBadge = () => {
 
 
     const user = useSelector(state => state.user)
-    console.log(user)
   return (
       <div >{user?.logueado && <Button onClick={() => setOpen(true)} variant="contained">{user.name} {user.surname}</Button>} 
           <Drawer
