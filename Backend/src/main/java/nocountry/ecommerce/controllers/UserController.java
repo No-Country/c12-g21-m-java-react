@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import nocountry.ecommerce.annotations.UniqueEmailValidator;
 import nocountry.ecommerce.dto.UserDTO;
 import nocountry.ecommerce.exception.CustomErrorResponse;
+import nocountry.ecommerce.exception.ModelNotFoundException;
 import nocountry.ecommerce.models.Role;
 import nocountry.ecommerce.models.User;
 import nocountry.ecommerce.models.UserPerson;
@@ -16,12 +17,11 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
@@ -61,6 +61,20 @@ User check = service.findByEmail(obj1.getEmail());
         User obj = service.save(obj1);
         return new ResponseEntity<>(convertToDto(obj), HttpStatus.CREATED);
     }
+
+    @Operation(summary="Obtiene los datos de un usuario." +
+            " {'email': 'susana@mail.com'}")
+    @PostMapping("/profile")
+    public ResponseEntity<UserDTO> getUser(@RequestBody UserDTO dto) throws Exception {
+        User check = service.findByEmail(dto.getEmail());
+        if (Objects.isNull(check)) {
+            String exceptionMsg = "User not found";
+            throw new ModelNotFoundException(exceptionMsg);
+        }
+        UserDTO obj = this.convertToDto(service.findByEmail(dto.getEmail()));
+        return new ResponseEntity<>(obj, HttpStatus.OK);
+    }
+
     private User convertToEntity(UserDTO dto){
         return mapper.map(dto, User.class);
     }

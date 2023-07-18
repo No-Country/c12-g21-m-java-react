@@ -15,9 +15,9 @@ public class AuthorizeLogic {
         boolean rpta = false;
 
         String methodRole = switch (path){
-            case "findAll" -> "ADMIN";
-            case "findById" -> "USER,DBA";
-            default -> "ROOT";
+            case "findAll" -> "VENDEDOR,COMPRADOR";
+            case "findById" -> "USER,DBA,VENDEDOR,COMPRADOR";
+            default -> "ROOT,VENDEDOR,COMPRADOR";
         };
 
         String methodRoles[] = methodRole.split(",");

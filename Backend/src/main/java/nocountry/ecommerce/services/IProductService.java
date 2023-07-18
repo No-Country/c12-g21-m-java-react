@@ -17,4 +17,6 @@ public interface IProductService extends ICRUD<Product, Integer> {
                                Double priceTo,
                                Integer idCity);
     Product findByIdProductAndActive(Integer id, boolean active);
+
+    List<Product> findByHighlightAndActive(boolean highlight, boolean active);
 }

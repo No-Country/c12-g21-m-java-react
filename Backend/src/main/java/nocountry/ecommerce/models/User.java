@@ -25,7 +25,6 @@ public class User {
     @Id
     private Integer idUser;
 
-
     @Email
     @Column(length = 50, nullable = false, unique=true)
     private String email;
