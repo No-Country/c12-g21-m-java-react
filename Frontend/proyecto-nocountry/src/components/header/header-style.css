@@ -1,0 +1,19 @@
+.header-container {
+    width: 100%;
+    padding: 0 20px;
+    height: 80px;
+    background-color: #6a6a6a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .header-container {
+        display: none;
+    }
+}
+
+.header-logo {
+    height: 50px;
+}

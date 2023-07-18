@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import { getProducts } from "../../firebase/functions";
 
 const Home = () => {
-
+  
   const filaRef = useRef(null);
   const [products, setProducts] = useState([])
   const scrollDerecha = () => {
@@ -36,15 +36,15 @@ const Home = () => {
     <div className="home-container">
       <div className="container">
         <div className="options-container">
-          <Link to="/ventas"><Button variant="contained" className="options-button">QUIERO VENDER</Button></Link>
-          <Link to="/compras"><Button variant="contained" className="options-button">QUIERO COMPRAR</Button></Link>
+          <Link to="/ventas" className="options-button-container"><Button variant="contained" className="options-button" >QUIERO VENDER</Button></Link>
+          <Link to="/compras" className="options-button-container"><Button variant="contained" className="options-button">QUIERO COMPRAR</Button></Link>
         </div>
-        <Card title={"Lorem ipsum dolor sit amet consectetur adipisicing elit."}
-          description={"Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae quibusdam dignissimos neque unde quasi, voluptatum recusandae dolore ducimus magnam alias ab. Ea qui atque odio molestias aut labore quam quos!"}
+        <Card title={"Creemos en las segundas oportunidades."}
+          description={"Los muebles que necesitas para tu casa, a un solo click"}
           img={"https://hips.hearstapps.com/hmg-prod/images/index-online-642dd244cbcfe.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:*"}
         />
-        <Card title={"Consejos de compra para vos"}
-          description={"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa quaerat esse quo quae, earum officiis mollitia repellendus cupiditate dolorem sunt, iusto autem id. Consequuntur ipsum amet aliquam excepturi debitis modi."}
+        <Card title={"¿Cómo elegir el mejor mueble para vos?"}
+          description={"Primero que nada, mira bien las medidas del espacio que tenés para poner tu mueble..."}
           img={'https://www.unclaimedfurnitureupstate.com/wp-content/uploads/2023/03/Living-Room-Category-Page-Photo.webp'}
         />
         <div className="destacados-contenedor mt-5">

@@ -32,11 +32,13 @@ export default function Login() {
       email: email || "",
       password: password || "",     
     };   
+    console.log(usuario)
     axios.post('https://c12-21-m-java-react-ecommerce.onrender.com/login', {
         username: usuario.email,
         password: usuario.password
       })
       .then(response => {
+        console.log(response)
         dispatch(loguearse(response.data.jwtToken))
         navigate("/");
       })
@@ -47,15 +49,7 @@ export default function Login() {
           setError(false)
         }, 5000)
       })
-     /*  if (usuarioExistente?.password === usuario.password) {
-        dispatch(loguearse(usuarioExistente))
-        navigate("/");
-      } else {
-        setError(true)
-        setTimeout(() => {
-          setError(false)
-        }, 5000)
-      } */
+     
     };
 
   return (

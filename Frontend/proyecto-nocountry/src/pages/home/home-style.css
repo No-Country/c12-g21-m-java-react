@@ -14,10 +14,17 @@
     left: 0;
 }
 
-.options-button {
+.options-button-container {
     width: 25em;
-    height: 5em;
+    height: 10vh;
+        box-Shadow: 0px 2px 4px rgba(0, 0, 0, 0.25)!important
 
+}
+
+.options-button {
+    width: 100%;
+    height:100%;
+    box-Shadow: 0px 2px 4px rgba(0, 0, 0, 0.25)!important
 }
 
 .destacados-contenedor {
