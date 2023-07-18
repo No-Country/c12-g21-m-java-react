@@ -39,7 +39,6 @@ const Compras = () => {
               productosFiltrados = await getProducts()
 
 
-              console.log(productosFiltrados)
             }
         if (order == 0) {
           productosFiltrados.sort((a, b) => a.price - b.price);

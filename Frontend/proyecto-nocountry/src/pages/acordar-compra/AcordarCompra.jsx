@@ -19,7 +19,6 @@ export default function AcordarCompra() {
   };
 
   const handleSendMessage = () => {
-    console.log("Mensaje enviado:", message);
     setMessage("");
   };
 

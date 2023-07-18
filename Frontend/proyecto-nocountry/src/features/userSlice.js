@@ -12,6 +12,7 @@ const initialState = {
     postal: "",
     email: "",
     password: "",
+    jwtToken: "",
     logueado: false
 }
 
@@ -22,25 +23,27 @@ export const userSlice = createSlice({
         loguearse: (state, action) => {
             const {
                 name,
-                surname,
+                lastName,
                 country,
                 province,
                 city,
                 postal,
                 email,
-                password
+                password,
+                jwtToken,
             } = action.payload;
             state.name = name;
-            state.surname = surname;
+            state.lastName = lastName;
             state.country = country;
             state.province = province;
             state.city = city;
             state.postal = postal;
             state.email = email;
             state.password = password;
+            state.jwtToken = jwtToken;
             state.logueado = true;
-            console.log(state)
         },
+        
         cerrarSesion: (state) => {
             state.logueado = false;
         }
@@ -49,6 +52,6 @@ export const userSlice = createSlice({
 
 export const {
     loguearse,
-    cerrarSesion
+    cerrarSesion,
 } = userSlice.actions
 export default userSlice.reducer

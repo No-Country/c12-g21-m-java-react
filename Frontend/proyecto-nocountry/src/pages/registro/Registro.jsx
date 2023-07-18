@@ -9,43 +9,62 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { postUser } from "../../firebase/functions";
-import BasicModal from "../../components/basicModal/BasicModal";
+import { Toaster, toast } from 'sonner'
+import { useDispatch } from "react-redux";
 
 export default function Registro() {
 
-
-  const [openModal, setOpenModal] = useState(false)
-  const [messageModal, setMessageModal] = useState('')
   const [condicionesChecked, setCondicionesChecked] = useState(false)
   const [promocionesChecked, setPromocionesChecked] = useState(false)
+  const dispatch = useDispatch()
+
   const handleRegistro = () => {
     const user = {
-      nombre: nombre,
-      apellido: apellido,
-      pais: pais,
-      provincia: provincia,
-      ciudad: ciudad,
-      codigoPostal: codigoPostal,
+      name: nombre,
+      lastName: apellido,
+      country: pais,
+      province: provincia,
+      city: ciudad,
+      postal: codigoPostal,
       email: email,
       password: password,
     };
-    if(condicionesChecked && user.email && user.password){
-    dispatch(registrarse({ user }));
-    setModal(true);
+    if (condicionesChecked && user.email && user.password) {
+      axios.post('https://c12-21-m-java-react-ecommerce.onrender.com/users/register', {
+        idUser: 0, //modificar
+        email: user.email,
+        password: user.password,
+        userPerson: {
+          idUserPerson: 0, //modificar
+          firstName: user.name,
+          lastName: user.lastName,
+          address: "", //no hay
+          phone: "", //no hay
+          newsLetter: true,
+          idCity: user.city, // modificar
+          postalCode: user.postal
+        }
+      })
+        .then((response) => {
+          console.log(response.data)
+          toast.success('Se ha registrado con éxito')
+
+        })
+        .catch((error) => {
+          console.log(error)
+          toast.error('email existente')
+
+        }) 
+        /* if (true) {
+          dispatch(registrarse(user));
+          toast.success('Se ha registrado con éxito')
+        } else {
+          toast.error('email existente')
+        } */
+
     }
-    let registrado;
-    postUser(user).then(data => {
-      registrado = data
-      if (registrado) {
-        setMessageModal('Se ha registrado con éxito')
-      } else {
-        setMessageModal('email existente')
-      }
-      setOpenModal(true)
-     
-    });
-   
+
+
   }
 
   /////////////////////////////////
@@ -111,7 +130,7 @@ export default function Registro() {
 
     fetchData();
   }, [citiesURL]);
-  
+
 
   const validateEmail = (email) => {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -198,7 +217,7 @@ export default function Registro() {
 
           <TextField
             id="pais"
-            required
+            //required
             select
             label="País"
             value={pais}
@@ -213,7 +232,7 @@ export default function Registro() {
 
           <TextField
             id="provincia"
-            required
+            //required
             select
             label="Provincia"
             value={provincia}
@@ -228,7 +247,7 @@ export default function Registro() {
 
           <TextField
             id="ciudad"
-            required
+            //required
             select
             label="Ciudad"
             value={ciudad}
@@ -304,7 +323,7 @@ export default function Registro() {
           >
             Crear cuenta
           </Button>
-          <BasicModal open={openModal} setOpen={setOpenModal} message={messageModal} />
+          <Toaster />
         </Box>
       </Container>
     </>

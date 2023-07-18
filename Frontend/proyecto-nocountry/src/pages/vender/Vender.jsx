@@ -55,16 +55,13 @@ const Vender = () => {
     const missingFields = requiredFields.filter((field) => !productData[field]);
 
     if (missingFields.length > 0) {
-      console.log("Faltan campos requeridos: ", missingFields);
       return;
     }
 
-    console.log("Producto a publicar:", productData);
 
     const success = await postProduct(productData);
 
     if (success) {
-      console.log("Producto publicado exitosamente");
 
       setProductData({
         ambient: "",
@@ -79,7 +76,6 @@ const Vender = () => {
         userId: "",
       });
     } else {
-      console.log("Hubo un error al publicar producto");
     }
   };
 

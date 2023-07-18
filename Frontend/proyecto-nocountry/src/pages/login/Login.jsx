@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loguearse } from "../../features/userSlice";
 import { useNavigate } from "react-router-dom";
-import { getUserByEmail } from '../../firebase/functions';
+import axios from "axios";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  // const user = useSelector((state) => state.user);
+  const usuarioExistente = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -32,12 +32,22 @@ export default function Login() {
       email: email || "",
       password: password || "",     
     };   
-
-    let usuarioExistente
-    getUserByEmail(usuario.email).then(data => {
-      usuarioExistente = data
-      console.log(usuarioExistente)
-      if (usuarioExistente?.password === usuario.password) {
+    axios.post('https://c12-21-m-java-react-ecommerce.onrender.com/login', {
+        username: usuario.email,
+        password: usuario.password
+      })
+      .then(response => {
+        dispatch(loguearse(response.data.jwtToken))
+        navigate("/");
+      })
+      .catch(error => {
+        console.log(error)
+        setError(true)
+        setTimeout(() => {
+          setError(false)
+        }, 5000)
+      })
+     /*  if (usuarioExistente?.password === usuario.password) {
         dispatch(loguearse(usuarioExistente))
         navigate("/");
       } else {
@@ -45,10 +55,8 @@ export default function Login() {
         setTimeout(() => {
           setError(false)
         }, 5000)
-      }
-    })
-
-  };
+      } */
+    };
 
   return (
     <Container maxWidth="sm">
