@@ -1,76 +1,61 @@
-import './compras-style.css'
-import ItemListContainer from '../../components/itemListContainer/ItemListContainer';
-import ProductFilter from '../../components/productFilter/ProductFilter';
-import ProductOrder from '../../components/productOrder/ProductOrder';
-import { useEffect, useState } from 'react';
-import { getFilteredProducts, getProducts } from '../../firebase/functions';
-/* import { products } from '../../database/products';
- */
-const Compras = () => {
+//import './compras-style.css';
+import ItemListContainer from "../../components/itemListContainer/ItemListContainer";
+import ProductFilter from "../../components/productFilter/ProductFilter";
+import ProductOrder from "../../components/productOrder/ProductOrder";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Container, Grid } from "@mui/material";
 
-
-
+export default function Compras() {
   const [options, setOptions] = useState({
-    category: '',
-    ambient: '',
-    condition: ''
-  })
+    houseRoom: "",
+    category: "",
+    condition: "",
+  });
 
-  const [order, setOrder] = useState(2)
+  const [order, setOrder] = useState(2);
+  const [productsFiltered, setProductsFiltered] = useState([]);
 
-  const [productsFiltered, setProductsFiltered] = useState([])
   useEffect(() => {
-    let productosFiltrados;
-
     const fetchData = async () => {
       try {
-        if (options.ambient !== '' && options.ambient !== 'Todos') {
-          productosFiltrados = await getFilteredProducts('ambient', options.ambient)
+        const { category, houseRoom, condition, priceFrom, priceTo, IdCiudad } =
+          options;
 
-        } else
-          if (options.category !== '' && options.category !== 'Todos') {
-            productosFiltrados = await getFilteredProducts('category', options.category)
+        const url = `https://c12-21-m-java-react-ecommerce.onrender.com/products/search/filters/${houseRoom}/${category}/${condition}/${priceFrom}/${priceTo}/${IdCiudad}`;
 
-          } else
-            if (options.condition !== '' && options.condition !== 'Todos') {
-              productosFiltrados = await getFilteredProducts('condition', options.condition)
+        const response = await axios.get(url);
+        const data = response.data;
 
-            } else {
-              productosFiltrados = await getProducts()
-
-
-            }
-        if (order == 0) {
-          productosFiltrados.sort((a, b) => a.price - b.price);
-        } else if (order == 1) {
-          productosFiltrados.sort((a, b) => b.price - a.price);
+        if (order === 0) {
+          data.sort((a, b) => a.price - b.price);
+        } else if (order === 1) {
+          data.sort((a, b) => b.price - a.price);
         }
-        setProductsFiltered(productosFiltrados)
+
+        setProductsFiltered(data);
+
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
-    }
-    fetchData()
+    };
+
+    fetchData();
   }, [options, order]);
 
   return (
-    <div className="compras-container">
-      <div className="container">
-        <div className="title-container">
-          <h1>Lorem ipsum, dolor sit amet</h1>
-        </div>
+    <>
+      <Container>
         <ProductOrder order={order} setOrder={setOrder} />
-        <div className="row">
-          <div className="filtro col-md-2">
-            <ProductFilter options={options} setOptions={setOptions} />
-          </div>
-          <div className="product-container col-md-10">
+        <Grid container spacing={2}>
+          <Grid item xs={6} md={2}>
+            <ProductFilter setOptions={setOptions} />
+          </Grid>
+          <Grid item xs={6} md={10}>
             <ItemListContainer products={productsFiltered} />
-          </div>
-        </div>
-      </div>
-    </div>
+          </Grid>
+        </Grid>
+      </Container>
+    </>
   );
-};
-
-export default Compras;
+}
