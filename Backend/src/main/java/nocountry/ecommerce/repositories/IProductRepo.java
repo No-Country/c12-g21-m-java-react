@@ -20,4 +20,6 @@ public interface IProductRepo extends IGenericRepo<Product, Integer>{
     List<Product> findByFilters(Integer idCategoryHouseRooms, Integer idCategoryProduct, Integer idCategoryStatus, Double priceFrom, Double priceTo, Integer idCity);
 
     Product findByIdProductAndActive(Integer id, boolean active);
+
+    List<Product> findByHighlightAndActive(boolean highlight, boolean active);
 }

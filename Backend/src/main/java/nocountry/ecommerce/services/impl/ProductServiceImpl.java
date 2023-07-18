@@ -45,4 +45,8 @@ public class ProductServiceImpl extends CRUDImpl<Product, Integer> implements IP
     public Product findByIdProductAndActive(Integer id, boolean active) {
         return repo.findByIdProductAndActive(id, active);
     }
+    @Override
+    public List<Product> findByHighlightAndActive(boolean highlight, boolean active){
+        return repo.findByHighlightAndActive(highlight, active);
+    }
 }
