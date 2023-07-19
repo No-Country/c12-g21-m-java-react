@@ -10,26 +10,31 @@ const UserBadge = () => {
     const navLinks = [
         {
             title: "Mi perfil",
-            path: "/profile",
+            path: "usuario/perfil",
             icon: ''
         },
         {
             title: "Mis productos publicados",
-            path: "/ProductosVendidos",
+            path: "/usuario/productosPublicados",
             icon: "",
         },
         {
-            title: "Cerrar sesión",
-            path: "/cerrarsesion",
-            icon: "",
+            title: "Mis productos vendidos",
+            path: "/usuario/productosVendidos",
+            icon: ""
         },
+        {
+            title: 'Mis Calificaciones',
+            path: '/usuario/calificaciones',
+            icon: ""
+        }
         
     ];
 
 
     const user = useSelector(state => state.user)
   return (
-      <div >{user?.logueado && <Button onClick={() => setOpen(true)} variant="contained">{user.name} {user.surname}</Button>} 
+      <div >{user?.logueado && <Button onClick={() => setOpen(true)} variant="contained">{user.firstName} {user.lastName}</Button>} 
           <Drawer
               open={open}
               anchor="right"
