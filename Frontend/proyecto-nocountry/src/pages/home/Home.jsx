@@ -36,7 +36,7 @@ const Home = () => {
     <div className="home-container">
       <div className="container">
         <div className="options-container">
-          <Link to="/ventas" className="options-button-container"><Button variant="contained" className="options-button" >QUIERO VENDER</Button></Link>
+          <Link to="/vender" className="options-button-container"><Button variant="contained" className="options-button" >QUIERO VENDER</Button></Link>
           <Link to="/compras" className="options-button-container"><Button variant="contained" className="options-button">QUIERO COMPRAR</Button></Link>
         </div>
         <Card title={"Creemos en las segundas oportunidades."}

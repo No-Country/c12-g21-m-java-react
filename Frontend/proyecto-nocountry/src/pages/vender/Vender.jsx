@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CssBaseline,
   Box,
@@ -11,81 +11,100 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-// import InputLink from "../../components/inputs/InputLink";
-//import InputText from "../../components/inputs/InputText";
-// import InputLinkEstado from "../../components/inputs/InputLinkEstado";
-//import InputPrice from "../../components/inputs/InputPrice";
 import BtnExaminarLocal from "../../components/buttons/BtnExaminarLocal";
-import { postProduct } from "../../firebase/functions";
+import axios from "axios";
 
-const Vender = () => {
+export default function Vender() {
+  const [selectedHouseRoom, setSelectedHouseRoom] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCondition, setSelectedCondition] = useState("");
+
+  const handleHouseRoomChange = (event) => {
+    setSelectedHouseRoom(event.target.value);
+  };
+
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
+  const handleConditionChange = (event) => {
+    setSelectedCondition(event.target.value);
+  };
+
+  const [categoryStatusList, setCategoryStatusList] = useState([]);
+  const [categoryProductList, setCategoryProductList] = useState([]);
+  const [categoryHouseRoomsList, setCategoryHouseRoomsList] = useState([]);
+
+  useEffect(() => {
+    const statusUrl =
+      "https://c12-21-m-java-react-ecommerce.onrender.com/categoryStatus/list";
+    const productUrl =
+      "https://c12-21-m-java-react-ecommerce.onrender.com/categoryProduct/list";
+    const roomsUrl =
+      "https://c12-21-m-java-react-ecommerce.onrender.com/categoryHouseRooms/list";
+
+    axios
+      .all([axios.get(statusUrl), axios.get(productUrl), axios.get(roomsUrl)])
+      .then(
+        axios.spread((statusResponse, productResponse, roomsResponse) => {
+          const statusData = statusResponse.data;
+          const productData = productResponse.data;
+          const roomsData = roomsResponse.data;
+
+          setCategoryStatusList(statusData);
+          setCategoryProductList(productData);
+          setCategoryHouseRoomsList(roomsData);
+        })
+      )
+      .catch((error) => {
+        console.error("Error al hacer la solicitud:", error);
+      });
+  }, []);
+
   const [productData, setProductData] = useState({
-    ambient: "",
-    category: "",
-    condition: "",
-    datetime: "",
-    description: "",
-    img: [],
-    location: "",
-    price: "",
     title: "",
-    userId: "",
+    description: "",
+    price: "",
+    colour: "",
+    active: "",
+    highlight: "",
+    idCategoryHouseRooms: selectedHouseRoom,
+    idCategoryProduct: selectedCategory,
+    idCategoryStatus: selectedCondition,
+    idCity: "",
+    idUserSeller: "",
+    photos: [],
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProductData((prevProductData) => ({
-      ...prevProductData,
+  // const images = [{
+  //   "image_path": "https://res.cloudinary.com/dohtb4vzp/image/upload/v1689785819/djm93poginrbovz8zqcv.png"
+  //   }]
+
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setProductData((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
   };
 
-  const handlePublicar = async (e) => {
-    e.preventDefault();
+  // Publica el producto //
+  const handlePublicar = (event) => {
+    event.preventDefault();
 
-    const requiredFields = [
-      "ambient",
-      "category",
-      "condition",
-      "location",
-      "title",
-      "description",
-      "price",
-    ];
-    const missingFields = requiredFields.filter((field) => !productData[field]);
+    const url =
+      "https://c12-21-m-java-react-ecommerce.onrender.com/products/saveProduct";
 
-    if (missingFields.length > 0) {
-      return;
-    }
-
-
-    const success = await postProduct(productData);
-
-    if (success) {
-
-      setProductData({
-        ambient: "",
-        category: "",
-        condition: "",
-        datetime: "",
-        description: "",
-        img: [],
-        location: "",
-        price: "",
-        title: "",
-        userId: "",
+    axios
+      .post(url, productData)
+      .then((response) => {
+        console.log("Respuesta del servidor:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error al hacer la petición:", error);
       });
-    } else {
-    }
   };
-
-  // const handleFileChange = (files) => {
-  //   // Aquí actualizamos el estado productData para incluir las imágenes seleccionadas
-  //   setProductData((prevProductData) => ({
-  //     ...prevProductData,
-  //     img: files,
-  //   }));
-  // };
 
   return (
     <div>
@@ -106,13 +125,18 @@ const Vender = () => {
             <Select
               label="Seleccionar ambiente"
               name="ambient"
-              value={productData.ambient}
-              onChange={handleChange}
+              value={selectedHouseRoom}
+              onChange={handleHouseRoomChange}
               required
             >
-              <MenuItem value="Living">Living</MenuItem>
-              <MenuItem value="Comedor">Comedor</MenuItem>
-              <MenuItem value="Dormitorio">Dormitorio</MenuItem>
+              {categoryHouseRoomsList.map((categoryHouseRoom) => (
+                <MenuItem
+                  key={categoryHouseRoom.idCategoryHouseRooms}
+                  value={categoryHouseRoom.idCategoryHouseRooms}
+                >
+                  {categoryHouseRoom.title}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
 
@@ -121,13 +145,18 @@ const Vender = () => {
             <Select
               label="Seleccionar categoría"
               name="category"
-              value={productData.category}
-              onChange={handleChange}
+              value={selectedCategory}
+              onChange={handleCategoryChange}
               required
             >
-              <MenuItem value="Muebles">Muebles</MenuItem>
-              <MenuItem value="Accesorios">Accesorios</MenuItem>
-              <MenuItem value="Mesadas">Mesadas</MenuItem>
+              {categoryProductList.map((categoryProduct) => (
+                <MenuItem
+                  key={categoryProduct.idCategoryProduct}
+                  value={categoryProduct.idCategoryProduct}
+                >
+                  {categoryProduct.title}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
 
@@ -136,27 +165,20 @@ const Vender = () => {
             <Select
               label="Seleccionar condición"
               name="condition"
-              value={productData.condition}
-              onChange={handleChange}
+              value={selectedCondition}
+              onChange={handleConditionChange}
               required
             >
-              <MenuItem value="Buena">Buena</MenuItem>
-              <MenuItem value="Muy buena">Muy buena</MenuItem>
-              <MenuItem value="Excelente">Excelente</MenuItem>
+              {categoryStatusList.map((categoryStatus) => (
+                <MenuItem
+                  key={categoryStatus.idCategoryStatus}
+                  value={categoryStatus.idCategoryStatus}
+                >
+                  {categoryStatus.title}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
-          <hr />
-
-          <TextField
-            fullWidth
-            variant="outlined"
-            label="Ubicación del producto"
-            name="location"
-            value={productData.location}
-            onChange={handleChange}
-            sx={{ margin: "0.5rem 0" }}
-            required
-          />
 
           <TextField
             fullWidth
@@ -165,19 +187,6 @@ const Vender = () => {
             name="title"
             value={productData.title}
             onChange={handleChange}
-            sx={{ margin: "0.5rem 0" }}
-            required
-          />
-
-          <TextField
-            fullWidth
-            variant="outlined"
-            label="Descripción del producto"
-            name="description"
-            value={productData.description}
-            onChange={handleChange}
-            multiline
-            rows={4}
             sx={{ margin: "0.5rem 0" }}
             required
           />
@@ -194,8 +203,30 @@ const Vender = () => {
               pattern: "[0-9]*",
             }}
           />
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="Descripción del producto"
+            name="description"
+            value={productData.description}
+            onChange={handleChange}
+            multiline
+            rows={4}
+            sx={{ margin: "0.5rem 0" }}
+            required
+          />
           <hr />
-          {/* <BtnExaminarLocal onFileChange={handleFileChange} /> */}
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="Ubicación del producto"
+            name="location"
+            value={productData.location}
+            onChange={handleChange}
+            sx={{ margin: "0.5rem 0" }}
+            required
+          />
+          <hr />
           <BtnExaminarLocal />
           <Box
             sx={{
@@ -212,6 +243,4 @@ const Vender = () => {
       </Container>
     </div>
   );
-};
-
-export default Vender;
+}
