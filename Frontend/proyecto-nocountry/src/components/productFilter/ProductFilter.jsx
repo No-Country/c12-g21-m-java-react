@@ -53,9 +53,9 @@ const ProductFilter = ({ setOptions }) => {
   useEffect(() => {
     setOptions((prevOptions) => ({
       ...prevOptions,
-      houseRoom: selectedHouseRoom,
-      category: selectedCategory,
-      condition: selectedCondition,
+      houseRoom: selectedHouseRoom ? parseInt(selectedHouseRoom) : null,
+      category: selectedCategory ? parseInt(selectedCategory) : null,
+      condition: selectedCondition ? parseInt(selectedCondition) : null,
     }));
   }, [selectedHouseRoom, selectedCategory, selectedCondition, setOptions]);
 
@@ -69,7 +69,7 @@ const ProductFilter = ({ setOptions }) => {
         <RadioGroup
           aria-label="house-room"
           name="houseRoom"
-          value={selectedHouseRoom}
+          value={selectedHouseRoom ? selectedHouseRoom : null}
           onChange={handleHouseRoomChange}
         >
           {categoryHouseRoomsList.map((categoryHouseRoom) => (
@@ -80,7 +80,7 @@ const ProductFilter = ({ setOptions }) => {
               label={categoryHouseRoom.title}
             />
           ))}
-          <FormControlLabel value={0} control={<Radio />} label="Todos" />
+          <FormControlLabel value={null} control={<Radio />} label="Todos" />
         </RadioGroup>
       </FormGroup>
 
@@ -90,7 +90,7 @@ const ProductFilter = ({ setOptions }) => {
         <RadioGroup
           aria-label="category"
           name="category"
-          value={selectedCategory}
+          value={selectedCategory ? selectedCategory : null}
           onChange={handleCategoryChange}
         >
           {categoryProductList.map((categoryProduct) => (
@@ -101,7 +101,7 @@ const ProductFilter = ({ setOptions }) => {
               label={categoryProduct.title}
             />
           ))}
-          <FormControlLabel value={0} control={<Radio />} label="Todos" />
+          <FormControlLabel value={null} control={<Radio />} label="Todos" />
         </RadioGroup>
       </FormGroup>
 
@@ -111,7 +111,7 @@ const ProductFilter = ({ setOptions }) => {
         <RadioGroup
           aria-label="condition"
           name="condition"
-          value={selectedCondition}
+          value={selectedCondition ? selectedCondition : null}
           onChange={handleConditionChange}
         >
           {categoryStatusList.map((category) => (
@@ -122,7 +122,7 @@ const ProductFilter = ({ setOptions }) => {
               label={category.title}
             />
           ))}
-          <FormControlLabel value={0} control={<Radio />} label="Todos" />
+          <FormControlLabel value={null} control={<Radio />} label="Todos" />
         </RadioGroup>
       </FormGroup>
     </div>

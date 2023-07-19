@@ -8,18 +8,19 @@ import { Container, Grid } from "@mui/material";
 
 export default function Compras() {
   const [options, setOptions] = useState({
-    houseRoom: 0,
-    category: 0,
-    condition: 0,
-    priceFrom: 0,
-    priceTo: 0,
-    idCity: 0,
+    houseRoom: null,
+    category: null,
+    condition: null,
+    priceFrom: null,
+    priceTo: null,
+    idCity: null,
   });
 
   const [order, setOrder] = useState(2);
   const [productsFiltered, setProductsFiltered] = useState([]);
 
   useEffect(() => {
+    console.log(options)
     const fetchData = async () => {
       try {
         const { category, houseRoom, condition, priceFrom, priceTo, idCity } =
@@ -29,14 +30,12 @@ export default function Compras() {
           "https://c12-21-m-java-react-ecommerce.onrender.com/products/search/filters";
 
         const response = await axios.post(url, {
-          params: {
             idCategoryHouseRooms: houseRoom,
             idCategoryProduct: category,
             idCategoryStatus: condition,
             priceFrom: priceFrom,
             priceTo: priceTo,
             idCity: idCity,
-          },
         });
 
         const data = response.data;
