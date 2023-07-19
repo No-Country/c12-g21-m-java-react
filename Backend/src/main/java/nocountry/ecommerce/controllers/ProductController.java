@@ -4,8 +4,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import nocountry.ecommerce.dto.*;
+import nocountry.ecommerce.exception.CustomErrorResponse;
 import nocountry.ecommerce.models.Product;
 import nocountry.ecommerce.models.ProductImage;
+import nocountry.ecommerce.services.ICloudinaryService;
+import nocountry.ecommerce.services.IProductImageService;
 import nocountry.ecommerce.services.IProductService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -16,10 +19,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -28,22 +35,19 @@ import java.util.stream.Collectors;
 public class ProductController {
 
     private final IProductService service;
+    private final IProductImageService serviceImage;
+
+   // private final ICloudinaryService cloudinaryService;
+
     //private final IProductImageService serviceImage;
     @Qualifier("productResponseMapper")
     private final ModelMapper mapper;
 
     @Operation(summary = "Filtrado de Productos Publicados de acuerdo a ambiente, tipo, estado, precio desde, precio hasta, o ciudad.")
-    @GetMapping("/search/filters/{idCategoryHouseRooms}/{idCategoryProduct}/{idCategoryStatus}/{priceFrom}/{priceTo}/{IdCiudad}")
-    public ResponseEntity<List<ProductResponseDTO>> searchPublishProducts(@RequestParam(value = "idCategoryHouseRooms", required = false) Integer idCategoryHouseRooms,
-                                                                          @RequestParam(value = "idCategoryProduct", required = false) Integer idCategoryProduct,
-                                                                          @RequestParam(value = "idCategoryStatus", required = false) Integer idCategoryStatus,
-                                                                          @RequestParam(value = "priceFrom", required = false) Double priceFrom,
-                                                                          @RequestParam(value = "priceTo", required = false) Double priceTo,
-                                                                          @RequestParam(value = "idCity", required = false) Integer idCity
-    ) {
-        List<Product> list = service.getByFilters(idCategoryHouseRooms, idCategoryProduct, idCategoryStatus, priceFrom, priceTo, idCity).stream().toList();
-
-
+    @GetMapping("/search/filters")
+    public ResponseEntity<List<ProductResponseDTO>> searchPublishProducts(@RequestBody FilterProductDTO dto)
+    {
+        List<Product> list = service.getByFilters(dto.getIdCategoryHouseRooms(), dto.getIdCategoryProduct(), dto.getIdCategoryStatus(), dto.getPriceFrom(), dto.getPriceTo(), dto.getIdCity()).stream().toList();
         List<ProductResponseDTO> consultDTOS = mapper.map(list, new TypeToken<List<ProductResponseDTO>>() {
         }.getType());
         return new ResponseEntity<>(consultDTOS, HttpStatus.OK);
@@ -90,19 +94,29 @@ public class ProductController {
           URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdProduct()).toUri();
         return ResponseEntity.created(location).build();
     }
-  /*  @GetMapping("/search/filters")
-    public ResponseEntity<List<ProductDTO>> searchPublishProducts(@RequestBody ProductFilterDTO filterDTO )
-    {
-        List<ProductDTO> list = service.getByFilters(filterDTO.getIdCategoryHouseRooms(),
-                        filterDTO.getIdCategoryProduct(),
-                        filterDTO.getIdCategoryStatus(),
-                        filterDTO.getPriceFrom(),
-                        filterDTO.getPriceTo(),
-                        filterDTO.getIdCity()
-                        )
-                .stream().map(this::convertToDto).collect(Collectors.toList());
-        return new ResponseEntity<>(list, HttpStatus.OK);
+
+/*
+    @GetMapping("/list")
+    public ResponseEntity<List<Imagen>> list(){
+        List<Imagen> list = imagenService.list();
+        return new ResponseEntity(list, HttpStatus.OK);
     }
+
+    @PostMapping("/upload")
+    public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile)throws IOException {
+        BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
+        if(bi == null){
+            //return new ResponseEntity(new Mensaje("imagen no válida"), HttpStatus.BAD_REQUEST);
+            CustomErrorResponse errorResponse = new CustomErrorResponse(LocalDateTime.now(), "imagen no valida", null);
+        }
+        Map result = cloudinaryService.upload(multipartFile);
+        System.out.println(result.get("original_filename"));
+        System.out.println(result.get("url"));
+        System.out.println(result.get("public_id"));
+
+         return new ResponseEntity(result, HttpStatus.OK);
+    }
+
     */
 
     private ProductResponseDTO convertToDto(Product obj) {

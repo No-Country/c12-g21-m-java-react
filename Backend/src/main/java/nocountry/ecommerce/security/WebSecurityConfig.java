@@ -60,7 +60,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/countries").permitAll()
                         .requestMatchers("/cities/province/*").permitAll()
                         .requestMatchers("/products/*").permitAll()
-                        .requestMatchers("/products/search/filters/*/*/*/*/*/*").permitAll()
+                        .requestMatchers("/products/search/filters").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic()
                 .and()
