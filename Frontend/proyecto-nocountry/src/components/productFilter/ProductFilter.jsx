@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 
 // eslint-disable-next-line react/prop-types
 const ProductFilter = ({ setOptions }) => {
-  const [selectedHouseRoom, setSelectedHouseRoom] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedCondition, setSelectedCondition] = useState("");
+  const [selectedHouseRoom, setSelectedHouseRoom] = useState();
+  const [selectedCategory, setSelectedCategory] = useState();
+  const [selectedCondition, setSelectedCondition] = useState();
 
   const handleHouseRoomChange = (event) => {
     setSelectedHouseRoom(event.target.value);
@@ -80,7 +80,7 @@ const ProductFilter = ({ setOptions }) => {
               label={categoryHouseRoom.title}
             />
           ))}
-          <FormControlLabel value="" control={<Radio />} label="Todos" />
+          <FormControlLabel value={0} control={<Radio />} label="Todos" />
         </RadioGroup>
       </FormGroup>
 
@@ -101,7 +101,7 @@ const ProductFilter = ({ setOptions }) => {
               label={categoryProduct.title}
             />
           ))}
-          <FormControlLabel value="" control={<Radio />} label="Todos" />
+          <FormControlLabel value={0} control={<Radio />} label="Todos" />
         </RadioGroup>
       </FormGroup>
 
@@ -122,7 +122,7 @@ const ProductFilter = ({ setOptions }) => {
               label={category.title}
             />
           ))}
-          <FormControlLabel value="" control={<Radio />} label="Todos" />
+          <FormControlLabel value={0} control={<Radio />} label="Todos" />
         </RadioGroup>
       </FormGroup>
     </div>
