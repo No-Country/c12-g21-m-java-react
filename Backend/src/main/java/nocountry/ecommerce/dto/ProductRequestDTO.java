@@ -45,10 +45,11 @@ public class ProductRequestDTO {
     @Column(nullable = false)
     private String colour;
     @NotNull
-    @NotEmpty
-    @Column(nullable = false)
+     @Column(nullable = false)
     private boolean active;
 
+    @NotNull
+     @Column(nullable = false)
     private boolean highlight;
     @NotNull
     private Integer idCategoryHouseRooms;
@@ -66,5 +67,5 @@ public class ProductRequestDTO {
     private Integer idUserSeller;
 
 
-    private List<MultipartFile> photos;
+  // private MultipartFile[] photos;
 }

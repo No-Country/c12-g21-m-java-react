@@ -61,6 +61,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/cities/province/*").permitAll()
                         .requestMatchers("/products/*").permitAll()
                         .requestMatchers("/products/search/filters").permitAll()
+                        .requestMatchers("/products/savaProducts").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic()
                 .and()

@@ -3,19 +3,22 @@ package nocountry.ecommerce.services;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import nocountry.ecommerce.models.City;
+import nocountry.ecommerce.models.Country;
+import nocountry.ecommerce.models.ProductImage;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class ICloudinaryService {
+public interface ICloudinaryService extends ICRUD<ProductImage, Integer>{
 
-    Cloudinary cloudinary;
+   // Cloudinary cloudinary;
 
-    private Map<String, String> valuesMap = new HashMap<>();
+   /* private Map<String, String> valuesMap = new HashMap<>();
 
     public ICloudinaryService() {
         valuesMap.put("cloud_name", "dohtb4vzp");
@@ -23,24 +26,27 @@ public class ICloudinaryService {
         valuesMap.put("api_secret", "UuaRPotGANnxuPQOUFZ_B3hHwDg");
         cloudinary = new Cloudinary(valuesMap);
     }
-
-    public Map upload(MultipartFile multipartFile) throws IOException {
+*/
+    Map upload(MultipartFile multipartFile)throws IOException ;
+    /*public Map upload(MultipartFile multipartFile) throws IOException {
         File file = convert(multipartFile);
         Map result = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
         file.delete();
         return result;
     }
-
-    public Map delete(String id) throws IOException {
+*/
+    Map delete(String id)throws IOException ;
+   /* public Map delete(String id) throws IOException {
         Map result = cloudinary.uploader().destroy(id, ObjectUtils.emptyMap());
         return result;
     }
-
-    private File convert(MultipartFile multipartFile) throws IOException {
+*/
+   File convert(MultipartFile multipartFile) throws IOException ;
+   /* private File convert(MultipartFile multipartFile) throws IOException {
         File file = new File(multipartFile.getOriginalFilename());
         FileOutputStream fo = new FileOutputStream(file);
         fo.write(multipartFile.getBytes());
         fo.close();
         return file;
-    }
+    }*/
 }
