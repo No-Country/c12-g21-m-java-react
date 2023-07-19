@@ -18,7 +18,9 @@ export default function Vender() {
   const [selectedHouseRoom, setSelectedHouseRoom] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedCondition, setSelectedCondition] = useState("");
+  const [photos, setPhotos] = useState([]);
 
+  
   const handleHouseRoomChange = (event) => {
     setSelectedHouseRoom(event.target.value);
   };
@@ -73,12 +75,9 @@ export default function Vender() {
     idCategoryStatus: selectedCondition,
     idCity: "",
     idUserSeller: "",
-    photos: [],
+    photos: photos,
   });
 
-  // const images = [{
-  //   "image_path": "https://res.cloudinary.com/dohtb4vzp/image/upload/v1689785819/djm93poginrbovz8zqcv.png"
-  //   }]
 
 
   const handleChange = (event) => {
@@ -87,12 +86,18 @@ export default function Vender() {
       ...prevData,
       [name]: value,
     }));
+    console.log(productData)
   };
 
-  // Publica el producto //
-  const handlePublicar = (event) => {
-    event.preventDefault();
 
+
+  // Publica el producto //
+  const handlePublicar = async (event) => {
+    setProductData((prevData) => ({
+      ...prevData,
+      "photos": photos,
+    }));
+    event.preventDefault();
     const url =
       "https://c12-21-m-java-react-ecommerce.onrender.com/products/saveProduct";
 
@@ -227,7 +232,7 @@ export default function Vender() {
             required
           />
           <hr />
-          <BtnExaminarLocal />
+          <BtnExaminarLocal onFileChange={handleChange} setPhotos={setPhotos} />
           <Box
             sx={{
               display: "flex",
