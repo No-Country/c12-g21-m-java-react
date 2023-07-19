@@ -16,7 +16,7 @@ export default function Navbar({ navLinks }) {
   return (
     <>
       <AppBar position="sticky">
-        <Toolbar>
+        <Toolbar >
           <IconButton
             color="inherit"
             size="large"
@@ -65,7 +65,7 @@ export default function Navbar({ navLinks }) {
               ))}
             </Tabs>
           </Box>
-          {isMobile && <UserBadge />}
+          {isMobile && <div ><UserBadge /></div>}
           <FavoriteBadge />
         </Toolbar>
       </AppBar>

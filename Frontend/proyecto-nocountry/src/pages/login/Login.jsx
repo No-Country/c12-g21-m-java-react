@@ -26,31 +26,54 @@ export default function Login() {
       handleLogin();
     }
   };
-  
+
   const handleLogin = () => {
     const usuario = {
-      email: email || "",
-      password: password || "",     
-    };   
-    console.log(usuario)
-    axios.post('https://c12-21-m-java-react-ecommerce.onrender.com/login', {
-        username: usuario.email,
-        password: usuario.password
-      })
-      .then(response => {
-        console.log(response)
-        dispatch(loguearse(response.data.jwtToken))
-        navigate("/");
-      })
-      .catch(error => {
-        console.log(error)
-        setError(true)
-        setTimeout(() => {
-          setError(false)
-        }, 5000)
-      })
-     
+      username: email || "",
+      password: password || "",
     };
+
+
+    axios
+      .post("https://c12-21-m-java-react-ecommerce.onrender.com/login", usuario)
+      .then((response) => {
+        const token = response.data.jwtToken
+        axios
+          .post(
+            "https://c12-21-m-java-react-ecommerce.onrender.com/users/profile",
+            {
+              email: usuario.username
+
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            },
+            
+
+          )
+          .then((response) => {
+            console.log(response.data)
+            dispatch(loguearse({ ...response.data, jwtToken: token }));
+            navigate("/");
+          })
+          .catch((error) => {
+            console.log(error);
+            setError(true);
+            setTimeout(() => {
+              setError(false);
+            }, 5000);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(true);
+        setTimeout(() => {
+          setError(false);
+        }, 5000);
+      });
+  };
 
   return (
     <Container maxWidth="sm">
@@ -80,7 +103,6 @@ export default function Login() {
           sx={{ marginBottom: "1rem" }}
         />
         <Button
-          submit="submit"
           variant="contained"
           onClick={handleLogin}
           fullWidth
@@ -88,7 +110,7 @@ export default function Login() {
           Iniciar sesión
         </Button>
       </Box>
-      {error ? <p>Usuario y/o contraseña incorrectos</p> : ""}
+      {error && <p>Usuario y/o contraseña incorrectos</p>}
     </Container>
   );
 }

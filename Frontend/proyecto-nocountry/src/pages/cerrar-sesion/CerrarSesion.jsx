@@ -13,8 +13,8 @@ const CerrarSesion = () => {
     }, 2000);
   });
   return (
-    <div>
-      <h2>Cerrando sesion</h2>
+    <div className="d-flex justify-content-center align-items-center" >
+      <h3>Cerrando sesion</h3>
     </div>
   );
 };

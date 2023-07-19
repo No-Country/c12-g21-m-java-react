@@ -52,12 +52,7 @@ export default function Registro() {
           toast.error('email existente')
 
         }) 
-        /* if (true) {
-          dispatch(registrarse(user));
-          toast.success('Se ha registrado con éxito')
-        } else {
-          toast.error('email existente')
-        } */
+
 
     }
 
