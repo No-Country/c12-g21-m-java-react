@@ -47,7 +47,6 @@ public class ProductController {
 
    private final ICloudinaryService cloudinaryService;
 
-    //private final IProductImageService serviceImage;
     @Qualifier("productResponseMapper")
     private final ModelMapper mapper;
 
@@ -63,19 +62,20 @@ public class ProductController {
 
     @Operation(summary="Lista el detalle de un producto Publicado pasado por parametro.")
     @GetMapping("/{idProduct}")
-    public ResponseEntity<ProductResponseDTO> findById(@PathVariable("idProduct") Integer id){
-        ProductResponseDTO prod = convertToDto(service.findByIdProductAndActive(id, true));
+    public ResponseEntity<ProductDTO> findById(@PathVariable("idProduct") Integer id){
+        ProductDTO prod = convertToDTOProduct(service.findByIdProductAndActive(id, true));
         return new ResponseEntity<>(prod, HttpStatus.OK);
     }
 
     @Operation(summary="Lista los Productos Publicados Destacados")
     @GetMapping("/highlight")
-    public ResponseEntity<List<ProductResponseDTO>> findHighlight(){
-        List<ProductResponseDTO> list = service.findByHighlightAndActive(true, true).stream().map(this::convertToDto).collect(Collectors.toList());
+    public ResponseEntity<List<ProductDTO>> findHighlight(){
+        List<ProductDTO> list = service.findByHighlightAndActive(true, true).stream().map(this::convertToDTOProduct).collect(Collectors.toList());
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
    // @PostMapping(value = "/saveProduct", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 
+    @Operation(summary="Inserta un nuevo producto")
     @PostMapping( "/saveProduct")
     public ResponseEntity<ProductDTO> save(@Valid @RequestBody ProductDTO dto) {
          Product prod =   service.save(this.convertToProduct(dto));
@@ -85,8 +85,16 @@ public class ProductController {
         return new ResponseEntity<>(this.convertToDTOProduct(obj), HttpStatus.OK);
 
     }
+    @Operation(summary="Actualiza un producto")
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDTO> update(@Valid @PathVariable("id") Integer id, @RequestBody ProductDTO dto){
+        dto.setIdProduct(id);
+        Product obj = service.update(this.convertToProduct(dto), id);
+        return new ResponseEntity<>(this.convertToDTOProduct(obj), HttpStatus.OK);
+    }
 
-/*
+
+    /*
     @GetMapping("/list")
     public ResponseEntity<List<Imagen>> list(){
         List<Imagen> list = imagenService.list();
@@ -97,7 +105,6 @@ public class ProductController {
     public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile)throws IOException {
         BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
         if(bi == null){
-            //return new ResponseEntity(new Mensaje("imagen no válida"), HttpStatus.BAD_REQUEST);
             CustomErrorResponse errorResponse = new CustomErrorResponse(LocalDateTime.now(), "imagen no valida", null);
         }
         Map result = cloudinaryService.upload(multipartFile);
