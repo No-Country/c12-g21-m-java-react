@@ -28,33 +28,38 @@ export default function Login() {
   };
 
   const handleLogin = () => {
-    const usuario = {
-      username: email || "",
-      password: password || "",
-    };
+    // Verificar si el email o la contraseña están vacíos
+    if (!email.trim() || !password.trim()) {
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 5000);
+      return; // Evitar enviar la solicitud si hay campos vacíos
+    }
 
+    const usuario = {
+      username: email,
+      password: password,
+    };
 
     axios
       .post("https://c12-21-m-java-react-ecommerce.onrender.com/login", usuario)
       .then((response) => {
-        const token = response.data.jwtToken
+        const token = response.data.jwtToken;
         axios
           .post(
             "https://c12-21-m-java-react-ecommerce.onrender.com/users/profile",
             {
-              email: usuario.username
-
+              email: usuario.username,
             },
             {
               headers: {
-                Authorization: `Bearer ${token}`
-              }
-            },
-            
-
+                Authorization: `Bearer ${token}`,
+              },
+            }
           )
           .then((response) => {
-            console.log(response.data)
+            console.log(response.data);
             dispatch(loguearse({ ...response.data, jwtToken: token }));
             navigate("/");
           })
@@ -102,11 +107,7 @@ export default function Login() {
           fullWidth
           sx={{ marginBottom: "1rem" }}
         />
-        <Button
-          variant="contained"
-          onClick={handleLogin}
-          fullWidth
-        >
+        <Button variant="contained" onClick={handleLogin} fullWidth>
           Iniciar sesión
         </Button>
       </Box>

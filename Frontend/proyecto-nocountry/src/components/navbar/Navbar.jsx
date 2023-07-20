@@ -1,4 +1,12 @@
-import { AppBar, Box, Drawer, IconButton, Tab, Tabs, Toolbar, useTheme } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Drawer,
+  IconButton,
+  Tab,
+  Tabs,
+  Toolbar,
+} from "@mui/material";
 import NavListDrawer from "./NavListDrawer";
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -7,16 +15,18 @@ import PropTypes from "prop-types";
 import FavoriteBadge from "../favoriteBadge/FavoriteBadge";
 import UserBadge from "../userBadge/UserBadge";
 import { useMediaQuery } from "@mui/material";
+import { useSelector } from "react-redux";
 
 export default function Navbar({ navLinks }) {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const isMobile = useMediaQuery("(max-width: 767px)");
+  const logueado = useSelector((state) => state.user.logueado);
 
   return (
     <>
       <AppBar position="sticky">
-        <Toolbar >
+        <Toolbar>
           <IconButton
             color="inherit"
             size="large"
@@ -25,47 +35,45 @@ export default function Navbar({ navLinks }) {
           >
             <MenuIcon />
           </IconButton>
-          <Box display="flex" flexGrow={1} justifyContent="flex-start" sx={{ display: { xs: "none", sm: "flex" }}}>
+          <Box
+            display="flex"
+            alignItems="center"
+            flexGrow={1}
+            justifyContent="flex-start"
+            sx={{ display: { xs: "none", sm: "flex" } }}
+          >
             <Tabs
               value={location.pathname}
               textColor="inherit"
               variant="scrollable"
               scrollButtons="auto"
               indicatorColor="primary"
-
               TabIndicatorProps={{
                 style: {
                   height: 2,
                   top: "-1.6px",
                   backgroundColor: "white",
-
                 },
-
               }}
             >
               {navLinks.map((item) => (
-                item.path == "/login-registro" || item.path == "/cerrarSesion"? 
                 <Tab
                   key={item.title}
                   label={item.title}
                   value={item.path}
                   component={NavLink}
                   to={item.path}
-                  style={{ display: "none" }}
+                  style={{ margin: "0 30px" }}
                 />
-                :
-                  <Tab
-                    key={item.title}
-                    label={item.title}
-                    value={item.path}
-                    component={NavLink}
-                    to={item.path}
-                    style={{ margin: "0 30px" }}
-                  />
               ))}
             </Tabs>
           </Box>
-          {isMobile && <div ><UserBadge /></div>}
+          {isMobile && (
+            <div>
+              <UserBadge />
+            </div>
+          )}
+          {logueado && !isMobile && <UserBadge />}
           <FavoriteBadge />
         </Toolbar>
       </AppBar>
@@ -89,5 +97,3 @@ export default function Navbar({ navLinks }) {
 Navbar.propTypes = {
   navLinks: PropTypes.array.isRequired,
 };
-
-

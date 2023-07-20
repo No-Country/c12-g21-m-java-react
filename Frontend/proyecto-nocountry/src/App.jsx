@@ -8,12 +8,10 @@ import Registro from "./pages/registro/Registro.jsx";
 import HomeIcon from "@mui/icons-material/Home";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import StorefrontIcon from "@mui/icons-material/Storefront";
-import LoginIcon from "@mui/icons-material/Login";
 import ItemDetailContainer from "./components/itemDetailContainer/ItemDetailContainer.jsx";
 import AcordarCompra from "./pages/acordar-compra/AcordarCompra.jsx";
 import CerrarSesion from "./pages/cerrar-sesion/CerrarSesion.jsx";
 import { useSelector } from "react-redux";
-import LogoutIcon from "@mui/icons-material/Logout";
 import Header from "./components/header/Header.jsx";
 import LoginRegistro from "./pages/login-registro/LoginRegistro.jsx";
 import ProductosPublicados from "./pages/usuario/productosPublicados/ProductosPublicados.jsx";
@@ -32,7 +30,7 @@ const App = () => {
     },
     {
       title: "Vender",
-      path: "/vender",
+      path: logueado ? "/vender" : "/login-registro",
       icon: <MonetizationOnIcon />,
     },
     {
@@ -40,34 +38,33 @@ const App = () => {
       path: "/compras",
       icon: <StorefrontIcon />,
     },
-    {
-      title: logueado ? "Logout" : "Login",
-      path: logueado ? "/cerrarSesion" : "/login-registro",
-      icon: logueado ? <LogoutIcon /> : <LoginIcon />,
-
-    },
-
   ];
 
   return (
     <>
-    <Header />
+      <Header />
       <Navbar navLinks={navLinks} />
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/compras" element={<Compras />} />        
+        <Route path="/compras" element={<Compras />} />
         <Route path="/vender" element={<Vender />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/detail/:id" element={<ItemDetailContainer />} />
         <Route path="/acordar-compra" element={<AcordarCompra />} />
         <Route path="/cerrarsesion" element={<CerrarSesion />} />
-        <Route path="/login-registro" element={<LoginRegistro/>}/>
-        <Route path="/usuario/perfil" element={<Perfil/>}/>
-        <Route path="/usuario/productosPublicados" element={<ProductosPublicados />} />
-        <Route path="/usuario/productosVendidos" element={<ProductosVendidos />} />
-        <Route path='/usuario/calificaciones' element={<Calificaciones/>} />
+        <Route path="/login-registro" element={<LoginRegistro />} />
+        <Route path="/usuario/perfil" element={<Perfil />} />
+        <Route
+          path="/usuario/productosPublicados"
+          element={<ProductosPublicados />}
+        />
+        <Route
+          path="/usuario/productosVendidos"
+          element={<ProductosVendidos />}
+        />
+        <Route path="/usuario/calificaciones" element={<Calificaciones />} />
       </Routes>
     </>
   );

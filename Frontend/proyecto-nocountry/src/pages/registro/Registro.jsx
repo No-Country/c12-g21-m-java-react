@@ -9,12 +9,11 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Toaster, toast } from 'sonner'
+import { Toaster, toast } from "sonner";
 
 export default function Registro() {
-
-  const [condicionesChecked, setCondicionesChecked] = useState(false)
-  const [promocionesChecked, setPromocionesChecked] = useState(false)
+  const [condicionesChecked, setCondicionesChecked] = useState(false);
+  const [promocionesChecked, setPromocionesChecked] = useState(false);
 
   const handleRegistro = () => {
     const user = {
@@ -27,37 +26,36 @@ export default function Registro() {
       email: email,
       password: password,
       address: address,
-      phone: phone
+      phone: phone,
     };
     if (condicionesChecked && user.email && user.password) {
-      axios.post('https://c12-21-m-java-react-ecommerce.onrender.com/users/register', {
-        email: user.email,
-        password: user.password,
-        userPerson: {
-          firstName: user.name,
-          lastName: user.lastName,
-          address: user.address, 
-          phone: user.phone, 
-          newsLetter: promocionesChecked,
-          idCity: user.city, 
-          postalCode: user.postal
-        }
-      })
+      axios
+        .post(
+          "https://c12-21-m-java-react-ecommerce.onrender.com/users/register",
+          {
+            email: user.email,
+            password: user.password,
+            userPerson: {
+              firstName: user.name,
+              lastName: user.lastName,
+              address: user.address,
+              phone: user.phone,
+              newsLetter: promocionesChecked,
+              idCity: user.city,
+              postalCode: user.postal,
+            },
+          }
+        )
         .then((response) => {
-          toast.success('Se ha registrado con éxito')
-
+          console.log(response.data);
+          toast.success("Se ha registrado con éxito");
         })
         .catch((error) => {
-          console.log(error)
-          toast.error('email existente')
-
-        }) 
-
-
+          console.log(error);
+          toast.error("email existente");
+        });
     }
-
-
-  }
+  };
 
   /////////////////////////////////
 
@@ -70,11 +68,7 @@ export default function Registro() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("")
-  const [error, setError] = useState({
-    error: false,
-    message: "",
-  });
+  const [phone, setPhone] = useState("");
 
   const countriesURL =
     "https://c12-21-m-java-react-ecommerce.onrender.com/countries";
@@ -124,68 +118,13 @@ export default function Registro() {
     fetchData();
   }, [citiesURL]);
 
-
-  const validateEmail = (email) => {
-    const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    return regex.test(email);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // const datos = {
-    //   nombre,
-    //   apellido,
-    //   pais,
-    //   provincia,
-    //   ciudad,
-    //   codigoPostal,
-    //   email,
-    //   password,
-    // };
-
-    if (validateEmail(email)) {
-      setError({
-        error: false,
-        message: "",
-      });
-
-      // axios
-      // .post("url", datos)
-      // .then((response) => {
-      //   console.log("Datos enviados correctamente")
-      // })
-      // .catch((error) => {
-      //   console.error("Error al enviar los datos", error)
-      // })
-
-      setNombre("");
-      setApellido("");
-      setPais("");
-      setProvincia("");
-      setCiudad("");
-      setCodigoPostal("");
-      setEmail("");
-      setPassword("");
-      setCondicionesChecked(false);
-      setPromocionesChecked(false);
-      setAddress("");
-      setPhone("");
-    } else {
-      setError({
-        error: true,
-        message: "Formato de email incorrecto",
-      });
-    }
-  };
-
   return (
     <>
       <Container maxWidth="sm" sx={{ mb: "2rem", mt: "2rem" }}>
         <h1>Registro de usuario</h1>
         <Box
           component="form"
-          onSubmit={handleSubmit}
+          onSubmit={handleRegistro}
           sx={{ display: "grid", gap: 2 }}
         >
           <TextField
@@ -287,7 +226,7 @@ export default function Registro() {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
-          
+
           <TextField
             id="email"
             label="Email"
@@ -295,8 +234,6 @@ export default function Registro() {
             variant="outlined"
             fullWidth
             required
-            error={error.error}
-            helperText={error.message}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -332,12 +269,7 @@ export default function Registro() {
             label="Deseo recibir emails y promociones en mi correo electrónico"
           />
 
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{ mt: 2 }}
-            onClick={handleRegistro}
-          >
+          <Button type="submit" variant="contained" sx={{ mt: 2 }}>
             Crear cuenta
           </Button>
           <Toaster />
