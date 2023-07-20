@@ -1,21 +1,41 @@
-import {useState} from 'react'
-import {Button} from '@mui/material'
-import Registro from '../registro/Registro'
-import Login from '../login/Login'
-import './login-registro-style.css'
+import { useState } from "react";
+import { Button, Typography } from "@mui/material";
+import Registro from "../registro/Registro";
+import Login from "../login/Login";
+import "./login-registro-style.css";
+
 const LoginRegistro = () => {
-  
-    const [registerActive, setRegisterActive] = useState(true)
+  const [registerActive, setRegisterActive] = useState(false);
 
-    return (
-    <div className='login-registro-container'>
-        <h1>Nombre de la empresa</h1>
-        <Button className='login-registro-button' variant={registerActive ? 'outlined' : 'contained'} onClick={() => {setRegisterActive(false)}} >Iniciar sesión</Button>
-            <Button className='login-registro-button'  variant={registerActive ? 'contained' : 'outlined'} onClick={() => setRegisterActive(true)} >Crear cuenta</Button> 
-
-        {registerActive ? <Registro /> : <Login/>}
+  return (
+    <div className="login-registro-container">
+      {registerActive ? (
+        <>
+          <Registro />
+        </>
+      ) : (
+        <>
+          <Login />
+          <Typography
+            variant="body2"
+            className="register-info-text"
+            paddingTop={"3rem"}
+          >
+            Si no estás registrado, crea tu cuenta ahora!
+          </Typography>
+          <Button
+            className="login-registro-button"
+            variant="contained"
+            onClick={() => {
+              setRegisterActive(true);
+            }}
+          >
+            Crear cuenta
+          </Button>
+        </>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default LoginRegistro
+export default LoginRegistro;
