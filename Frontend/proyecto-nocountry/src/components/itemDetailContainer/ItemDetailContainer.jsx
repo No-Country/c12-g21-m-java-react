@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import ItemDetail from './itemDetail/ItemDetail'
 import Spinner from '../spinner/Spinner'
 import { getProductById } from '../../firebase/functions'
+import axios from 'axios'
 
 const ItemDetailContainer = () => {
 
@@ -13,8 +14,10 @@ const ItemDetailContainer = () => {
  
 
     useEffect(() => {
-        getProductById(id).then(product => setItem(product))
-
+        axios.get(`https://c12-21-m-java-react-ecommerce.onrender.com/products/${id}`)
+        .then(response => {
+            setItem(response.data)
+        })
         setTimeout(() => {
             setIsLoading(false)
         }, 2000)

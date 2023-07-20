@@ -35,7 +35,7 @@ const ItemDetail = ({ item }) => {
       <div className="detail-container">
         <div className="detail-img-container">
           <img
-            src={item.img[0]}
+            src={item.photos[0].imagePath}
             alt="img 1"
           />
         </div>
@@ -46,9 +46,9 @@ const ItemDetail = ({ item }) => {
               <p>{item.description}</p>
               <p>${item.price}</p>
               <div className="d-flex justify-content-between">
-                <Button variant='outlined'>Ambiente: {item.ambient}</Button>
-                <Button variant='outlined'>Categoría: {item.category}</Button>
-                <Button variant='outlined'>Condición: {item.condition}</Button>
+                <Button variant='outlined'>Ambiente: {item.categoryHouseRooms.title}</Button>
+                <Button variant='outlined'>Categoría: {item.categoryProduct.title}</Button>
+                <Button variant='outlined'>Condición: {item.categoryStatus.title}</Button>
               </div>
             </div>
             <div className="card_product-favorite" onClick={handleFavorite}>
@@ -62,6 +62,7 @@ const ItemDetail = ({ item }) => {
           <div className="detail-owner-container">
             <div className="detail-owner-data">
               <h2>Vendedor</h2>
+              <p>Nombre y apellido: {item.user.userPerson.firstName} {item.user.userPerson.lastName}</p>
               <p>Puntuación: </p>
               <p>Cantidad de ventas: </p>
               <Button variant="contained">Reseñas del vendedor</Button>

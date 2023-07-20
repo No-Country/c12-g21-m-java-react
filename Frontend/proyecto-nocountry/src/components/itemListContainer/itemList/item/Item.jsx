@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
 import {increment, decrement} from '../../../../features/productSlice'
 
-const Item = ({ title, description, price, img, id, ambient, category, condition }) => {
+const Item = ({ item }) => {
     const [favorite, setFavorite] = useState(false);
     const dispatch = useDispatch()
 
@@ -27,16 +27,16 @@ const Item = ({ title, description, price, img, id, ambient, category, condition
             <div className='item-favorite' onClick={handleFavorite}>
                 {favorite == false ? <StarBorderIcon></StarBorderIcon> : <StarIcon></StarIcon>}
             </div>
-            <Link to={`/detail/${id}`} style={{ textDecoration: "none", color: 'black' }}>
+            <Link to={`/detail/${item.idProduct}`} style={{ textDecoration: "none", color: 'black' }}>
                 <div className='item-img-container'>
-                    <img className='item-img' src="https://d2oo5quzpsdib.cloudfront.net/Website/General/Standard-Product-Icon-500.png" alt='producto'></img>
+                    <img className='item-img' src={item.photos[0] ? item.photos[0].imagePath : ""} alt='producto'></img>
                 </div>
                 <div className='item-text'>
-                    <h2>{title}</h2>
-                    <p>Categoría: {category}</p>
-                    <p>Ambiente: {ambient}</p>
-                    <p>Condición: {condition}</p>
-                    <p>${price}</p>
+                    <h2>{item.title}</h2>
+                    <p>Categoría: {item.categoryProduct.title}</p>
+                    <p>Ambiente: {item.categoryHouseRooms.title}</p>
+                    <p>Condición: {item.categoryStatus.title}</p>
+                    <p>${item.price}</p>
                 </div>
             </Link>
         </div>
