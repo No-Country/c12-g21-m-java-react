@@ -76,35 +76,14 @@ public class ProductController {
     }
    // @PostMapping(value = "/saveProduct", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 
-    @RequestMapping(path = "/saveProduct", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    //@RequestMapping(path = "/saveProduct", method = "POST", consumes = { "multipart/form-data" })
-   //public ResponseEntity<List<String>> save(@Valid @RequestBody ProductRequestDTO dto){
-    public ResponseEntity<List<String>> save(@Valid @RequestPart ProductRequestDTO dto,
-                                             @RequestParam("fotos") @NotNull @NotBlank MultipartFile[] fotos) {
-        BufferedImage bi;
-        //System.out.println("Request contains, Files count: " + multipartFile.length);
-        List<String> lista = new ArrayList<>();
-       // Arrays.asList(dto.getPhotos()).forEach(imageFile -> {
-        for (MultipartFile imageFile : fotos){
-            try {
-                /*bi = ImageIO.read(imageFile.getInputStream());
-                if(bi == null){
-                    //return new ResponseEntity(new Mensaje("imagen no válida"), HttpStatus.BAD_REQUEST);
-                    throw new InvalidImageException("imagen no válida");
-                }*/
-                Map result = cloudinaryService.upload(imageFile);
-                System.out.println(result.get("original_filename"));
-                System.out.println(result.get("url"));
-                System.out.println(result.get("public_id"));
-                lista.add(result.get("url").toString());
-            } catch (IOException e) {
-                // Handle the exception
-            }
-        };
-        //Product obj = service.save(this.convertRequestToEntity(dto));
-       //   URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdProduct()).toUri();
-        //return ResponseEntity.created(location).build();
-        return new ResponseEntity(lista, HttpStatus.OK);
+    @PostMapping( "/saveProduct")
+    public ResponseEntity<ProductDTO> save(@Valid @RequestBody ProductDTO dto) {
+         Product prod =   service.save(this.convertToProduct(dto));
+        System.out.println(prod);
+        List<ProductImage> fotos = mapper.map(dto.getPhotos(), new TypeToken<List<ProductImage>>(){}.getType());
+        Product obj = service.saveTransactional(prod, fotos);
+        return new ResponseEntity<>(this.convertToDTOProduct(obj), HttpStatus.OK);
+
     }
 
 /*
@@ -122,9 +101,9 @@ public class ProductController {
             CustomErrorResponse errorResponse = new CustomErrorResponse(LocalDateTime.now(), "imagen no valida", null);
         }
         Map result = cloudinaryService.upload(multipartFile);
-        System.out.println(result.get("original_filename"));
-        System.out.println(result.get("url"));
-        System.out.println(result.get("public_id"));
+      //  System.out.println(result.get("original_filename"));
+       // System.out.println(result.get("url"));
+       // System.out.println(result.get("public_id"));
 
          return new ResponseEntity(result, HttpStatus.OK);
     }
@@ -132,6 +111,12 @@ public class ProductController {
 
     private ProductResponseDTO convertToDto(Product obj) {
         return mapper.map(obj, ProductResponseDTO.class);
+    }
+    private Product convertToProduct(ProductDTO obj) {
+        return mapper.map(obj, Product.class);
+    }
+    private ProductDTO convertToDTOProduct(Product obj) {
+        return mapper.map(obj, ProductDTO.class);
     }
 
     private Product convertRequestToEntity(ProductRequestDTO obj) {

@@ -1,5 +1,6 @@
 package nocountry.ecommerce.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -17,12 +18,14 @@ import lombok.Setter;
 public class ProductResponseImageDTO {
     private Integer idProductImage;
 
+    @JsonBackReference
+    private ProductDTO product;
+
     @NotNull
     @NotEmpty
     @Size(max = 300)
     private String imagePath;
 
     @NotNull
-    @NotEmpty
     private boolean first;
 }

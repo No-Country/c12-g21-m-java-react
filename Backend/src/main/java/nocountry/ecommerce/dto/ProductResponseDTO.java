@@ -42,19 +42,19 @@ public class ProductResponseDTO {
     @Column(nullable = false)
     private String colour;
     @NotNull
-    @NotEmpty
     @Column(nullable = false)
     private boolean active;
 
     private boolean highlight;
-    @NotNull
-    private CategoryHouseRooms categoryHouseRooms;
+
+   @NotNull
+    private Integer idCategoryHouseRooms;
 
     @NotNull
-    private CategoryProduct categoryProduct;
+    private Integer idCategoryProduct;
 
     @NotNull
-    private CategoryStatus categoryStatus;
+    private Integer idCategoryStatus;
 
     @NotNull
     private Integer idCity;
