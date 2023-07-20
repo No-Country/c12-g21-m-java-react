@@ -12,6 +12,17 @@ const LoginRegistro = () => {
       {registerActive ? (
         <>
           <Registro />
+
+          <Button
+            className="login-registro-button"
+            variant="contained"
+            onClick={() => {
+              setRegisterActive(false);
+            }}
+            sx={{ whiteSpace: "nowrap", minWidth: "auto", margin: "1rem" }}
+          >
+            Volver a Inicio de Sesión
+          </Button>
         </>
       ) : (
         <>
