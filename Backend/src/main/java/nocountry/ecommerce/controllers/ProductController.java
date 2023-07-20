@@ -53,10 +53,10 @@ public class ProductController {
 
     @Operation(summary = "Filtrado de Productos Publicados de acuerdo a ambiente, tipo, estado, precio desde, precio hasta, o ciudad.")
     @PostMapping("/search/filters")
-    public ResponseEntity<List<ProductResponseDTO>> searchPublishProducts(@RequestBody FilterProductDTO dto)
+    public ResponseEntity<List<ProductDTO>> searchPublishProducts(@RequestBody FilterProductDTO dto)
     {
         List<Product> list = service.getByFilters(dto.getIdCategoryHouseRooms(), dto.getIdCategoryProduct(), dto.getIdCategoryStatus(), dto.getPriceFrom(), dto.getPriceTo(), dto.getIdCity()).stream().toList();
-        List<ProductResponseDTO> consultDTOS = mapper.map(list, new TypeToken<List<ProductResponseDTO>>() {
+        List<ProductDTO> consultDTOS = mapper.map(list, new TypeToken<List<ProductDTO>>() {
         }.getType());
         return new ResponseEntity<>(consultDTOS, HttpStatus.OK);
     }

@@ -31,6 +31,9 @@ public class MapperConfig {
         TypeMap<Product, ProductResponseDTO> typeMap1 = mapper.createTypeMap(Product.class, ProductResponseDTO.class);
         typeMap1.addMapping(e-> e.getUser().getIdUser(), (dest, v) -> dest.setIdUserSeller((Integer) v));
         typeMap1.addMapping(e-> e.getCity().getIdCity(), (dest, v) -> dest.setIdCity((Integer) v));
+        typeMap1.addMapping(e-> e.getCategoryProduct().getIdCategoryProduct(), (dest, v) -> dest.setIdCategoryProduct((Integer) v));
+        typeMap1.addMapping(e-> e.getCategoryHouseRooms().getIdCategoryHouseRooms(), (dest, v) -> dest.setIdCategoryHouseRooms((Integer) v));
+        typeMap1.addMapping(e-> e.getCategoryStatus().getIdCategoryStatus(), (dest, v) -> dest.setIdCategoryStatus((Integer) v));
         return mapper;
     }
 }
