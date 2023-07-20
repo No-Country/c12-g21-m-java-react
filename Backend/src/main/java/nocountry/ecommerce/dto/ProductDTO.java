@@ -43,7 +43,6 @@ public class ProductDTO {
     @Column(nullable = false)
     private String colour;
     @NotNull
-    @NotEmpty
     @Column(nullable = false)
     private boolean active;
 

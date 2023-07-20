@@ -3,6 +3,7 @@ package nocountry.ecommerce.services;
 import nocountry.ecommerce.dto.ProductResponseDTO;
 import nocountry.ecommerce.models.City;
 import nocountry.ecommerce.models.Product;
+import nocountry.ecommerce.models.ProductImage;
 import nocountry.ecommerce.models.Province;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -19,4 +20,5 @@ public interface IProductService extends ICRUD<Product, Integer> {
     Product findByIdProductAndActive(Integer id, boolean active);
 
     List<Product> findByHighlightAndActive(boolean highlight, boolean active);
+    Product saveTransactional(Product product, List<ProductImage> photos);
 }

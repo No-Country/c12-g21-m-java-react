@@ -2,17 +2,16 @@ package nocountry.ecommerce.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import nocountry.ecommerce.dto.ProductResponseDTO;
-import nocountry.ecommerce.models.City;
-import nocountry.ecommerce.models.Country;
-import nocountry.ecommerce.models.Product;
-import nocountry.ecommerce.models.Province;
+import nocountry.ecommerce.models.*;
 import nocountry.ecommerce.repositories.IGenericRepo;
+import nocountry.ecommerce.repositories.IProductImageRepo;
 import nocountry.ecommerce.repositories.IProductRepo;
 import nocountry.ecommerce.repositories.IProvinceRepo;
 import nocountry.ecommerce.services.IProductService;
 import nocountry.ecommerce.services.IProvinceService;
 import org.apache.el.stream.Optional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductServiceImpl extends CRUDImpl<Product, Integer> implements IProductService {
     private final IProductRepo repo;
+    private final IProductImageRepo ceRepo;
 
     @Override
     protected IGenericRepo<Product, Integer> getRepo() {
@@ -48,5 +48,15 @@ public class ProductServiceImpl extends CRUDImpl<Product, Integer> implements IP
     @Override
     public List<Product> findByHighlightAndActive(boolean highlight, boolean active){
         return repo.findByHighlightAndActive(highlight, active);
+    }
+
+    @Transactional //(propagation = Propagation.REQUIRES_NEW)
+    @Override
+    public Product saveTransactional(Product product, List<ProductImage> photos) {
+        Product prod1 = repo.save(product);
+        //System.out.println(product.getIdProduct());
+       // photos.forEach(ex -> ceRepo.savePhoto(prod1.getIdProduct(), ex.getImagePath(), false));
+
+        return product;
     }
 }
