@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import {useSelector} from 'react-redux';
 import {
   CssBaseline,
   Box,
@@ -13,24 +14,37 @@ import {
 } from "@mui/material";
 import BtnExaminarLocal from "../../components/buttons/BtnExaminarLocal";
 import axios from "axios";
+import { Toaster, toast } from 'sonner'
 
 export default function Vender() {
-  const [selectedHouseRoom, setSelectedHouseRoom] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedCondition, setSelectedCondition] = useState("");
+  const [selectedHouseRoom, setSelectedHouseRoom] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCondition, setSelectedCondition] = useState(null);
   const [photos, setPhotos] = useState([]);
-
+  const user = useSelector(state => state.user)
   
   const handleHouseRoomChange = (event) => {
     setSelectedHouseRoom(event.target.value);
+    setProductData((prevData) => ({
+      ...prevData,
+      categoryHouseRooms: { idCategoryHouseRooms: event.target.value },
+    }));
   };
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
+    setProductData((prevData) => ({
+      ...prevData,
+      categoryProduct: { idCategoryProduct: event.target.value },
+    }));
   };
 
   const handleConditionChange = (event) => {
     setSelectedCondition(event.target.value);
+    setProductData((prevData) => ({
+      ...prevData,
+      categoryStatus: { idCategoryStatus: event.target.value },
+    }));
   };
 
   const [categoryStatusList, setCategoryStatusList] = useState([]);
@@ -66,15 +80,15 @@ export default function Vender() {
   const [productData, setProductData] = useState({
     title: "",
     description: "",
-    price: "",
-    colour: "",
-    active: "",
-    highlight: "",
-    idCategoryHouseRooms: selectedHouseRoom,
-    idCategoryProduct: selectedCategory,
-    idCategoryStatus: selectedCondition,
-    idCity: "",
-    idUserSeller: "",
+    price: 0,
+    colour: "blanco",
+    active: true,
+    highlight: false,
+    categoryHouseRooms: { idCategoryHouseRooms: selectedHouseRoom } ,
+    categoryProduct: {idCategoryProduct: selectedCategory},
+    categoryStatus: {idCategoryStatus: selectedCondition},
+    city: {idCity: user.idCity},
+    user: {idUser: user.idUser },
     photos: photos,
   });
 
@@ -89,26 +103,35 @@ export default function Vender() {
     console.log(productData)
   };
 
+  const handleChangePrice = (event) => {
+    const {name, value} = event.target;
+    setProductData((prevData) => ({
+      ...prevData,
+      [name]: parseInt(value),
+    }));
+  }
+
 
 
   // Publica el producto //
   const handlePublicar = async (event) => {
-    setProductData((prevData) => ({
-      ...prevData,
-      "photos": photos,
-    }));
     event.preventDefault();
+    console.log(productData)
+    
     const url =
       "https://c12-21-m-java-react-ecommerce.onrender.com/products/saveProduct";
 
     axios
-      .post(url, productData)
+      .post(url, {...productData})
       .then((response) => {
         console.log("Respuesta del servidor:", response.data);
+        toast.success('Se subió el producto con éxito')
+
       })
       .catch((error) => {
         console.error("Error al hacer la petición:", error);
-      });
+        toast.error("Hubo un error al subir el producto")
+      }); 
   };
 
   return (
@@ -201,8 +224,9 @@ export default function Vender() {
             variant="outlined"
             label="Precio $"
             name="price"
+            type='number'
             value={productData.price}
-            onChange={handleChange}
+            onChange={handleChangePrice}
             inputProps={{
               inputMode: "numeric",
               pattern: "[0-9]*",
@@ -227,12 +251,11 @@ export default function Vender() {
             label="Ubicación del producto"
             name="location"
             value={productData.location}
-            onChange={handleChange}
             sx={{ margin: "0.5rem 0" }}
             required
           />
           <hr />
-          <BtnExaminarLocal onFileChange={handleChange} setPhotos={setPhotos} />
+          <BtnExaminarLocal onFileChange={handleChange} photos={photos} setPhotos={setPhotos} setProductData={setProductData} />
           <Box
             sx={{
               display: "flex",
@@ -246,6 +269,7 @@ export default function Vender() {
           </Box>
         </Box>
       </Container>
+      <Toaster/>
     </div>
   );
 }

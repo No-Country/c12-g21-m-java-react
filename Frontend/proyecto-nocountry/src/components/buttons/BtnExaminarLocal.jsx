@@ -4,7 +4,7 @@ import { Box, Button, Avatar } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "axios";
-const BtnExaminarLocal = ({ onFileChange, setPhotos }) => {
+const BtnExaminarLocal = ({ onFileChange, setPhotos, setProductData, photos }) => {
   const [selectedFiles, setSelectedFiles] = useState([]); // Variable de estado para almacenar las imágenes seleccionadas
   const [showButtons, setShowButtons] = useState(true)
   const handleUploadFiles = async () => {
@@ -21,7 +21,11 @@ const BtnExaminarLocal = ({ onFileChange, setPhotos }) => {
         )
           .then(response => {
             const imageUrl = response.data.url;
-            setPhotos(prevPhotos => [...prevPhotos, imageUrl]);
+            setPhotos(prevPhotos => [...prevPhotos, {imagePath: imageUrl, first: true}]);
+            setProductData((prevData) => ({
+              ...prevData,
+              "photos": [{imagePath: imageUrl, first: true}],
+            }));
             setShowButtons(false)
           })
           .catch(error => {
