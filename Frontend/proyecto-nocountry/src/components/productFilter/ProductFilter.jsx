@@ -1,6 +1,12 @@
-import { FormGroup, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import {
+  FormGroup,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import RangeSlider from "../rangeSlider/RangeSlider";
 
 // eslint-disable-next-line react/prop-types
 const ProductFilter = ({ setOptions }) => {
@@ -60,9 +66,9 @@ const ProductFilter = ({ setOptions }) => {
   }, [selectedHouseRoom, selectedCategory, selectedCondition, setOptions]);
 
   return (
-    <div>
-      <h3 className="filtro-title">Filtrar por:</h3>
-
+    <>
+      <h5>Precio</h5>
+      <RangeSlider />
       {/* houseRoom */}
       <h5>Habitación</h5>
       <FormGroup>
@@ -125,7 +131,7 @@ const ProductFilter = ({ setOptions }) => {
           <FormControlLabel value={null} control={<Radio />} label="Todos" />
         </RadioGroup>
       </FormGroup>
-    </div>
+    </>
   );
 };
 
