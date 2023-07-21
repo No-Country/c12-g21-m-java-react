@@ -74,7 +74,7 @@ export default function Navbar({ navLinks }) {
             </div>
           )}
           {logueado && !isMobile && <UserBadge />}
-          <FavoriteBadge />
+          <FavoriteBadge />         
         </Toolbar>
       </AppBar>
 
