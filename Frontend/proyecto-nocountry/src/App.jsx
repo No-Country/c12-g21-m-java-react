@@ -18,6 +18,8 @@ import ProductosPublicados from "./pages/usuario/productosPublicados/ProductosPu
 import Perfil from "./pages/usuario/perfil/Perfil.jsx";
 import ProductosVendidos from "./pages/usuario/productosVendidos/ProductosVendidos.jsx";
 import Calificaciones from "./pages/usuario/calificaciones/Calificaciones.jsx";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const App = () => {
   const logueado = useSelector((state) => state.user.logueado);
@@ -37,6 +39,11 @@ const App = () => {
       title: "Comprar",
       path: "/compras",
       icon: <StorefrontIcon />,
+    },
+    {
+      title: logueado ? "Cerrar Sesión" : "Iniciar Sesión",
+      path: logueado ? "/cerrarsesion" : "/login-registro",
+      icon: logueado ? <LogoutIcon /> : <LoginIcon />,
     },
   ];
 

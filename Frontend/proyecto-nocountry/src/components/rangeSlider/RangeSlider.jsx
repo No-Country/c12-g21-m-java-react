@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 
@@ -11,9 +11,18 @@ function valuetext(value) {
 const MIN_PRICE = 500;
 const MAX_PRICE = 50000;
 
-export default function PriceRangeSlider() {
 
-  const [value, setValue] = React.useState([MIN_PRICE, MAX_PRICE]);
+// eslint-disable-next-line react/prop-types
+export default function PriceRangeSlider({ setOptions }) {
+  const [value, setValue] = useState([MIN_PRICE, MAX_PRICE]);
+
+  useEffect(() => {
+    setOptions((prevOptions) => ({
+      ...prevOptions,
+      priceFrom: value[0] ? parseInt(value[0]) : MIN_PRICE,
+      priceTo: value[1] ? parseInt(value[1]) : MAX_PRICE,
+    }));
+  }, [value, setOptions]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

@@ -56,16 +56,24 @@ export default function Navbar({ navLinks }) {
                 },
               }}
             >
-              {navLinks.map((item) => (
-                <Tab
-                  key={item.title}
-                  label={item.title}
-                  value={item.path}
-                  component={NavLink}
-                  to={item.path}
-                  style={{ margin: "0 30px" }}
-                />
-              ))}
+              {navLinks.map((item) => {
+                if (
+                  item.title === "Iniciar Sesión" ||
+                  item.title === "Cerrar Sesión"
+                ) {
+                  return null;
+                }
+                return (
+                  <Tab
+                    key={item.title}
+                    label={item.title}
+                    value={item.path}
+                    component={NavLink}
+                    to={item.path}
+                    style={{ margin: "0 30px" }}
+                  />
+                );
+              })}
             </Tabs>
           </Box>
           {isMobile && (

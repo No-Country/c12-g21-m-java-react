@@ -1,9 +1,4 @@
-import {
-  FormGroup,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-} from "@mui/material";
+import { FormGroup, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import RangeSlider from "../rangeSlider/RangeSlider";
@@ -68,7 +63,8 @@ const ProductFilter = ({ setOptions }) => {
   return (
     <>
       <h5>Precio</h5>
-      <RangeSlider setOptions={setOptions}/>
+
+      <RangeSlider setOptions={setOptions} />
       {/* houseRoom */}
       <h5>Habitación</h5>
       <FormGroup>
