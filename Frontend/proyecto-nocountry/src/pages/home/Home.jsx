@@ -3,10 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import "./home-style.css";
 import { useEffect, useRef, useState } from "react";
-import { getProducts } from "../../firebase/functions";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import { MyButton } from "../../assets/styles";
+
 
 const Home = () => {
+
+
   const navigate = useNavigate();
   const filaRef = useRef(null);
   const [products, setProducts] = useState([]);
@@ -37,31 +41,32 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getProducts().then((items) => setProducts(items));
+    axios.get('https://c12-21-m-java-react-ecommerce.onrender.com/products/highlight').
+      then((response) => setProducts(response.data))
+      .catch(error => console.log(error))
   }, []);
   return (
     <div className="home-container">
       <div className="container">
         <div className="options-container">
           <div className="options-button-container">
-            <Button
-              variant="contained"
-              className="options-button"
+            <Link to="/compras" >
+              <MyButton>
+                Quiero comprar
+              </MyButton>
+            </Link>
+            <MyButton
               onClick={handleAuthenticate}
             >
-              QUIERO VENDER
-            </Button>
+              Quiero vender
+            </MyButton>
           </div>
-          <Link to="/compras" className="options-button-container">
-            <Button variant="contained" className="options-button">
-              QUIERO COMPRAR
-            </Button>
-          </Link>
+
         </div>
         <Card
-          title={"Creemos en las segundas oportunidades."}
+          title={"Creemos en las segundas oportunidades.Re House"}
           description={
-            "Los muebles que necesitas para tu casa, a un solo click"
+            "Los muebles que necesitas para tu casa, a un solo click."
           }
           img={
             "https://hips.hearstapps.com/hmg-prod/images/index-online-642dd244cbcfe.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:*"
@@ -89,15 +94,17 @@ const Home = () => {
             </button>
             <div ref={filaRef} className="contenedor-carousel">
               {products.map((element) => (
+
                 <Link
-                  to={`/detail/${element.id}`}
-                  key={element.id}
+                  to={`/detail/${element.idProduct}`}
+                  key={element.idProduct}
                   className="imagen link"
                   style={{ textDecoration: "none", color: "black" }}
                 >
+                  {console.log(element)}
                   <h4>{element.title}</h4>
                   <img
-                    src="https://mint.com.uy/wp-content/uploads/2022/09/Cuadros-1.jpg"
+                    src={element.photos[0]?.imagePath}
                     alt=""
                   />
                 </Link>

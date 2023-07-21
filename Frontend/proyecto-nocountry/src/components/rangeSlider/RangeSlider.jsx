@@ -11,6 +11,7 @@ function valuetext(value) {
 const MIN_PRICE = 500;
 const MAX_PRICE = 50000;
 
+
 // eslint-disable-next-line react/prop-types
 export default function PriceRangeSlider({ setOptions }) {
   const [value, setValue] = useState([MIN_PRICE, MAX_PRICE]);
@@ -26,6 +27,7 @@ export default function PriceRangeSlider({ setOptions }) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
 
   return (
     <Box sx={{ width: 150, mt: 2, mb: 5 }}>
