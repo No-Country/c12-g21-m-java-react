@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ItemDetail from './itemDetail/ItemDetail'
 import Spinner from '../spinner/Spinner'
-import { getProductById } from '../../firebase/functions'
 import axios from 'axios'
 
 const ItemDetailContainer = () => {

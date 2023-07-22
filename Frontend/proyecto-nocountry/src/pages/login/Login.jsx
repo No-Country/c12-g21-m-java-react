@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loguearse } from "../../features/userSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -9,7 +9,6 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  const usuarioExistente = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -85,7 +84,7 @@ export default function Login() {
       <Box sx={{ mt: "3rem", textAlign: "center" }}>
         <Typography variant="h4">Inicio de sesión</Typography>
       </Box>
-      <Box sx={{ mt: "2rem" }}>
+      <Box sx={{ mt: "2rem", display: "flex", flexDirection: "column", alignItems: "center"  }}>
         <TextField
           required
           label="Email"
@@ -110,9 +109,21 @@ export default function Login() {
         <Button variant="contained" onClick={handleLogin} fullWidth>
           Iniciar sesión
         </Button>
+
+        {error && <p>Usuario y/o contraseña incorrectos</p>}
+
+        <Typography variant="body2" paddingTop={"3rem"}>
+          Si no estás registrado, crea tu cuenta ahora!
+        </Typography>
+        <Button
+          variant="contained"
+          onClick={() => {
+            navigate("/registro");
+          }}
+        >
+          Crear cuenta
+        </Button>
       </Box>
-      {error && <p>Usuario y/o contraseña incorrectos</p>}
     </Container>
-    
   );
 }

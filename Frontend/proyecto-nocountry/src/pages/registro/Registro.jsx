@@ -49,6 +49,7 @@ export default function Registro() {
         .then((response) => {
           console.log(response.data);
           toast.success("Se ha registrado con éxito");
+
         })
         .catch((error) => {
           console.log(error);
