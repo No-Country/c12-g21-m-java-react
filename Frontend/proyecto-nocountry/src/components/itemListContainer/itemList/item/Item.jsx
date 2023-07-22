@@ -24,19 +24,19 @@ const Item = ({ item }) => {
 
     return (
         <div className='item-component my-5'>
-            <div className='item-favorite' onClick={handleFavorite}>
+            {/* <div className='item-favorite' onClick={handleFavorite}>
                 {favorite == false ? <StarBorderIcon></StarBorderIcon> : <StarIcon></StarIcon>}
-            </div>
+            </div> */}
             <Link to={`/detail/${item.idProduct}`} style={{ textDecoration: "none", color: 'black' }}>
                 <div className='item-img-container'>
                     <img className='item-img' src={item.photos[0] ? item.photos[0].imagePath : ""} alt='producto'></img>
                 </div>
                 <div className='item-text'>
-                    <h2>{item.title}</h2>
-                    <p>Categoría: {item.categoryProduct.title}</p>
-                    <p>Ambiente: {item.categoryHouseRooms.title}</p>
-                    <p>Condición: {item.categoryStatus.title}</p>
+                    <div className='d-flex justify-content-between'>
+                    <h3>{item.title}</h3>
                     <p>${item.price}</p>
+                    </div>
+                    <p>{item.description}</p>
                 </div>
             </Link>
         </div>
