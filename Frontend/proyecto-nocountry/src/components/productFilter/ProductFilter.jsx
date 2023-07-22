@@ -68,7 +68,7 @@ const ProductFilter = ({ setOptions }) => {
   return (
     <>
       <h5>Precio</h5>
-      <RangeSlider />
+      <RangeSlider setOptions={setOptions}/>
       {/* houseRoom */}
       <h5>Habitación</h5>
       <FormGroup>

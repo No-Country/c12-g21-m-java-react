@@ -12,11 +12,13 @@ const MIN_PRICE = 500;
 const MAX_PRICE = 50000;
 
 export default function PriceRangeSlider() {
+
   const [value, setValue] = React.useState([MIN_PRICE, MAX_PRICE]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
 
   return (
     <Box sx={{ width: 150, mt: 2, mb: 5 }}>

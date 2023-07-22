@@ -2,12 +2,19 @@
     height: 20em;
     display: flex;
     margin: 1em 0;
+    border-radius: 1rem;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-text {
+    background-color: #fff;
+    width: 100%;
+    padding: 3rem;
 }
 
 .card-description {
-    background-color: #D9D9D9;
-    width: 100%;
-    padding: 3rem;
+    margin-top: 2em;
+    font-size: 1.5em;
 }
 
 .card-title {
@@ -15,6 +22,8 @@
 }
 
 .card-image img {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
     max-height: 100%;
     object-fit: fill;
 }
@@ -42,11 +51,11 @@
 
 .card-box {
     display: grid;
-    grid-template-areas: 
-    "title link"
-    "nPublicacion nPublicacion"
-    "precio precio"
-    "estadoProd estadoProd";
+    grid-template-areas:
+        "title link"
+        "nPublicacion nPublicacion"
+        "precio precio"
+        "estadoProd estadoProd";
 }
 
 .inputMnsj {
