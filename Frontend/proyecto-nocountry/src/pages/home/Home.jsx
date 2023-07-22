@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import "./home-style.css";
@@ -37,7 +36,7 @@ const Home = () => {
   const user = useSelector((state) => state.user);
 
   const handleAuthenticate = () => {
-    user.logueado ? navigate("/vender") : navigate("/login-registro");
+    user.logueado ? navigate("/vender") : navigate("/login");
   };
 
   useEffect(() => {
