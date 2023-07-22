@@ -9,10 +9,31 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom'
+
+import axios from 'axios'
+import Spinner from "../../components/spinner/Spinner";
 
 export default function AcordarCompra() {
   const [message, setMessage] = useState("");
+  const [item, setItem] = useState({})
+  const [isLoading, setIsLoading] = useState(true)
+  const {id} = useParams()
+
+   useEffect(() => {
+        axios.get(`https://c12-21-m-java-react-ecommerce.onrender.com/products/${id}`)
+        .then(response => {
+            setItem(response.data)
+             setTimeout(() => {
+            setIsLoading(false)
+          }, 2000)
+             
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }, [id])
 
   const handleInputChange = (event) => {
     setMessage(event.target.value);
@@ -24,6 +45,7 @@ export default function AcordarCompra() {
 
   return (
     <>
+     {isLoading ? <Spinner /> :
       <Container maxWidth="sm">
         <Box sx={{ mt: "3rem", textAlign: "center" }}>
           <Typography variant="h4">
@@ -40,10 +62,10 @@ export default function AcordarCompra() {
                 Reserva número: #0000000
               </Typography>
               <Typography variant="h5" gutterBottom>
-                Vendedor: xxxxxx xxxxxx
+                Vendedor: {item?.user?.userPerson?.firstName}
               </Typography>
               <Typography variant="h5" gutterBottom>
-                Ubicación: xxxxxx xxxxxx
+                Ubicación: {item?.user?.userPerson?.address}
               </Typography>
             </CardContent>
             <Typography
@@ -76,6 +98,7 @@ export default function AcordarCompra() {
           </Card>
         </Box>
       </Container>
+    }
     </>
   );
 }

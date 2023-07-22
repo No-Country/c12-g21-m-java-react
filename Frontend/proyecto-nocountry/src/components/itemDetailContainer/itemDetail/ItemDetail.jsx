@@ -26,7 +26,7 @@ const ItemDetail = ({ item }) => {
   };
 
   const handleAuthenticate = () => {
-    user.logueado? navigate('/acordar-compra') : setOpen(true)
+    user.logueado? navigate(`/acordar-compra/${item.idProduct}`) : setOpen(true)
   }
   return (
     <div className="detail-component m-5">

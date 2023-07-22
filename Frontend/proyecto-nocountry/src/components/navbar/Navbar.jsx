@@ -60,7 +60,8 @@ export default function Navbar({ navLinks }) {
               {navLinks.map((item) => {
                 if (
                   item.title === "Iniciar Sesión" ||
-                  item.title === "Cerrar Sesión"
+                  item.title === "Cerrar Sesión" ||
+                  item.title === "Crear Cuenta"
                 ) {
                   return null;
                 }

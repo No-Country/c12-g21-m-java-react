@@ -9,7 +9,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleSesion = () => {
-    navigate("/login-registro");
+    navigate("/login");
   };
 
   const handleActionToHome = () => {

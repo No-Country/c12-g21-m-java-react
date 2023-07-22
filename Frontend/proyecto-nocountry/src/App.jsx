@@ -13,13 +13,13 @@ import AcordarCompra from "./pages/acordar-compra/AcordarCompra.jsx";
 import CerrarSesion from "./pages/cerrar-sesion/CerrarSesion.jsx";
 import { useSelector } from "react-redux";
 import Header from "./components/header/Header.jsx";
-import LoginRegistro from "./pages/login-registro/LoginRegistro.jsx";
 import ProductosPublicados from "./pages/usuario/productosPublicados/ProductosPublicados.jsx";
 import Perfil from "./pages/usuario/perfil/Perfil.jsx";
 import ProductosVendidos from "./pages/usuario/productosVendidos/ProductosVendidos.jsx";
 import Calificaciones from "./pages/usuario/calificaciones/Calificaciones.jsx";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 
 const App = () => {
   const logueado = useSelector((state) => state.user.logueado);
@@ -32,7 +32,7 @@ const App = () => {
     },
     {
       title: "Vender",
-      path: logueado ? "/vender" : "/login-registro",
+      path: logueado ? "/vender" : "/login",
       icon: <MonetizationOnIcon />,
     },
     {
@@ -42,8 +42,13 @@ const App = () => {
     },
     {
       title: logueado ? "Cerrar Sesión" : "Iniciar Sesión",
-      path: logueado ? "/cerrarsesion" : "/login-registro",
+      path: logueado ? "/cerrarsesion" : "/login",
       icon: logueado ? <LogoutIcon /> : <LoginIcon />,
+    },
+    {
+      title: !logueado ? "Crear Cuenta" : "",
+      path: !logueado ? "/registro" : "",
+      icon: !logueado ? <AppRegistrationIcon /> : "",
     },
   ];
 
@@ -59,9 +64,8 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/detail/:id" element={<ItemDetailContainer />} />
-        <Route path="/acordar-compra" element={<AcordarCompra />} />
+        <Route path="/acordar-compra/:id" element={<AcordarCompra />} />
         <Route path="/cerrarsesion" element={<CerrarSesion />} />
-        <Route path="/login-registro" element={<LoginRegistro />} />
         <Route path="/usuario/perfil" element={<Perfil />} />
         <Route
           path="/usuario/productosPublicados"
