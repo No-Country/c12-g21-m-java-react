@@ -16,6 +16,7 @@ import FavoriteBadge from "../favoriteBadge/FavoriteBadge";
 import UserBadge from "../userBadge/UserBadge";
 import { useMediaQuery } from "@mui/material";
 import { useSelector } from "react-redux";
+import { theme } from "../../assets/styles";
 
 export default function Navbar({ navLinks }) {
   const [open, setOpen] = useState(false);
@@ -25,7 +26,7 @@ export default function Navbar({ navLinks }) {
 
   return (
     <>
-      <AppBar position="sticky">
+      <AppBar position="sticky" sx={{backgroundColor: theme.palette.background.main, boxShadow: "1px 0px 1px 1px"}}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -50,9 +51,9 @@ export default function Navbar({ navLinks }) {
               indicatorColor="primary"
               TabIndicatorProps={{
                 style: {
-                  height: 2,
+                  height: 3,
                   top: "-1.6px",
-                  backgroundColor: "white",
+                  backgroundColor: "black",
                 },
               }}
             >

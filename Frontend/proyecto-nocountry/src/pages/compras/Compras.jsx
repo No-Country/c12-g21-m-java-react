@@ -20,7 +20,6 @@ export default function Compras() {
   const [productsFiltered, setProductsFiltered] = useState([]);
 
   useEffect(() => {
-    console.log(options)
     const fetchData = async () => {
       try {
         const { category, houseRoom, condition, priceFrom, priceTo, idCity } =
@@ -40,7 +39,6 @@ export default function Compras() {
 
         const data = response.data;
 
-        console.log(data);
 
         if (order === 0) {
           data.sort((a, b) => a.price - b.price);
