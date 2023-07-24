@@ -62,11 +62,12 @@ const ProductFilter = ({ setOptions }) => {
 
   return (
     <>
-      <h5>Precio</h5>
+    <h5>Filtrar por:</h5>
+      <b>Precio</b>
 
       <RangeSlider setOptions={setOptions} />
       {/* houseRoom */}
-      <h5>Habitación</h5>
+      <b>Habitación</b>
       <FormGroup>
         <RadioGroup
           aria-label="house-room"
@@ -87,7 +88,7 @@ const ProductFilter = ({ setOptions }) => {
       </FormGroup>
 
       {/* category */}
-      <h5>Categoría</h5>
+      <b>Categoría</b>
       <FormGroup>
         <RadioGroup
           aria-label="category"
@@ -108,7 +109,7 @@ const ProductFilter = ({ setOptions }) => {
       </FormGroup>
 
       {/* condition */}
-      <h5>Condición</h5>
+      <b>Condición</b>
       <FormGroup>
         <RadioGroup
           aria-label="condition"

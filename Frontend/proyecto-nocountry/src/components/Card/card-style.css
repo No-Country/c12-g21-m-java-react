@@ -21,6 +21,42 @@
     font-size: 2em;
 }
 
+.card-box {
+    display: grid;
+    grid-template-areas:
+        "left right"
+        ;
+        border-radius: 1rem;
+        border: solid black 0.5px;
+        width: 470px;
+        padding: 1rem;
+}
+
+.card-button {
+     border: 0.5px solid #C4C4C4;
+     font-size: 0.9em;
+     padding: 0.3em 0.7m 0.3em 0.7em;
+     width: fit-content;
+     font-weight: 400;
+     border-radius: 2em;
+}
+.published-button {
+    border: 0.5px solid #C4C4C4;
+    font-size: 0.9em;
+    padding: 0.3em 0.7m 0.3em 0.7em;
+    font-weight: 400;
+}
+
+.published-button#published{
+        border-top-left-radius: 1em;
+        border-bottom-left-radius: 1em;
+}
+
+.published-button#unpublished {
+    border-top-right-radius: 1em;
+    border-bottom-right-radius: 1em;
+}
+
 .card-image img {
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
@@ -33,12 +69,7 @@
     justify-content: space-between;
 }
 
-.card-box-profile {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: .5rem 1rem;
-}
+
 
 .card-publicacion {
     display: flex;
@@ -49,13 +80,10 @@
     flex-wrap: wrap;
 }
 
-.card-box {
-    display: grid;
-    grid-template-areas:
-        "title link"
-        "nPublicacion nPublicacion"
-        "precio precio"
-        "estadoProd estadoProd";
+.notas-button {
+    border-radius: 2em;
+    border: 0;
+
 }
 
 .inputMnsj {

@@ -1,12 +1,11 @@
 import CardProdVendidos from "../Card/CardProdVendidos"
 import "../groups/groups.css"
 
-const CardProdVendidosGroup = () => {
+const CardProdVendidosGroup = ({products}) => {
   return (
     <div className="cardProdVendidosGroup">
-        <CardProdVendidos/>
-        <CardProdVendidos/>
-        <CardProdVendidos/>
+      {products.length !== 0 ? products.map((product) => <CardProdVendidos product={product} key={product.idProduct} />) : <div><h3>No hay productos vendidos</h3></div>}
+    <CardProdVendidos/>
     </div>
   )
 }

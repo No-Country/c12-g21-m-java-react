@@ -4,7 +4,6 @@ import Item from './item/Item'
 const ItemList = ({ items }) => {
   return (
     <div>
-      <h1>Productos</h1>
       <div className='w-100 d-flex justify-content-start flex-wrap'>
         {items.length !== 0 ? items.map((item) => <Item item={item} key={item.id} />) : <div><h3>No hay coincidencias con su búsqueda</h3></div>}
       </div>
