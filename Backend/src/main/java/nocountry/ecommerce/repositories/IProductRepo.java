@@ -2,6 +2,7 @@ package nocountry.ecommerce.repositories;
 
 import nocountry.ecommerce.models.Product;
 import nocountry.ecommerce.models.Province;
+import nocountry.ecommerce.models.Sale;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -22,4 +23,10 @@ public interface IProductRepo extends IGenericRepo<Product, Integer>{
     Product findByIdProductAndActive(Integer id, boolean active);
 
     List<Product> findByHighlightAndActive(boolean highlight, boolean active);
+
+    @Query("FROM Product p " +
+            "WHERE p.idProduct not in (select d.product.idProduct from SaleDetail d where d.product.idProduct = p.idProduct) " +
+            "AND ( p.user.idUser <= ?1 )"
+    )
+    List<Product> findPublish(Integer idUser);
 }

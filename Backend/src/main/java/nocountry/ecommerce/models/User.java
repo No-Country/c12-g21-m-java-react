@@ -1,5 +1,6 @@
 package nocountry.ecommerce.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.Constraint;
@@ -39,6 +40,7 @@ public class User {
     @JoinColumn(name = "id_user_person" , referencedColumnName = "idUserPerson")
     private UserPerson userPerson;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "id_user", referencedColumnName = "idUser"),

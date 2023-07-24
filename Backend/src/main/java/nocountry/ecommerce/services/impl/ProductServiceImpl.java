@@ -59,4 +59,9 @@ public class ProductServiceImpl extends CRUDImpl<Product, Integer> implements IP
 
         return product;
     }
+
+    @Override
+    public List<Product> findPublish( Integer idUser) {
+        return repo.findPublish( idUser);
+    }
 }
