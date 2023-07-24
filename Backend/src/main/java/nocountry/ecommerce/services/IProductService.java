@@ -1,10 +1,7 @@
 package nocountry.ecommerce.services;
 
 import nocountry.ecommerce.dto.ProductResponseDTO;
-import nocountry.ecommerce.models.City;
-import nocountry.ecommerce.models.Product;
-import nocountry.ecommerce.models.ProductImage;
-import nocountry.ecommerce.models.Province;
+import nocountry.ecommerce.models.*;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
@@ -21,4 +18,6 @@ public interface IProductService extends ICRUD<Product, Integer> {
 
     List<Product> findByHighlightAndActive(boolean highlight, boolean active);
     Product saveTransactional(Product product, List<ProductImage> photos);
+
+    List<Product> findPublish(Integer idUSer);
 }

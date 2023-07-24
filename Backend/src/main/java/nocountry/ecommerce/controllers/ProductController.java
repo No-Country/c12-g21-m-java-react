@@ -114,7 +114,12 @@ public class ProductController {
 
          return new ResponseEntity(result, HttpStatus.OK);
     }
-
+    @GetMapping("/publishedlist/{id}")
+    public ResponseEntity<List<ProductDTO>> findListPublish(@PathVariable("id") Integer id){
+        // List<SaleDTO> dto = this.convertToDto(service.findByStatus("RESERVADO"));
+        List<ProductDTO> dto = service.findPublish(id).stream().map(this::convertToDTOProduct).collect(Collectors.toList());
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
 
     private ProductResponseDTO convertToDto(Product obj) {
         return mapper.map(obj, ProductResponseDTO.class);

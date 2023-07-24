@@ -1,8 +1,10 @@
 package nocountry.ecommerce.config;
 
-import nocountry.ecommerce.dto.ProductImageDTO;
-import nocountry.ecommerce.dto.ProductResponseDTO;
+import nocountry.ecommerce.dto.*;
+import nocountry.ecommerce.models.Message;
 import nocountry.ecommerce.models.Product;
+import nocountry.ecommerce.models.Sale;
+import nocountry.ecommerce.models.User;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.context.annotation.Bean;
@@ -36,4 +38,30 @@ public class MapperConfig {
         typeMap1.addMapping(e-> e.getCategoryStatus().getIdCategoryStatus(), (dest, v) -> dest.setIdCategoryStatus((Integer) v));
         return mapper;
     }
+
+    @Bean("saleMapper")
+    public ModelMapper saleMapper(){
+        ModelMapper mapper = new ModelMapper();
+
+        TypeMap<Sale, SaleDTO> typeMap1 = mapper.createTypeMap(Sale.class, SaleDTO.class);
+        typeMap1.addMapping(e-> e.getUser(), (dest, v) -> dest.setIdUserBuyer((UserDTO) v));
+
+        TypeMap<SaleDTO, Sale> typeMap2= mapper.createTypeMap(SaleDTO.class, Sale.class);
+        typeMap2.addMapping(SaleDTO::getIdUserBuyer, (dest, v) -> dest.setUser((User) v));
+
+        return mapper;
+    }
+
+   /* @Bean("messageMapper")
+    public ModelMapper messageMapper(){
+        ModelMapper mapper = new ModelMapper();
+
+        TypeMap<Message, MessageDTO> typeMap1 = mapper.createTypeMap(Message.class, MessageDTO.class);
+        typeMap1.addMapping(e-> e.getUser().getIdUser(), (dest, v) -> dest.setIdUser((Integer) v));
+
+        TypeMap<MessageDTO, Message> typeMap2= mapper.createTypeMap(MessageDTO.class, Message.class);
+        typeMap2.addMapping(MessageDTO::getIdUser, (dest, v) -> dest.setUser((User) v));
+
+        return mapper;
+    }*/
 }
