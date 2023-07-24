@@ -16,8 +16,8 @@ const ItemListContainer = ({products}) => {
     }, [products])
 
     return (
-        <div className='d-flex justify-content-center  w-100'>
-            {isLoading ? <Spinner /> : <div className='w-100'><ItemList items={items} /></div>}
+        <div className='d-flex justify-content-center  w-100 align-items-center'>
+            {isLoading ? <div className='mt-5'><Spinner /></div> : <div className='w-100'><ItemList items={items} /></div>}
         </div>
     )
 }

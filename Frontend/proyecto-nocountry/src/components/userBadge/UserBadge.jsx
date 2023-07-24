@@ -9,7 +9,7 @@ const UserBadge = () => {
     const [open, setOpen] = useState(false);
     const navLinks = [
         {
-            title: "Mi perfil",
+            title: "Mi datos personales",
             path: "usuario/perfil",
             icon: ''
         },
@@ -27,6 +27,11 @@ const UserBadge = () => {
             title: 'Mis Calificaciones',
             path: '/usuario/calificaciones',
             icon: ""
+        },
+        {
+            title: "Cerrar sesión",
+            path: "/cerrarSesion",
+            icon: ""
         }
         
     ];
@@ -34,7 +39,7 @@ const UserBadge = () => {
 
     const user = useSelector(state => state.user)
   return (
-      <div >{user?.logueado && <Button onClick={() => setOpen(true)} variant="contained">{user.firstName} {user.lastName}</Button>} 
+      <div >{user?.logueado && <Button onClick={() => setOpen(true)} variant="contained" sx={{background: "#fff", borderRadius: "2em" }}>Mi perfil</Button>} 
           <Drawer
               open={open}
               anchor="right"

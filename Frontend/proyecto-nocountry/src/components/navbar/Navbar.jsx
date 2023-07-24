@@ -78,13 +78,11 @@ export default function Navbar({ navLinks }) {
               })}
             </Tabs>
           </Box>
-          {isMobile && (
+          {isMobile && logueado && (
             <div>
               <UserBadge />
             </div>
           )}
-          {logueado && !isMobile && <UserBadge />}
-          <FavoriteBadge />
         </Toolbar>
       </AppBar>
 
