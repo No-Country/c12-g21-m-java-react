@@ -24,8 +24,10 @@ public interface IProductRepo extends IGenericRepo<Product, Integer>{
 
     List<Product> findByHighlightAndActive(boolean highlight, boolean active);
 
-    @Query("FROM Product p " +
-            "WHERE p.idProduct NOT IN (SELECT d.product.idProduct FROM SaleDetail d) " +
-            "AND p.user.idUser <= ?1")
+    @Query(value = """
+            select p.* from product p
+            where p.id_product not in (select id_product from sale_detail)
+            and p.id_user_seller = :idUser
+            """, nativeQuery = true)
     List<Product> findPublish(Integer idUser);
 }
