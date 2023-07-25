@@ -10,7 +10,6 @@ import {increment, decrement} from '../../../../features/productSlice'
 const Item = ({ item }) => {
     const [favorite, setFavorite] = useState(false);
     const dispatch = useDispatch()
-
     const handleFavorite = () => {
         if (favorite === false) {
             setFavorite(true)

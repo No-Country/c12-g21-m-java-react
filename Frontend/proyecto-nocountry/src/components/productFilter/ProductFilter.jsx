@@ -61,7 +61,7 @@ const ProductFilter = ({ setOptions }) => {
   }, [selectedHouseRoom, selectedCategory, selectedCondition, setOptions]);
 
   return (
-    <>
+    <div style={{paddingLeft: "2em"}}>
     <h5>Filtrar por:</h5>
       <b>Precio</b>
 
@@ -128,7 +128,7 @@ const ProductFilter = ({ setOptions }) => {
           <FormControlLabel value={null} control={<Radio />} label="Todos" />
         </RadioGroup>
       </FormGroup>
-    </>
+    </div>
   );
 };
 

@@ -16,10 +16,18 @@
 .options-button-container {
     display: flex;
     justify-content: space-evenly;
-    width: 50%;
+    width: 100%;
 }
 
+@media only screen and (max-width: 768px) {
+    .options-button-container {
+        flex-direction: column;
+        align-items: center;
+        height: 200px;
 
+    }
+    
+}
 
 .destacados-contenedor {
     margin-bottom: 200px;

@@ -79,7 +79,7 @@ export default function Navbar({ navLinks }) {
             </Tabs>
           </Box>
           {isMobile && logueado && (
-            <div>
+            <div style={{position: "absolute", right: 0}}>
               <UserBadge />
             </div>
           )}

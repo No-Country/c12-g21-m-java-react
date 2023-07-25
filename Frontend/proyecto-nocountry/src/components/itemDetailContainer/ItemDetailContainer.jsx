@@ -24,7 +24,7 @@ const ItemDetailContainer = () => {
 
   return (
       <div className='position-absolute d-flex justify-content-center  w-100' style={{left: 0}}>
-          {isLoading ? <Spinner /> : <div className='container d-flex justify-content-center'><ItemDetail item={item} key={item.id} /></div>}
+          {isLoading ? <div className='mt-5'><Spinner /></div> : <div className='container d-flex justify-content-center'><ItemDetail item={item} key={item.id} /></div>}
       </div>
   )
 }

@@ -11,14 +11,25 @@
     width: 100%;
     padding: 3rem;
 }
+@media only screen and (max-width: 768px) {
+    .card-image {
+        display: none;
+    }
 
+    .card-container {
+        border-radius: 0;
+        margin: 0;
+        height: fit-content;
+    }
+
+}
 .card-description {
     margin-top: 2em;
-    font-size: 1.5em;
+    font-size: 1em;
 }
 
 .card-title {
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 .card-box {

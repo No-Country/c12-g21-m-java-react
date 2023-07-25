@@ -1,11 +1,11 @@
+import { useState } from "react"
 import CardProdVendidos from "../Card/CardProdVendidos"
 import "../groups/groups.css"
 
 const CardProdVendidosGroup = ({products}) => {
   return (
-    <div className="cardProdVendidosGroup">
-      {products.length !== 0 ? products.map((product) => <CardProdVendidos product={product} key={product.idProduct} />) : <div><h3>No hay productos vendidos</h3></div>}
-    <CardProdVendidos/>
+    <div className="cardProdVendidosGroup d-flex justify-content-center">
+      {products.length !== 0 ? products.map((product, key) => <CardProdVendidos product={product} key={key} />) : <div><h3>No hay productos vendidos</h3></div>}
     </div>
   )
 }
