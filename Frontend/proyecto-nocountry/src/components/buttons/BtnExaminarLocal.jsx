@@ -2,43 +2,51 @@
 import { useState } from "react";
 import { Box, Button, Avatar } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
-const BtnExaminarLocal = ({ onFileChange, setPhotos, setProductData, photos }) => {
+const BtnExaminarLocal = ({
+  onFileChange,
+  setPhotos,
+  setProductData,
+  photos,
+}) => {
   const [selectedFiles, setSelectedFiles] = useState([]); // Variable de estado para almacenar las imágenes seleccionadas
-  const [showButtons, setShowButtons] = useState(true)
+  const [showButtons, setShowButtons] = useState(true);
   const handleUploadFiles = async () => {
     if (selectedFiles.length > 0) {
-      selectedFiles.map(file => {
-        axios.post('https://c12-21-m-java-react-ecommerce.onrender.com/products/upload', {
-          multipartFile: file
-        },
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data' // Asegúrate de establecer el encabezado adecuado para archivos
+      selectedFiles.map((file) => {
+        axios
+          .post(
+            "https://c12-21-m-java-react-ecommerce.onrender.com/products/upload",
+            {
+              multipartFile: file,
+            },
+            {
+              headers: {
+                "Content-Type": "multipart/form-data", // Asegúrate de establecer el encabezado adecuado para archivos
+              },
             }
-          }
-        )
-          .then(response => {
+          )
+          .then((response) => {
             const imageUrl = response.data.url;
-            setPhotos(prevPhotos => [...prevPhotos, {imagePath: imageUrl, first: true}]);
+            setPhotos((prevPhotos) => [
+              ...prevPhotos,
+              { imagePath: imageUrl, first: true },
+            ]);
             setProductData((prevData) => ({
               ...prevData,
-              "photos": [{imagePath: imageUrl, first: true}],
+              photos: [{ imagePath: imageUrl, first: true }],
             }));
-            setShowButtons(false)
+            setShowButtons(false);
           })
-          .catch(error => {
-            console.log(error)
-          })
-      })
-
+          .catch((error) => {
+            console.log(error);
+          });
+      });
     }
-
-  }
+  };
   const handleFileChange = (e) => {
-
-    const files = Array.from(e.target.files); 
+    const files = Array.from(e.target.files);
     setSelectedFiles((prevSelectedFiles) => [...prevSelectedFiles, ...files]); // Actualizar la variable de estado con las imágenes seleccionadas
     onFileChange([...selectedFiles, ...files]); // Pasar las imágenes seleccionadas al componente padre
   };
@@ -84,29 +92,28 @@ const BtnExaminarLocal = ({ onFileChange, setPhotos, setProductData, photos }) =
             multiple // Permitir seleccionar múltiples archivos
             onChange={handleFileChange}
           />
-
         </label>
-        {showButtons ?
-          <div>
+        {showButtons ? (
+          <Box sx={{margin: "2rem"}}>
             <Button
               variant="contained"
               component="span"
               startIcon={<DeleteIcon />}
               onClick={() => setSelectedFiles([])}
-              sx={{ mb: "2rem" }}
             >
               ELIMINAR FOTOS
             </Button>
             <Button
               variant="contained"
               component="span"
-              sx={{ mb: "2rem" }}
               onClick={handleUploadFiles}
             >
               ACEPTAR
             </Button>
-          </div>
-          : ""}
+          </Box>
+        ) : (
+          ""
+        )}
       </Box>
     </div>
   );

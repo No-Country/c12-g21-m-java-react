@@ -1,6 +1,14 @@
 /* eslint-disable react/prop-types */
-import { Button } from "@mui/material";
-import "./itemDetail-style.css";
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
+// import "./itemDetail-style.css";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
@@ -28,7 +36,7 @@ const ItemDetail = ({ item }) => {
   };
 
   const URL = "https://c12-21-m-java-react-ecommerce.onrender.com/sales/create";
-  console.log(user.jwtToken);
+
   const handleSaleCreate = () => {
     const currentDate = new Date();
     const messageDateTime = currentDate.toISOString();
@@ -67,63 +75,52 @@ const ItemDetail = ({ item }) => {
   };
 
   return (
-    <div className="detail-component m-5">
+    <>
       <BasicModal
         open={open}
         setOpen={setOpen}
         message={"No se encuentra logueado"}
       />
-
-      <div className="detail-container">
-        <div className="detail-img-container">
-          <img src={item.photos[0].imagePath} alt="img 1" />
-        </div>
-        <div className="detail-data-container">
-          <div className="detail-product-container">
-            <div className="detail-product">
-              <h2>{item.title}</h2>
-              <p>{item.description}</p>
-              <p>${item.price}</p>
-              <div className="d-flex justify-content-between">
-                <Button variant="outlined">
-                  Ambiente: {item.categoryHouseRooms.title}
-                </Button>
-                <Button variant="outlined">
-                  Categoría: {item.categoryProduct.title}
-                </Button>
-                <Button variant="outlined">
-                  Condición: {item.categoryStatus.title}
-                </Button>
-              </div>
-            </div>
-            <div className="card_product-favorite" onClick={handleFavorite}>
-              {favorite == false ? (
-                <StarBorderIcon sx={{ fontSize: 40 }}></StarBorderIcon>
-              ) : (
-                <StarIcon sx={{ fontSize: 40 }}></StarIcon>
-              )}
-            </div>
-          </div>
-          <div className="detail-owner-container">
-            <div className="detail-owner-data">
-              <h2>Vendedor</h2>
-              <p>
-                Nombre y apellido: {item.user.userPerson.firstName}{" "}
-                {item.user.userPerson.lastName}
-              </p>
-              <p>Puntuación: </p>
-              <p>Cantidad de ventas: </p>
-              <Button variant="contained">Reseñas del vendedor</Button>
-            </div>
-            <div className="detail-owner-button">
-              <Button variant="contained" onClick={handleSaleCreate}>
-                Acordar compra con el vendedor
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <Card sx={{ maxWidth: 345, p: "2rem", m: "2rem" }}>
+        {/* <Button sx={{ onClick: { handleFavorite } }}>
+          {favorite == false ? (
+            <StarBorderIcon sx={{ fontSize: 20 }}></StarBorderIcon>
+          ) : (
+            <StarIcon sx={{ fontSize: 20 }}></StarIcon>
+          )}
+        </Button> */}
+        <Typography gutterBottom variant="h5" component="div">
+          {item.title}
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            "& > :not(style) + :not(style)": { marginLeft: "10px" },
+          }}
+        >
+          <Button variant="outlined">{item.categoryHouseRooms.title}</Button>
+          <Button variant="outlined">{item.categoryProduct.title}</Button>
+          <Button variant="outlined">{item.categoryStatus.title}</Button>
+        </Box>
+        <CardMedia
+          sx={{ height: 140, margin: "1rem", objectFit: "cover" }}
+          image={item.photos[0].imagePath}
+          title={item.title}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            ${item.price}
+          </Typography>
+          <Typography variant="body2">{item.description}</Typography>
+        </CardContent>
+        <CardActions style={{ justifyContent: "flex-end" }}>
+          <Button variant="contained" onClick={handleSaleCreate}>
+            Lo quiero
+          </Button>
+        </CardActions>
+      </Card>
+    </>
   );
 };
 
