@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import {useSelector} from 'react-redux';
+import { useSelector } from "react-redux";
 import {
-  CssBaseline,
   Box,
   Container,
   MenuItem,
@@ -11,18 +10,20 @@ import {
   Typography,
   Button,
   TextField,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import BtnExaminarLocal from "../../components/buttons/BtnExaminarLocal";
 import axios from "axios";
-import { Toaster, toast } from 'sonner'
+import { Toaster, toast } from "sonner";
 
 export default function Vender() {
   const [selectedHouseRoom, setSelectedHouseRoom] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedCondition, setSelectedCondition] = useState(null);
   const [photos, setPhotos] = useState([]);
-  const user = useSelector(state => state.user)
-  
+  const user = useSelector((state) => state.user);
+
   const handleHouseRoomChange = (event) => {
     setSelectedHouseRoom(event.target.value);
     setProductData((prevData) => ({
@@ -84,15 +85,13 @@ export default function Vender() {
     colour: "blanco",
     active: true,
     highlight: false,
-    categoryHouseRooms: { idCategoryHouseRooms: selectedHouseRoom } ,
-    categoryProduct: {idCategoryProduct: selectedCategory},
-    categoryStatus: {idCategoryStatus: selectedCondition},
-    city: {idCity: user.idCity},
-    user: {idUser: user.idUser },
+    categoryHouseRooms: { idCategoryHouseRooms: selectedHouseRoom },
+    categoryProduct: { idCategoryProduct: selectedCategory },
+    categoryStatus: { idCategoryStatus: selectedCondition },
+    city: { idCity: user.idCity },
+    user: { idUser: user.idUser },
     photos: photos,
   });
-
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -100,53 +99,52 @@ export default function Vender() {
       ...prevData,
       [name]: value,
     }));
-    console.log(productData)
+    console.log(productData);
   };
 
   const handleChangePrice = (event) => {
-    const {name, value} = event.target;
+    const { name, value } = event.target;
     setProductData((prevData) => ({
       ...prevData,
       [name]: parseInt(value),
     }));
-  }
-
-
+  };
 
   // Publica el producto //
   const handlePublicar = async (event) => {
     event.preventDefault();
-    console.log(productData)
-    
+    console.log(productData);
+
     const url =
       "https://c12-21-m-java-react-ecommerce.onrender.com/products/saveProduct";
 
     axios
-      .post(url, {...productData})
+      .post(url, { ...productData })
       .then((response) => {
         console.log("Respuesta del servidor:", response.data);
-        toast.success('Se subió el producto con éxito')
-
+        toast.success("Se subió el producto con éxito");
       })
       .catch((error) => {
         console.error("Error al hacer la petición:", error);
-        toast.error("Hubo un error al subir el producto")
-      }); 
+        toast.error("Hubo un error al subir el producto");
+      });
   };
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <div>
-      <CssBaseline />
       <Container maxWidth="md">
-        <Box sx={{ margin: "2rem", textAlign: "center" }}>
-          <Typography variant="h2">
+        <Box sx={{ marginTop: isMobile ? "2rem" : "4rem", textAlign: "center" }}>
+          <Typography variant={isMobile ? "h4" : "h2"}>
             Vende tus productos usados de forma simple
           </Typography>
         </Box>
         <Box
           component="form"
           onSubmit={handlePublicar}
-          sx={{ padding: "1rem 5rem" }}
+          sx={{ padding: isMobile ? "0.5rem" : "3rem" }}
         >
           <FormControl fullWidth variant="outlined" sx={{ margin: "0.5rem 0" }}>
             <InputLabel htmlFor="ambient">Seleccionar ambiente</InputLabel>
@@ -224,7 +222,7 @@ export default function Vender() {
             variant="outlined"
             label="Precio $"
             name="price"
-            type='number'
+            type="number"
             value={productData.price}
             onChange={handleChangePrice}
             inputProps={{
@@ -255,12 +253,17 @@ export default function Vender() {
             required
           />
           <hr />
-          <BtnExaminarLocal onFileChange={handleChange} photos={photos} setPhotos={setPhotos} setProductData={setProductData} />
+          <BtnExaminarLocal
+            onFileChange={handleChange}
+            photos={photos}
+            setPhotos={setPhotos}
+            setProductData={setProductData}
+          />
           <Box
             sx={{
               display: "flex",
               justifyContent: "center",
-              marginTop: "5rem",
+              margin: "5rem",
             }}
           >
             <Button type="submit" variant="contained" size="large">
@@ -269,7 +272,7 @@ export default function Vender() {
           </Box>
         </Box>
       </Container>
-      <Toaster/>
+      <Toaster />
     </div>
   );
 }
