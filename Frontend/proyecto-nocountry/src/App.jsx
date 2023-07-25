@@ -22,6 +22,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import SimpleBottomNavigation from "./components/bottomNavigation/SimpleBottomNavigation.jsx";
 import { useMediaQuery } from "@mui/material";
+import Footer from "./components/footer/Footer.jsx";
 
 const App = () => {
   const logueado = useSelector((state) => state.user.logueado);
@@ -56,7 +57,7 @@ const App = () => {
   ];
 
   return (
-    <div style={{ position: "relative", minHeight: "100vh" }}>
+    <>
       <Header />
       <Navbar navLinks={navLinks} />
 
@@ -86,7 +87,8 @@ const App = () => {
           <SimpleBottomNavigation navLinks={navLinks} />
         </div>
       )}
-    </div>
+      {!isMobile && <Footer />}
+    </>
   );
 };
 
