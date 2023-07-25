@@ -20,9 +20,12 @@ import Calificaciones from "./pages/usuario/calificaciones/Calificaciones.jsx";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+import SimpleBottomNavigation from "./components/bottomNavigation/SimpleBottomNavigation.jsx";
+import { useMediaQuery } from "@mui/material";
 
 const App = () => {
   const logueado = useSelector((state) => state.user.logueado);
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   const navLinks = [
     {
@@ -41,7 +44,7 @@ const App = () => {
       icon: <StorefrontIcon />,
     },
     {
-      title: logueado ? "Cerrar Sesión" : "Iniciar Sesión",
+      title: logueado ? "Logout" : "Login",
       path: logueado ? "/cerrarsesion" : "/login",
       icon: logueado ? <LogoutIcon /> : <LoginIcon />,
     },
@@ -53,7 +56,7 @@ const App = () => {
   ];
 
   return (
-    <>
+    <div style={{ position: "relative", minHeight: "100vh" }}>
       <Header />
       <Navbar navLinks={navLinks} />
 
@@ -77,7 +80,13 @@ const App = () => {
         />
         <Route path="/usuario/calificaciones" element={<Calificaciones />} />
       </Routes>
-    </>
+
+      {isMobile && (
+        <div style={{ position: "fixed", bottom: 0, width: "100%" }}>
+          <SimpleBottomNavigation navLinks={navLinks} />
+        </div>
+      )}
+    </div>
   );
 };
 
