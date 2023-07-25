@@ -7,11 +7,11 @@
     align-items: center;
 }
 
-@media only screen and (max-width: 768px) {
+/* @media only screen and (max-width: 768px) {
     .header-container {
         display: none;
     }
-}
+} */
 
 .header-logo {
     max-height: 8em;
