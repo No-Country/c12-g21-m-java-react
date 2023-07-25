@@ -8,8 +8,8 @@ function valuetext(value) {
 }
 
 // Rango mínimo y máximo de precios
-const MIN_PRICE = 500;
-const MAX_PRICE = 50000;
+const MIN_PRICE = 0;
+const MAX_PRICE = 100000;
 
 
 // eslint-disable-next-line react/prop-types

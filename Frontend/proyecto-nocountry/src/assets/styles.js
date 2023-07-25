@@ -32,7 +32,8 @@ export const MyButton = styled(Button)({
     backgroundColor: theme.palette.primary.light,
     color: '#000',
     paddingTop: "0.5em",
-    width: "fit-content",
+    width: "18em",
+    height: "3em",
     fontSize: "1.2em",
-
+    
 });

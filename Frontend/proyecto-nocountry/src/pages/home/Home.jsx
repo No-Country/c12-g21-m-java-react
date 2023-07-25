@@ -49,11 +49,9 @@ const Home = () => {
       <div className="container">
         <div className="options-container">
           <div className="options-button-container">
-            <Link to="/compras" >
-              <MyButton>
+              <MyButton onClick={() => navigate('/compras')}>
                 Quiero comprar
               </MyButton>
-            </Link>
             <MyButton
               onClick={handleAuthenticate}
             >

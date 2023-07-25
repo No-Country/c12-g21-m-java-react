@@ -11,13 +11,13 @@ const ProductosVendidos = () => {
     const [isLoading, setIsLoading] = useState(false)
     useEffect(() => {
         setIsLoading(true)
-        axios.get(`https://c12-21-m-java-react-ecommerce.onrender.com/sales/${user.idUser}`,
+        axios.get(`https://c12-21-m-java-react-ecommerce.onrender.com/sales/selledlist/${user.idUser}`,
             {
                 headers: {
                     Authorization: `Bearer ${user.jwtToken}`,
                 }
             })
-            .then(response => { console.log(response.data); setProducts(response.data) })
+            .then(response => { setProducts(response.data) })
             .catch(error => console.log(error))
         setTimeout(() => {
             setIsLoading(false)
