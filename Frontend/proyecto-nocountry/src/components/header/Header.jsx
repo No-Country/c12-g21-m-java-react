@@ -1,10 +1,12 @@
-import { Button } from "@mui/material";
+import { Button, useMediaQuery } from "@mui/material";
 import "./header-style.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Logo from '../../assets/img/logo.png'
 import UserBadge from "../userBadge/UserBadge";
+
 const Header = () => {
+  const isMobile = useMediaQuery("(max-width: 767px)");
   const logueado = useSelector((state) => state.user.logueado);
 
   const navigate = useNavigate();
@@ -31,7 +33,7 @@ const Header = () => {
           justifyContent: "flex-end",
         }}
       >
-        {!logueado ? (
+        {!logueado && !isMobile ? (
           <Button
             className="header-sesion"
             variant="contained"
