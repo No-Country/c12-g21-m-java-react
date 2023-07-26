@@ -4,28 +4,51 @@ import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import './messageModal-style.css'
 import axios from 'axios';
-import Spinner from '../spinner/Spinner';
 import { Button } from '@mui/material';
+import Spinner from '../spinner/Spinner';
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
+    height: 600,
+    borderRadius: "1em",
     bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
 };
 
 export default function MessageModal({ open, setOpen, id, buyer }) {
     const user = useSelector(state => state.user);
     const handleClose = () => setOpen(false);
     const [messages, setMessages] = useState()
-    const [isLoading, setIsLoading] = useState(false)
+    const [valueText, setValueText] = useState()
+    const [isLoading, setIsLoading] = useState(false);
+    const [reload, setReload] = useState(false)
+    const handleSubmit = (e) => {
+        const currentDate = new Date();
+        const messageDateTime = currentDate.toISOString();
+        console.log(valueText)
+        e.preventDefault()
+        axios.post("https://c12-21-m-java-react-ecommerce.onrender.com/messages", {
+            idSale: id,
+            messageDateTime: messageDateTime,
+            message: valueText,
+            idUser: user.idUser
+        },
+            {
+                headers: {
+                    Authorization: `Bearer ${user.jwtToken}`,
+                },
+            })
+            .then(response => {
+                setValueText()
+                setReload(true)
+            })
+    }
     useEffect(() => {
+        setReload(false)
         setIsLoading(true)
-
         axios.get(`https://c12-21-m-java-react-ecommerce.onrender.com/messages/sale/${id}`,
             {
                 headers: {
@@ -38,10 +61,10 @@ export default function MessageModal({ open, setOpen, id, buyer }) {
 
             })
             .catch(error => console.log(error))
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 2000)
-    }, [])
+       setTimeout(() => {
+        setIsLoading(false)
+       }, 1000)
+    }, [reload])
     return (
         <div>
 
@@ -52,21 +75,41 @@ export default function MessageModal({ open, setOpen, id, buyer }) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    {isLoading ? (
-                        <Spinner />
-                    ) : (
-                        messages?.length ? messages?.map((message) => (
-                            <div key={message.idMessage}> 
-                                <p><span className='modal-buyer'>{buyer}:</span><span className='modal-date'>{message.messageDateTime}</span> </p>
-                                <p className='modal-message'>
-                                    {message.message}
-                                </p>
+                    <div className='modal-header'>
+                        <h5>Notas</h5>
+                        <p>{buyer}</p>
+                    </div>
+                {isLoading ? (<></>) :
+                    messages?.length ? messages?.map((message) => {
+                        if (message.idUser !== user.idUser) { return (
+                            <div key={message.idMessage}>
+                                <div className='modal-text left'><span className='modal-buyer'>{buyer[0]}</span>
+                                    <span className='modal-message'>
+                                        {message.message}
+                                    </span>
+                                </div>
                             </div>
-                        )) : <div><p>No hay mensajes</p></div>
-                    )}
-                    <input type='text'></input>
-                    <Button>Responder</Button>
-
+                        )} else { return (
+                            <div key={message.idMessage}>
+                                <div className='modal-text right'>
+                                    <span className='modal-message right'>
+                                        {message.message}
+                                    </span>
+                                    <span className='modal-seller'>{user.firstName[0]}</span>
+                                    
+                                </div>
+                            </div>
+                        ) }
+                    })
+                        : <div><p>No hay mensajes</p></div>
+                    }
+                    <div className='footer-container'>
+                        <textarea onChange={(e) => setValueText(e.target.value)} type='text' placeholder='Escribir nota' value={valueText} className='footer-input'></textarea>
+                        <div className='footer-button'>
+                            <div className='modal-input-seller'>{user.firstName[0]}</div>
+                            <Button onClick={handleSubmit} variant="contained" sx={{ background: "#fff", borderRadius: "2em" }}>Enviar</Button>
+                        </div>
+                    </div>
                 </Box>
             </Modal>
         </div>
