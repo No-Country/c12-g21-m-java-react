@@ -6,9 +6,15 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-
-.header-logo {
+  }
+  
+  .header-logo {
     max-height: 7rem;
-}
+  }
+  
+  /* Estilos para centrar el logo en dispositivos móviles */
+  .center-logo {
+    flex-direction: column; 
+    justify-content: center;    
+  }
+  

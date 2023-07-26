@@ -1,11 +1,12 @@
-import { Button, Drawer } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Button, Drawer, useMediaQuery } from "@mui/material";
+import { useState } from "react";
 import NavListDrawer from "../navbar/NavListDrawer";
 import { NavLink } from "react-router-dom";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const UserBadge = () => {
   const [open, setOpen] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 767px)");
   const navLinks = [
     {
       title: "Mi datos personales",
@@ -29,30 +30,45 @@ const UserBadge = () => {
     },
     {
       title: "Cerrar sesión",
-      path: "/cerrarSesion",
+      path: "/cerrarsesion",
       icon: "",
     },
   ];
 
-  const user = useSelector((state) => state.user);
+  const handleCloseDrawer = () => {
+    setOpen(false);
+  };
   return (
     <div>
-      {user?.logueado && (
-        <Button
-          onClick={() => setOpen(true)}
-          variant="contained"
-          sx={{ background: "#fff", borderRadius: "2em" }}
-        >
-          Mi perfil
-        </Button>
+      {isMobile ? (
+        <>
+          <AccountCircleIcon onClick={() => setOpen(true)} />
+          <Drawer anchor="right" open={open} onClose={handleCloseDrawer}>
+            <NavListDrawer
+              navLinks={navLinks}
+              NavLink={NavLink}
+              setOpen={setOpen}
+            />
+          </Drawer>
+        </>
+      ) : (
+        <>
+          <Button
+            onClick={() => setOpen(true)}
+            variant="contained"
+            sx={{ background: "#fff", borderRadius: "2em" }}
+          >
+            Mi perfil
+          </Button>
+          <Drawer anchor="right" open={open} onClose={handleCloseDrawer}>
+            <NavListDrawer
+              navLinks={navLinks}
+              NavLink={NavLink}
+              setOpen={setOpen}
+            />
+          </Drawer>
+        </>
       )}
-      <Drawer open={open} anchor="right" onClose={() => setOpen(false)}>
-        <NavListDrawer
-          navLinks={navLinks}
-          NavLink={NavLink}
-          setOpen={setOpen}
-        />
-      </Drawer>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import { Button, useMediaQuery } from "@mui/material";
 import "./header-style.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Logo from '../../assets/img/logo.png'
+import Logo from "../../assets/img/logo.png";
 import UserBadge from "../userBadge/UserBadge";
 
 const Header = () => {
@@ -20,12 +20,11 @@ const Header = () => {
   };
 
   return (
-    <div className="header-container">
-      <Button
-        onClick={handleActionToHome}
-      >
-        <img className="header-logo" src={Logo} alt="logo"/>
+    <div className={`header-container ${isMobile ? "center-logo" : ""}`}>
+      <Button onClick={handleActionToHome}>
+        <img className="header-logo" src={Logo} alt="logo" />
       </Button>
+
       <div
         style={{
           display: "flex",
@@ -42,9 +41,8 @@ const Header = () => {
           >
             Iniciar sesión
           </Button>
-        ) : (
-          <UserBadge/>
-        )}
+        ) : null}
+        {!isMobile && logueado && <UserBadge />}
       </div>
     </div>
   );
