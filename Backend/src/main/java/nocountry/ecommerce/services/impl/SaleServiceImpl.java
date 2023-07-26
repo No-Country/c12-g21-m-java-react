@@ -48,4 +48,9 @@ public class SaleServiceImpl extends CRUDImpl<Sale, Integer> implements ISaleSer
         repo.delete(sale);
 
     }
+
+    @Override
+    public void updateRating(Integer idRating, Integer idSale) {
+        repo.updateRating(idRating, idSale);
+    }
 }

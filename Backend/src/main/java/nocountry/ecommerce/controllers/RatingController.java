@@ -32,7 +32,8 @@ public class RatingController {
     @PostMapping( )
     public ResponseEntity<RatingDTO> save(@Valid @RequestBody RatingDTO dto) {
        // System.out.println(this.convertToEntity(dto).getUser().getIdUser());
-        Rating obj =   service.save(this.convertToEntity(dto));
+       Integer sal = dto.getIdSale();
+        Rating obj =   service.save(this.convertToEntity(dto), sal);
         return new ResponseEntity<>(this.convertToDTO(obj), HttpStatus.OK);
     }
 

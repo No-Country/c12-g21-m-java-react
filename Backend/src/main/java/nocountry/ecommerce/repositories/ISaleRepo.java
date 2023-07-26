@@ -1,7 +1,9 @@
 package nocountry.ecommerce.repositories;
 
+import jakarta.transaction.Transactional;
 import nocountry.ecommerce.models.Product;
 import nocountry.ecommerce.models.Sale;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -23,5 +25,12 @@ public interface ISaleRepo extends IGenericRepo<Sale, Integer>{
     )
     List<Sale> findBuyByStatus(String status, Integer idUser);
 
+    @Transactional
+    @Modifying
+    @Query(value = """
+            UPDATE sale  SET id_rating= :idRating
+             where id_sale = :idSale 
+            """, nativeQuery = true)
+    void updateRating(Integer idRating, Integer idSale);
 
 }

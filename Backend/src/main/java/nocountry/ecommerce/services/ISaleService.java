@@ -13,5 +13,5 @@ public interface ISaleService extends ICRUD<Sale, Integer> {
     List<Sale> findBuyByStatus(String status, Integer idUSer);
 
     void cancelTransactional(Sale sale);
-
+    void updateRating(Integer idRating, Integer idSale);
 }
