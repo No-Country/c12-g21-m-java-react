@@ -14,6 +14,11 @@ const UserBadge = () => {
       icon: "",
     },
     {
+      title: 'Mis compras',
+      path: "usuario/miscompras",
+      icon: ""
+    },  
+    {
       title: "Mis productos publicados",
       path: "/usuario/productosPublicados",
       icon: "",
