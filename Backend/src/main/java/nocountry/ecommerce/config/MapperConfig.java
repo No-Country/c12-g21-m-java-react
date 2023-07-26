@@ -1,10 +1,7 @@
 package nocountry.ecommerce.config;
 
 import nocountry.ecommerce.dto.*;
-import nocountry.ecommerce.models.Message;
-import nocountry.ecommerce.models.Product;
-import nocountry.ecommerce.models.Sale;
-import nocountry.ecommerce.models.User;
+import nocountry.ecommerce.models.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.context.annotation.Bean;
@@ -64,4 +61,5 @@ public class MapperConfig {
 
         return mapper;
     }*/
+
 }
