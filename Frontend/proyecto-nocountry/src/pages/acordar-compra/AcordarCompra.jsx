@@ -110,7 +110,7 @@ export default function AcordarCompra() {
               ¡Tu reserva se ha realizado con éxito!
             </Typography>
             <CardContent>
-              <Typography gutterBottom>Número de reserva: #0000000</Typography>
+              <Typography gutterBottom>Número de reserva: 000{id}</Typography>
               <Typography gutterBottom>
                 Precio: ${item.details[0].product.price}
               </Typography>
