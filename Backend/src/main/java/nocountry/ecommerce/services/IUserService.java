@@ -9,4 +9,6 @@ public interface IUserService extends ICRUD<User, Integer>{
     User findByEmail(String email);
     boolean existsByEmail(String email);
 
+    User saveAvatar(User user, String path);
+
 }

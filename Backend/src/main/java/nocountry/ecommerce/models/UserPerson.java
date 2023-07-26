@@ -46,4 +46,7 @@ public class UserPerson {
     @Column(length = 50, nullable = false)
     private String postalCode;
 
+    @Column(length = 300)
+    private String avatarPath;
+
 }

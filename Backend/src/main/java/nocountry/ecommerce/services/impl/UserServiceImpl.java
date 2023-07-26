@@ -33,4 +33,13 @@ public class UserServiceImpl  extends CRUDImpl<User, Integer> implements IUserSe
         return repo.existsUsersByEmail(email);
     }
 
+    @Override
+    public User saveAvatar(User user, String path) {
+        //?System.out.println(user.getUserPerson().getIdUserPerson());
+        //System.out.println(path);
+        //System.out.println( "UPDATE user_person  SET avatar_path="+path +"WHERE id_user_person = :user.getUserPerson().getIdUserPerson()" );
+        repo.saveAvatar(user.getUserPerson().getIdUserPerson(), path);
+        return user;
+    }
+
 }
