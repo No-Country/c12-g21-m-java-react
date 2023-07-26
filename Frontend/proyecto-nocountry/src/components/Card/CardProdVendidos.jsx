@@ -2,10 +2,13 @@ import { Box, Link } from "@mui/material"
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useState } from "react";
 import MessageModal from "../messageModal/MessageModal";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const CardProdVendidos = ({ product }) => {
     const [openModal, setOpenModal] = useState(false)
-
+    const user = useSelector(state => state.user)
+    
     return (
         <div>
             {openModal && <MessageModal setOpen={setOpenModal} open={openModal} id={product?.idSale} buyer={product?.idUserBuyer?.userPerson?.firstName} />}
