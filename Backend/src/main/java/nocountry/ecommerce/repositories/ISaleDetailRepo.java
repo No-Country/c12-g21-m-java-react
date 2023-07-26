@@ -16,4 +16,20 @@ public interface ISaleDetailRepo extends IGenericRepo<SaleDetail, Integer>{
             "WHERE m.sale.idSale = ?1 "
     )
     void deleteSale(Integer id);
+
+    @Transactional
+    @Modifying
+    @Query(value = """
+            UPDATE product  SET active= false 
+            where id_product in (select id_product from sale_detail where id_sale = :idSale )
+            """, nativeQuery = true)
+    void unpublish(Integer idSale);
+
+    @Transactional
+    @Modifying
+    @Query(value = """
+            UPDATE product SET active= true 
+            where id_product in (select id_product from sale_detail where id_sale = :idSale )
+            """, nativeQuery = true)
+    void publish(Integer idSale);
 }

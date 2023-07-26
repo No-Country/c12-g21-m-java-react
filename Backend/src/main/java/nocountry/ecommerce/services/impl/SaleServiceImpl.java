@@ -24,6 +24,7 @@ public class SaleServiceImpl extends CRUDImpl<Sale, Integer> implements ISaleSer
    @Override
    public Sale saveTransactional(Sale sale, List<SaleDetail> details) {
         Sale sales = repo.save(sale);
+        ceRepo.unpublish(sale.getIdSale());
         //System.out.println(product.getIdProduct());
         // photos.forEach(ex -> ceRepo.savePhoto(prod1.getIdProduct(), ex.getImagePath(), false));
 
@@ -41,8 +42,10 @@ public class SaleServiceImpl extends CRUDImpl<Sale, Integer> implements ISaleSer
     @Transactional //(propagation = Propagation.REQUIRES_NEW)
     @Override
     public void cancelTransactional(Sale sale) {
+        ceRepo.publish(sale.getIdSale());
         ceRepo.deleteSale(sale.getIdSale());
         repom.deleteSale(sale.getIdSale());
         repo.delete(sale);
+
     }
 }
