@@ -71,7 +71,7 @@ User check = service.findByEmail(obj1.getEmail());
     }
 
     @Operation(summary="Obtiene los datos de un usuario." +
-            " {'email': 'susana@mail.com'}")
+            " git ")
     @PostMapping("/profile")
     public ResponseEntity<UserDTO> getUser(@RequestBody UserDTO dto) throws Exception {
         User check = service.findByEmail(dto.getEmail());
@@ -96,8 +96,8 @@ User check = service.findByEmail(obj1.getEmail());
         User user = service.findById(idUser);
         //user.saveAvatar(result.get("url").toString());
         User us = service.saveAvatar(user,result.get("url").toString());
-
-        return new ResponseEntity(convertToDto(us), HttpStatus.OK);
+        User us1 = service.findById(idUser);
+        return new ResponseEntity(convertToDto(us1), HttpStatus.OK);
     }
     private User convertToEntity(UserDTO dto){
         return mapper.map(dto, User.class);
