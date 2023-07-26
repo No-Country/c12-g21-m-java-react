@@ -23,6 +23,7 @@ import SimpleBottomNavigation from "./components/bottomNavigation/SimpleBottomNa
 import { useMediaQuery } from "@mui/material";
 import Footer from "./components/footer/Footer.jsx";
 import UserBadge from "./components/userBadge/UserBadge.jsx";
+import MisCompras from "./pages/usuario/misCompras/MisCompras.jsx";
 
 const App = () => {
   const logueado = useSelector((state) => state.user.logueado);
@@ -80,6 +81,7 @@ const App = () => {
           element={<ProductosVendidos />}
         />
         <Route path="/usuario/calificaciones" element={<Calificaciones />} />
+        <Route path='/usuario/miscompras' element={<MisCompras/>}/>
       </Routes>
 
       {isMobile && (
