@@ -131,7 +131,7 @@ const ItemDetail = ({ item }) => {
           </Stack>
           <CardMedia
             sx={{ height: 140, margin: "1rem", objectFit: "cover" }}
-            image={item.photos[0].imagePath}
+            image={item?.photos[0]?.imagePath}
             title={item.title}
           />
           <CardContent>
