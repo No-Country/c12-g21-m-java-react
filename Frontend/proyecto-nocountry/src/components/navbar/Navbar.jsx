@@ -51,7 +51,8 @@ export default function Navbar({ navLinks }) {
                   if (
                     item.title === "Login" ||
                     item.title === "Logout" ||
-                    item.title === "Crear Cuenta"
+                    item.title === "Crear Cuenta" ||
+                    item.title === "Mi perfil"
                   ) {
                     return null;
                   }

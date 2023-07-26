@@ -18,11 +18,11 @@ import Perfil from "./pages/usuario/perfil/Perfil.jsx";
 import ProductosVendidos from "./pages/usuario/productosVendidos/ProductosVendidos.jsx";
 import Calificaciones from "./pages/usuario/calificaciones/Calificaciones.jsx";
 import LoginIcon from "@mui/icons-material/Login";
-import LogoutIcon from "@mui/icons-material/Logout";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import SimpleBottomNavigation from "./components/bottomNavigation/SimpleBottomNavigation.jsx";
 import { useMediaQuery } from "@mui/material";
 import Footer from "./components/footer/Footer.jsx";
+import UserBadge from "./components/userBadge/UserBadge.jsx";
 
 const App = () => {
   const logueado = useSelector((state) => state.user.logueado);
@@ -45,9 +45,9 @@ const App = () => {
       icon: <StorefrontIcon />,
     },
     {
-      title: logueado ? "Logout" : "Login",
-      path: logueado ? "/cerrarsesion" : "/login",
-      icon: logueado ? <LogoutIcon /> : <LoginIcon />,
+      title: logueado ? "Mi perfil" : "Login",
+      path: logueado ? "" : "/login",
+      icon: logueado ? <UserBadge /> : <LoginIcon />,
     },
     {
       title: !logueado ? "Crear Cuenta" : "",
