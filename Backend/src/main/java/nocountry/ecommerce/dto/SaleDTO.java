@@ -1,5 +1,6 @@
 package nocountry.ecommerce.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -33,7 +34,7 @@ public class SaleDTO {
 
     @Column(columnDefinition = "decimal(18,2)" , nullable = false)
     private double amount;
-
+    @JsonBackReference
     private Rating rating;
 
     @JsonManagedReference
