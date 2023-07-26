@@ -52,5 +52,8 @@ public class UserPersonDTO {
     @NotEmpty
     @Column(length = 50, nullable = false)
     private String postalCode;
+
+    @Size(max = 300)
+    private String avatarPath;
 }
 

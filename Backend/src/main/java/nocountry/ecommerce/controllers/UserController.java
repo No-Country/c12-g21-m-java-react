@@ -10,6 +10,7 @@ import nocountry.ecommerce.exception.ModelNotFoundException;
 import nocountry.ecommerce.models.Role;
 import nocountry.ecommerce.models.User;
 import nocountry.ecommerce.models.UserPerson;
+import nocountry.ecommerce.services.ICloudinaryService;
 import nocountry.ecommerce.services.IUserService;
 import nocountry.ecommerce.services.IRoleService;
 import org.modelmapper.ModelMapper;
@@ -22,10 +23,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -36,6 +42,8 @@ public class UserController {
 
     private final IUserService service;
     private final IRoleService serviceRole;
+    private final ICloudinaryService cloudinaryService;
+
     @Qualifier("userMapper")
     private final ModelMapper mapper;
 
@@ -75,6 +83,22 @@ User check = service.findByEmail(obj1.getEmail());
         return new ResponseEntity<>(obj, HttpStatus.OK);
     }
 
+    @PostMapping("/uploadavatar")
+    public ResponseEntity<UserDTO> uploadAvatar(@RequestParam MultipartFile multipartFile, @RequestParam Integer idUser)throws IOException {
+        BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
+        if(bi == null){
+            CustomErrorResponse errorResponse = new CustomErrorResponse(LocalDateTime.now(), "imagen no valida", null);
+        }
+        Map result = cloudinaryService.upload(multipartFile);
+        //  System.out.println(result.get("original_filename"));
+        // System.out.println(result.get("url"));
+        // System.out.println(result.get("public_id"));
+        User user = service.findById(idUser);
+        //user.saveAvatar(result.get("url").toString());
+        User us = service.saveAvatar(user,result.get("url").toString());
+
+        return new ResponseEntity(convertToDto(us), HttpStatus.OK);
+    }
     private User convertToEntity(UserDTO dto){
         return mapper.map(dto, User.class);
     }
