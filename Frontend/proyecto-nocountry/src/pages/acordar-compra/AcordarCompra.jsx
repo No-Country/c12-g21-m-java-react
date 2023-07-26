@@ -5,7 +5,6 @@ import {
   CardActions,
   CardContent,
   Container,
-  Grid,
   TextField,
   Typography,
 } from "@mui/material";
@@ -14,6 +13,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Spinner from "../../components/spinner/Spinner";
 import { useSelector } from "react-redux";
+import { Toaster, toast } from "sonner";
 
 export default function AcordarCompra() {
   const user = useSelector((state) => state.user);
@@ -30,7 +30,7 @@ export default function AcordarCompra() {
         },
       })
       .then((response) => {
-        setItem(response.data);        
+        setItem(response.data);
         setTimeout(() => {
           setIsLoading(false);
         }, 2000);
@@ -62,10 +62,12 @@ export default function AcordarCompra() {
         }
       )
       .then((response) => {
+        toast.success("Mensaje enviado");
         console.log(response.data);
       })
       .catch((error) => {
-        console.error(error);
+        toast.error("El mensaje no fue enviado");
+        console.log(error);
       });
 
     setMessage("");
@@ -74,64 +76,70 @@ export default function AcordarCompra() {
   return (
     <>
       {isLoading ? (
-        <Spinner />
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "2rem",
+          }}
+        >
+          <Spinner />
+        </Box>
       ) : (
-        <Container maxWidth="sm">
-          <Box sx={{ mt: "3rem", textAlign: "center" }}>
-            <Typography variant="h4">
-              ¡Listo! Tu pedido ha sido realizado con éxito.
+        <Container
+          maxWidth="sm"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            paddingBottom: { xs: "80px", md: "0" },
+          }}
+        >
+          <Card
+            sx={{
+              minWidth: 275,
+              m: { xs: "1rem", md: "2rem" },
+              p: "1.5rem",
+              borderRadius: "12px",
+              textAlign: "left",
+            }}
+          >
+            <Typography variant="h5" gutterBottom>
+              ¡Tu reserva se ha realizado con éxito!
             </Typography>
-          </Box>
-          <Box>
-            <Card sx={{ minWidth: 275, mt: "2rem" }}>
-              <CardContent>
-                <Typography
-                  variant="h5"
-                  textAlign="center"
-                  paddingBottom="2rem"
-                >
-                  Detalle de tu reserva
-                </Typography>
-                <Typography variant="h5" gutterBottom>
-                  Reserva número: #0000000
-                </Typography>
-                <Typography variant="h5" gutterBottom>
-                  {/* Vendedor: {item?.user?.userPerson?.firstName} */}
-                  Vendedor: {item.details[0].product.user.userPerson.firstName}
-                </Typography>
-                <Typography variant="h5" gutterBottom>
-                  Ubicación: {item.details[0].product.user.userPerson.address}
-                </Typography>
-              </CardContent>
-              <Typography
-                variant="h5"
-                textAlign="center"
-                marginTop="2rem"
-                gutterBottom
-              >
-                Acordar retiro de producto con el vendedor
+            <CardContent>
+              <Typography gutterBottom>Número de reserva: #0000000</Typography>
+              <Typography gutterBottom>
+                Precio: ${item.details[0].product.price}
               </Typography>
-              <TextField
-                label="Escribe tu mensaje"
-                multiline
-                rows={4}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                fullWidth
-                variant="outlined"
-                sx={{ marginBottom: "1rem" }}
-              />
-              <CardActions>
-                <Grid container justifyContent="center">
-                  <Grid item>
-                    <Button variant="contained" onClick={handleSendMessage}>
-                      Enviar mensaje
-                    </Button>
-                  </Grid>
-                </Grid>
-              </CardActions>
-            </Card>
-          </Box>
+              <Typography gutterBottom>
+                Vendedor: {item.details[0].product.user.userPerson.firstName}{" "}
+                {item.details[0].product.user.userPerson.lastName}
+              </Typography>
+            </CardContent>
+            <Typography textAlign="center" gutterBottom>
+              <hr></hr>
+              Acordar retiro del producto con el vendedor
+            </Typography>
+            <TextField
+              label="Escribe tu mensaje"
+              multiline
+              rows={2}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              fullWidth
+              variant="outlined"
+              sx={{ marginBottom: "1rem" }}
+            />
+            <CardActions style={{ justifyContent: "center" }}>
+              <Button variant="contained" onClick={handleSendMessage}>
+                Enviar mensaje
+              </Button>
+            </CardActions>
+          </Card>
+          <Toaster richColors position="bottom-right" />
         </Container>
       )}
     </>

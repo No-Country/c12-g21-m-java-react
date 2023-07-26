@@ -112,8 +112,7 @@ export default function Vender() {
 
   // Publica el producto //
   const handlePublicar = async (event) => {
-    event.preventDefault();
-    console.log(productData);
+    event.preventDefault(); 
 
     const url =
       "https://c12-21-m-java-react-ecommerce.onrender.com/products/saveProduct";
@@ -121,7 +120,7 @@ export default function Vender() {
     axios
       .post(url, { ...productData })
       .then((response) => {
-        console.log("Respuesta del servidor:", response.data);
+        console.log("Respuesta del servidor:", response.data);        
         toast.success("Se subió el producto con éxito");
       })
       .catch((error) => {
@@ -272,7 +271,7 @@ export default function Vender() {
           </Box>
         </Box>
       </Container>
-      <Toaster />
+      <Toaster richColors position="bottom-right"/>
     </div>
   );
 }
