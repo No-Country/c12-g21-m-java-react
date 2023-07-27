@@ -23,6 +23,7 @@ export default function Vender() {
   const [selectedCondition, setSelectedCondition] = useState(null);
   const [photos, setPhotos] = useState([]);
   const user = useSelector((state) => state.user);
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   const handleHouseRoomChange = (event) => {
     setSelectedHouseRoom(event.target.value);
@@ -117,6 +118,7 @@ export default function Vender() {
     setSelectedCategory(null);
     setSelectedCondition(null);
     setPhotos([]);
+    setSelectedFiles([]);
     setProductData({
       title: "",
       description: "",
@@ -273,27 +275,18 @@ export default function Vender() {
             required
           />
           <hr />
-          <TextField
-            fullWidth
-            variant="outlined"
-            label="Ubicación del producto"
-            name="location"
-            value={productData.location}
-            sx={{ margin: "0.5rem 0" }}
-            required
-          />
-          <hr />
           <BtnExaminarLocal
             onFileChange={handleChange}
-            photos={photos}
             setPhotos={setPhotos}
             setProductData={setProductData}
+            selectedFiles={selectedFiles}
+            setSelectedFiles={setSelectedFiles}
           />
           <Box
             sx={{
               display: "flex",
               justifyContent: "center",
-              margin: "5rem",
+              margin: "1rem",
             }}
           >
             <Button type="submit" variant="contained" size="large">

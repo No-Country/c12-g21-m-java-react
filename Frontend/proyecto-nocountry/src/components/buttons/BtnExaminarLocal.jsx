@@ -1,17 +1,19 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect } from "react";
 import { Box, Button, Avatar } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
+
 const BtnExaminarLocal = ({
   onFileChange,
   setPhotos,
   setProductData,
-  photos,
+  selectedFiles,
+  setSelectedFiles
 }) => {
-  const [selectedFiles, setSelectedFiles] = useState([]); // Variable de estado para almacenar las imágenes seleccionadas
-  const [showButtons, setShowButtons] = useState(true);
+ 
+  
   const handleUploadFiles = async () => {
     if (selectedFiles.length > 0) {
       selectedFiles.map((file) => {
@@ -36,8 +38,7 @@ const BtnExaminarLocal = ({
             setProductData((prevData) => ({
               ...prevData,
               photos: [{ imagePath: imageUrl, first: true }],
-            }));
-            setShowButtons(false);
+            }));            
           })
           .catch((error) => {
             console.log(error);
@@ -49,7 +50,13 @@ const BtnExaminarLocal = ({
     const files = Array.from(e.target.files);
     setSelectedFiles((prevSelectedFiles) => [...prevSelectedFiles, ...files]); // Actualizar la variable de estado con las imágenes seleccionadas
     onFileChange([...selectedFiles, ...files]); // Pasar las imágenes seleccionadas al componente padre
+  
   };
+
+  useEffect(() => {
+    handleUploadFiles();
+  }, [selectedFiles])
+  
 
   return (
     <div>
@@ -61,7 +68,7 @@ const BtnExaminarLocal = ({
           alignItems: "center",
         }}
       >
-        <p>Añadir hasta 6 fotografías</p>
+        <p>Añadir foto del producto</p>
         <Box
           sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
         >
@@ -93,8 +100,8 @@ const BtnExaminarLocal = ({
             onChange={handleFileChange}
           />
         </label>
-        {showButtons ? (
-          <Box sx={{margin: "2rem"}}>
+        
+          <Box sx={{margin: "1rem"}}>
             <Button
               variant="contained"
               component="span"
@@ -102,18 +109,9 @@ const BtnExaminarLocal = ({
               onClick={() => setSelectedFiles([])}
             >
               ELIMINAR FOTOS
-            </Button>
-            <Button
-              variant="contained"
-              component="span"
-              onClick={handleUploadFiles}
-            >
-              ACEPTAR
-            </Button>
+            </Button>            
           </Box>
-        ) : (
-          ""
-        )}
+        
       </Box>
     </div>
   );

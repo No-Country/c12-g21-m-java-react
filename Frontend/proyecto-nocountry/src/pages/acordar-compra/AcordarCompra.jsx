@@ -62,16 +62,14 @@ export default function AcordarCompra() {
           },
         }
       )
-      .then((response) => {
+      .then(() => {
         toast.success("Mensaje enviado");
         setTimeout(() => {          
-          navigate("/miscompras");
-        }, 2000);
-        console.log(response.data);
+          navigate("/usuario/miscompras");
+        }, 2000);        
       })
-      .catch((error) => {
-        toast.error("El mensaje no fue enviado");
-        console.log(error);
+      .catch(() => {
+        toast.error("El mensaje no fue enviado");        
       });
 
     setMessage("");
