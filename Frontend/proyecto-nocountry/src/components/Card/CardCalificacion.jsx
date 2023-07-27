@@ -1,6 +1,7 @@
 import { Box, Rating, Link, Button } from "@mui/material"
 
 const CardCalificacion = ({ product }) => {
+    console.log(product)
     return (
         <div>
             <Box className="card-box" >
