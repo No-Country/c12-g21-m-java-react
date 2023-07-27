@@ -10,10 +10,12 @@ const CardMisCompras = ({ product }) => {
     const [openModal, setOpenModal] = useState(false)
     const user = useSelector(state => state.user)
     const [rating, setRating] = useState(0);
-
-    const handleRating = (value) => {
+    const [review, setReview] = useState()
+    const handleRating = (value, reviewvalue) => {
         setRating(value)
+        setReview(reviewvalue)
         console.log(value)
+        console.log(review)
         /* axios.post("https://c12-21-m-java-react-ecommerce.onrender.com/ratings", {
             ratingValue: rating,
             review: "vacio",
@@ -41,8 +43,12 @@ const CardMisCompras = ({ product }) => {
                     </div>
                 </div>
                 <div style={{ gridArea: "right", alignSelf: "end" }}>
-                    <BasicRating message={"Calificar al vendedor"} rating={rating} setRating={setRating} handleRating={handleRating} status={product.status}/>
+                    {product.status !== "RESERVADO"? (
+                    <BasicRating  handleRating={handleRating} status={product.status}/>
+                    ): (
+                    
                     <button className="card-button" onClick={() => setOpenModal(true)}>Notas con el vendedor <BorderColorIcon sx={{ fontSize: "1.2em" }}></BorderColorIcon></button>
+                        )}
                 </div>
 
             </Box>

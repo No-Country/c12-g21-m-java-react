@@ -2,9 +2,11 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
+import { Button } from '@mui/material';
 
-export default function BasicRating({ message, rating, setRating, handleRating, status }) {
-    const [value, setValue] = React.useState(0)
+export default function BasicRating({handleRating, status }) {
+    const [value, setValue] = React.useState()
+    const [review, setReview] = React.useState()
     const [voted, setVoted] = React.useState(false)
     return (
         <Box
@@ -12,14 +14,7 @@ export default function BasicRating({ message, rating, setRating, handleRating, 
                 '& > legend': { mt: 2 },
             }}
         >
-
-            {status == "RESERVADO" ? (
-                <>
-                    <Typography component="legend">Puedes votar al finalizar la compra</Typography>
-                    <Rating name='disabled' size={"large"} disabled  />
-                </>
-            ) : 
-            !voted ? (
+            {!voted ? (
                 <>
                     <Typography component="legend">Califica al vendedor</Typography>
                     <Rating
@@ -29,13 +24,12 @@ export default function BasicRating({ message, rating, setRating, handleRating, 
                         onChange={(event, newValue) => {
                             setValue(newValue);
                         }}
-                        onClick={() => {
-                            setVoted(true)
-                            handleRating(value)
-                        }
-                        }
+                    
                     />
+                    <textarea placeholder="Escribe una reseña" value={review} rows={4} className="card-textarea"></textarea>
+                    <Button onClick={() => {setVoted(true); handleRating(value, review)}}>Enviar</Button>
                 </>
+                
             ) : (
                     <>
                         <Typography component="legend">¡Gracias por votar!</Typography>
