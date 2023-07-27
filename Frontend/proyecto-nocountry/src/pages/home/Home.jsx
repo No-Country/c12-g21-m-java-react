@@ -44,6 +44,7 @@ const Home = () => {
       then((response) => setProducts(response.data))
       .catch(error => console.log(error))
   }, []);
+  
   return (
     <div className="home-container">
       <div className="container">

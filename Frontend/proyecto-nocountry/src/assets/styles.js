@@ -31,7 +31,7 @@ export const MyButton = styled(Button)({
     border: `0.2em solid ${theme.palette.primary.dark}`,
     backgroundColor: theme.palette.primary.light,
     color: '#000',
-    paddingTop: "0.5em",
+    padding: "3rem",
     width: "18em",
     height: "3em",
     fontSize: "1.2em",
