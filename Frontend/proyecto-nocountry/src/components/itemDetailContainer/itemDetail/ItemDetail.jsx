@@ -10,32 +10,16 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-// import "./itemDetail-style.css";
-//import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useState } from "react";
-//import StarIcon from "@mui/icons-material/Star";
-import { useDispatch, useSelector } from "react-redux";
-//import { decrement, increment } from "../../../features/productSlice";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import BasicModal from "../../basicModal/BasicModal";
 import axios from "axios";
 
 const ItemDetail = ({ item }) => {
-  // const [favorite, setFavorite] = useState(false);
-  // const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-
-  // const handleFavorite = () => {
-  //   if (favorite === false) {
-  //     setFavorite(true);
-  //     dispatch(increment());
-  //   } else {
-  //     setFavorite(false);
-  //     dispatch(decrement());
-  //   }
-  // };
 
   const URL = "https://c12-21-m-java-react-ecommerce.onrender.com/sales/create";
 
@@ -71,7 +55,10 @@ const ItemDetail = ({ item }) => {
             navigate(`/acordar-compra/${response.data.idSale}`);
           })
           .catch((error) => {
-            console.log(error);
+            if (error.response && error.response.status === 401) {
+              navigate("/login");
+              console.log(error);
+            }
           })
       : setOpen(true);
   };
@@ -102,13 +89,6 @@ const ItemDetail = ({ item }) => {
             textAlign: "left",
           }}
         >
-          {/* <Button sx={{ onClick: { handleFavorite } }}>
-          {favorite == false ? (
-            <StarBorderIcon sx={{ fontSize: 20 }}></StarBorderIcon>
-          ) : (
-            <StarIcon sx={{ fontSize: 20 }}></StarIcon>
-          )}
-        </Button> */}
           <Typography gutterBottom variant="h5" component="div">
             {item.title}
           </Typography>
