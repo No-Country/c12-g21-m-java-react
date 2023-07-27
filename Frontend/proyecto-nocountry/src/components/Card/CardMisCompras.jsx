@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Box, Link } from "@mui/material"
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useState } from "react";
@@ -7,21 +8,30 @@ import { useSelector } from "react-redux";
 import BasicRating from "../basicRating/BasicRating";
 
 const CardMisCompras = ({ product }) => {
+    console.log(product)
     const [openModal, setOpenModal] = useState(false)
     const user = useSelector(state => state.user)
-    const [rating, setRating] = useState(0);
+    const [rating, setRating] = useState();
     const [review, setReview] = useState()
     const handleRating = (value, reviewvalue) => {
-        setRating(value)
+        setRating(parseInt(value))
         setReview(reviewvalue)
         console.log(value)
         console.log(review)
-        /* axios.post("https://c12-21-m-java-react-ecommerce.onrender.com/ratings", {
+        axios.post("https://c12-21-m-java-react-ecommerce.onrender.com/ratings", {
             ratingValue: rating,
             review: "vacio",
             idSale: product.idSale,
-            idUser: idDelVendedor
-        }) */
+            idUser: product.details[0]?.product?.user?.idUser
+        },
+        {
+            headers: {
+                Authorization: `Bearer ${user.jwtToken}`,
+            }
+        }
+        )
+        .then(response => console.log(response.data))
+        .catch(error => console.log(error))
     }
     return (
         <div>
@@ -29,17 +39,14 @@ const CardMisCompras = ({ product }) => {
 
             <Box className="card-box" >
                 <div style={{ gridArea: "left" }}>
-                    <b>Detalle de producto: </b>
+                    <b>Detalle de reserva: </b>
+                    <p>Vendedor: {product?.details[0]?.product?.user?.userPerson?.firstName}</p>
                     <p>{product?.details[0]?.product?.title}</p>
-                    <p>Id del producto: #{product?.details[0]?.product?.idProduct}</p>
-                    <p>Id de venta: {product?.idSale}</p>
-                    <p>Fecha de venta: {product?.saleDate}</p>
+                    <p>Numero de reserva: #000{product?.idSale}</p>
+                    <p>Fecha de reserva: {product?.saleDate}</p>
                     <div className="d-flex flex-column justify-content-around">
-                        <b>Estado del producto: </b>
-                        <button className="card-button">Reservado</button>
-                        <Link href="#" style={{ color: "black", fontSize: "0.8em" }}>
-                            <p style={{ margin: 0 }}>Cancelar reserva</p>
-                        </Link>
+                        <b>Estado de la reserva: </b>
+                        <button className="card-button">{product?.status}</button>
                     </div>
                 </div>
                 <div style={{ gridArea: "right", alignSelf: "end" }}>

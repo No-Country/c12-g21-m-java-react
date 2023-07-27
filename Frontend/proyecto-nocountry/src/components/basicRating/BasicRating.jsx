@@ -26,8 +26,10 @@ export default function BasicRating({handleRating, status }) {
                         }}
                     
                     />
-                    <textarea placeholder="Escribe una reseña" value={review} rows={4} className="card-textarea"></textarea>
-                    <Button onClick={() => {setVoted(true); handleRating(value, review)}}>Enviar</Button>
+                    <textarea placeholder="Escribe una reseña" value={review} rows={4} onChange={(event) => {
+                            setReview(event.target.value);
+                        }} className="card-textarea"></textarea>
+                    <Button variant='contained' onClick={() => {setVoted(true); handleRating(value, review)}}>Enviar</Button>
                 </>
                 
             ) : (
