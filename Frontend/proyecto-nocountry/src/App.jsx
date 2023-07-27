@@ -47,7 +47,7 @@ const App = () => {
     },
     {
       title: logueado ? "Mi perfil" : "Login",
-      path: logueado ? "" : "/login",
+      path: logueado ? "/" : "/login",
       icon: logueado ? <UserBadge /> : <LoginIcon />,
     },
     {
@@ -81,7 +81,7 @@ const App = () => {
           element={<ProductosVendidos />}
         />
         <Route path="/usuario/calificaciones" element={<Calificaciones />} />
-        <Route path='/usuario/miscompras' element={<MisCompras/>}/>
+        <Route path="/usuario/miscompras" element={<MisCompras />} />
       </Routes>
 
       {isMobile && (

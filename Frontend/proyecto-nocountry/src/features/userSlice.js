@@ -15,7 +15,8 @@ const initialState = {
     firstName: "",
     lastName: "",
     jwtToken: "",
-    logueado: false
+    logueado: false,
+    avatarImage: "",
 }
 
 export const userSlice = createSlice({
@@ -35,6 +36,7 @@ export const userSlice = createSlice({
             state.postalCode = action.payload.userPerson.postalCode;
             state.jwtToken = action.payload.jwtToken;
             state.logueado = true;
+            state.avatarImage = action.payload.userPerson.avatarPath;
         },
         cerrarSesion: (state) => {
             state.email = ""
@@ -49,6 +51,7 @@ export const userSlice = createSlice({
             state.postalCode = ""
             state.jwtToken = ""
             state.logueado = false;
+            state.avatarImage = ""
         }
     }
 })
