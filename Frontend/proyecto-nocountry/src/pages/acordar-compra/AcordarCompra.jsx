@@ -9,13 +9,14 @@ import {
   Typography,
 } from "@mui/material";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Spinner from "../../components/spinner/Spinner";
 import { useSelector } from "react-redux";
 import { Toaster, toast } from "sonner";
 
 export default function AcordarCompra() {
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const [message, setMessage] = useState("");
   const [item, setItem] = useState({});
@@ -63,6 +64,9 @@ export default function AcordarCompra() {
       )
       .then((response) => {
         toast.success("Mensaje enviado");
+        setTimeout(() => {          
+          navigate("/miscompras");
+        }, 2000);
         console.log(response.data);
       })
       .catch((error) => {
@@ -110,7 +114,7 @@ export default function AcordarCompra() {
               ¡Tu reserva se ha realizado con éxito!
             </Typography>
             <CardContent>
-              <Typography gutterBottom>Número de reserva: #0000000</Typography>
+              <Typography gutterBottom>Número de reserva: 000{id}</Typography>
               <Typography gutterBottom>
                 Precio: ${item.details[0].product.price}
               </Typography>

@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
-import * as React from 'react';
-import { Link } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import * as React from "react";
+import { Link } from "react-router-dom";
+import Box from "@mui/material/Box";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 
 export default function SimpleBottomNavigation({ navLinks }) {
   const [value, setValue] = React.useState(0);
 
   return (
-    <Box sx={{ width: 480 }}>
+    <Box sx={{ width: 460 }}>
       <BottomNavigation
         showLabels
         value={value}
@@ -23,7 +23,7 @@ export default function SimpleBottomNavigation({ navLinks }) {
             label={link.title}
             icon={link.icon}
             component={Link}
-            to={link.path}
+            to={link.title === "Mi perfil" ? null : link.path}
           />
         ))}
       </BottomNavigation>

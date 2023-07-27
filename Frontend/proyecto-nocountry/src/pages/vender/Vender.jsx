@@ -94,7 +94,7 @@ export default function Vender() {
   });
 
   const handleChange = (event) => {
-    console.log(event.target)
+    console.log(event.target);
     const { name, value } = event.target;
     setProductData((prevData) => ({
       ...prevData,
@@ -111,9 +111,36 @@ export default function Vender() {
     }));
   };
 
+  // Función para restablecer el estado inicial de los campos
+  const resetForm = () => {
+    setSelectedHouseRoom(null);
+    setSelectedCategory(null);
+    setSelectedCondition(null);
+    setPhotos([]);
+    setProductData({
+      title: "",
+      description: "",
+      price: 0,
+      colour: "blanco",
+      active: true,
+      highlight: false,
+      categoryHouseRooms: { idCategoryHouseRooms: null },
+      categoryProduct: { idCategoryProduct: null },
+      categoryStatus: { idCategoryStatus: null },
+      city: { idCity: user.idCity },
+      user: { idUser: user.idUser },
+      photos: [],
+    });
+  };
+
   // Publica el producto //
   const handlePublicar = async (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
+
+    if (photos.length === 0) {
+      toast.error("Debes subir al menos una foto del producto");
+      return;
+    }
 
     const url =
       "https://c12-21-m-java-react-ecommerce.onrender.com/products/saveProduct";
@@ -121,8 +148,9 @@ export default function Vender() {
     axios
       .post(url, { ...productData })
       .then((response) => {
-        console.log("Respuesta del servidor:", response.data);        
+        console.log("Respuesta del servidor:", response.data);
         toast.success("Se subió el producto con éxito");
+        resetForm();
       })
       .catch((error) => {
         console.error("Error al hacer la petición:", error);
@@ -136,7 +164,9 @@ export default function Vender() {
   return (
     <div>
       <Container maxWidth="md">
-        <Box sx={{ marginTop: isMobile ? "2rem" : "4rem", textAlign: "center" }}>
+        <Box
+          sx={{ marginTop: isMobile ? "2rem" : "4rem", textAlign: "center" }}
+        >
           <Typography variant={isMobile ? "h4" : "h2"}>
             Vende tus productos usados de forma simple
           </Typography>
@@ -272,7 +302,7 @@ export default function Vender() {
           </Box>
         </Box>
       </Container>
-      <Toaster richColors position="bottom-right"/>
+      <Toaster richColors position="bottom-right" />
     </div>
   );
 }

@@ -43,7 +43,7 @@ export default function Login() {
 
     axios
       .post("https://c12-21-m-java-react-ecommerce.onrender.com/login", usuario)
-      .then((response) => {
+      .then((response) => {        
         const token = response.data.jwtToken;
         axios
           .post(
@@ -57,8 +57,7 @@ export default function Login() {
               },
             }
           )
-          .then((response) => {
-            console.log(response.data);
+          .then((response) => {           
             dispatch(loguearse({ ...response.data, jwtToken: token }));
             navigate("/");
           })
