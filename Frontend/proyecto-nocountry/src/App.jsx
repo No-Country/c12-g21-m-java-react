@@ -46,7 +46,7 @@ const App = () => {
     },
     {
       title: logueado ? "Mi perfil" : "Login",
-      path: logueado && "/login",
+      path: logueado ? "/" : "/login",
       icon: logueado ? <UserBadge /> : <LoginIcon />,
     },
   ];
