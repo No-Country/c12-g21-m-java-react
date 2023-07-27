@@ -1,4 +1,3 @@
-import React from 'react';
 import SelectSmall from '../menuFilter/SelectSmall';
 
 const ProductOrder = ({ order, setOrder }) => {

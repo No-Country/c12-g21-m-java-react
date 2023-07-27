@@ -1,4 +1,3 @@
-import * as React from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -11,7 +10,7 @@ export default function SelectSmall({order, setOrder}) {
     };
 
     return (
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+        <FormControl sx={{ m: 2, minWidth: 120 }} size="small">
             <InputLabel id="demo-select-small-label">Orden</InputLabel>
             <Select
                 labelId="demo-select-small-label"

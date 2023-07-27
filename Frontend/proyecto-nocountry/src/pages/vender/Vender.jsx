@@ -165,7 +165,7 @@ export default function Vender() {
 
   return (
     <div>
-      <Container maxWidth="md">
+      <Container sx={{maxWidth: "md", mb: "5rem"}}  >
         <Box
           sx={{ marginTop: isMobile ? "2rem" : "4rem", textAlign: "center" }}
         >

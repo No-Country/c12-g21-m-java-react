@@ -9,8 +9,16 @@ export default function SimpleBottomNavigation({ navLinks }) {
   const [value, setValue] = React.useState(0);
 
   return (
-    <Box sx={{ width: 460 }}>
+    <Box>
       <BottomNavigation
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          position: "fixed",
+          bottom: 0,
+          zIndex: 1000,
+        }}
         showLabels
         value={value}
         onChange={(event, newValue) => {
