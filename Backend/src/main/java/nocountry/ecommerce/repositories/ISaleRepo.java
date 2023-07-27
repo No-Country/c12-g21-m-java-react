@@ -13,7 +13,8 @@ public interface ISaleRepo extends IGenericRepo<Sale, Integer>{
             "INNER JOIN SaleDetail d on d.sale.idSale = s.idSale " +
             "INNER JOIN Product p on p.idProduct = d.product.idProduct" +
             " WHERE ((s.status = ?1 ) or (s.status = 'CERRADO'))" +
-            "AND ( p.user.idUser <= ?2 )"
+            "AND ( p.user.idUser <= ?2 )" +
+            "ORDER BY s.saleDate desc"
     )
     List<Sale> findSellByStatus(String status, Integer idUser);
 
@@ -21,7 +22,8 @@ public interface ISaleRepo extends IGenericRepo<Sale, Integer>{
             "INNER JOIN SaleDetail d on d.sale.idSale = s.idSale " +
             "INNER JOIN Product p on p.idProduct = d.product.idProduct" +
             " WHERE ((s.status = ?1 ) or (s.status = 'CERRADO'))" +
-            "AND ( s.user.idUser <= ?2 )"
+            "AND ( s.user.idUser <= ?2 )" +
+            "ORDER BY s.saleDate desc"
     )
     List<Sale> findBuyByStatus(String status, Integer idUser);
 
