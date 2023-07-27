@@ -18,7 +18,6 @@ import Perfil from "./pages/usuario/perfil/Perfil.jsx";
 import ProductosVendidos from "./pages/usuario/productosVendidos/ProductosVendidos.jsx";
 import Calificaciones from "./pages/usuario/calificaciones/Calificaciones.jsx";
 import LoginIcon from "@mui/icons-material/Login";
-import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import SimpleBottomNavigation from "./components/bottomNavigation/SimpleBottomNavigation.jsx";
 import { useMediaQuery } from "@mui/material";
 import Footer from "./components/footer/Footer.jsx";
@@ -50,11 +49,6 @@ const App = () => {
       path: logueado && "/login",
       icon: logueado ? <UserBadge /> : <LoginIcon />,
     },
-    {
-      title: !logueado ? "Crear Cuenta" : "",
-      path: !logueado ? "/registro" : "",
-      icon: !logueado ? <AppRegistrationIcon /> : "",
-    },
   ];
 
   return (
@@ -84,11 +78,7 @@ const App = () => {
         <Route path="/usuario/miscompras" element={<MisCompras />} />
       </Routes>
 
-      {isMobile && (
-        <div style={{ position: "fixed", bottom: 0, width: "100%" }}>
-          <SimpleBottomNavigation navLinks={navLinks} />
-        </div>
-      )}
+      {isMobile && <SimpleBottomNavigation navLinks={navLinks} />}
       {!isMobile && <Footer />}
     </>
   );

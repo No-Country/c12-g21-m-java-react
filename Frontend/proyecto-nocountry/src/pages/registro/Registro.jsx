@@ -10,12 +10,15 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Toaster, toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 export default function Registro() {
   const [condicionesChecked, setCondicionesChecked] = useState(false);
   const [promocionesChecked, setPromocionesChecked] = useState(false);
+  const navigate = useNavigate();
 
-  const handleRegistro = () => {
+  const handleRegistro = (e) => {
+    e.preventDefault();
     const user = {
       name: nombre,
       lastName: apellido,
@@ -49,11 +52,11 @@ export default function Registro() {
         .then((response) => {
           console.log(response.data);
           toast.success("Se ha registrado con éxito");
-
+          navigate("/login");
         })
         .catch((error) => {
           console.log(error);
-          toast.error("email existente");
+          toast.error("Email existente");
         });
     }
   };
@@ -121,7 +124,7 @@ export default function Registro() {
 
   return (
     <>
-      <Container maxWidth="sm" sx={{ mb: "2rem", mt: "2rem" }}>
+      <Container maxWidth="sm" sx={{ mb: "6rem", mt: "2rem" }}>
         <h1>Registro de usuario</h1>
         <Box
           component="form"
@@ -273,7 +276,7 @@ export default function Registro() {
           <Button type="submit" variant="contained" sx={{ mt: 2 }}>
             Crear cuenta
           </Button>
-          <Toaster />
+          <Toaster richColors />
         </Box>
       </Container>
     </>

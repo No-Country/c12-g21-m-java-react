@@ -9,8 +9,8 @@
 
 .home-container {
     width: 100%;
-    position: absolute;
-    left: 0;
+    /* position: absolute; */
+    left: 0;    
 }
 
 .options-button-container {
