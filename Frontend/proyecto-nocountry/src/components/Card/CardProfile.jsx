@@ -9,8 +9,10 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-const CardProfile = ({ user, onUpdateUser }) => {
+const CardProfile = () => {
+  const user = useSelector((state) => state.user);
   const [avatarUploaded, setAvatarUploaded] = useState(null);
 
   const handleFileChange = (event) => {
@@ -35,12 +37,7 @@ const CardProfile = ({ user, onUpdateUser }) => {
           },
         })
         .then((response) => {
-          const newAvatarUrl = response.data.userPerson.avatarPath;
-          const updatedUser = {
-            ...user,
-            avatarImage: newAvatarUrl,
-          };
-          onUpdateUser(updatedUser);
+          console.log(response)    
         })
         .catch((error) => {
           console.log(error);
