@@ -10,23 +10,23 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { actualizarImagen } from "../../features/userSlice";
 const CardProfile = () => {
   const user = useSelector((state) => state.user);
   const [avatarUploaded, setAvatarUploaded] = useState(null);
   const [rating, setRating] = useState()
   const [isLoading, setIsLoading] = useState(false)
-  
+  const[url, setUrl] = useState()
+
+  const dispatch = useDispatch()
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setAvatarUploaded(file);
   };
-
   
   const handleUpload = () => {
     if (avatarUploaded) {
-      console.log(avatarUploaded);
       const formData = new FormData();
       formData.append("idUser", user.idUser);
       formData.append("multipartFile", avatarUploaded);
@@ -41,7 +41,8 @@ const CardProfile = () => {
           },
         })
         .then((response) => {
-          console.log(response)    
+          dispatch(actualizarImagen(response.data.userPerson.avatarPath))
+          setUrl(response.data.userPerson.avatarPath)
         })
         .catch((error) => {
           console.log(error);
@@ -66,6 +67,8 @@ const CardProfile = () => {
   useEffect(() => {
     handleUpload();
   }, [avatarUploaded]);
+
+  useEffect
 
   return (
     <>
@@ -105,10 +108,11 @@ const CardProfile = () => {
                 style={{ display: "none" }}
                 onChange={handleFileChange}
               />
+
               <label htmlFor="avatarInput">
                 <Avatar
                   alt={user.firstName}
-                  src={user.avatarImage}
+                  src={user.avatarImage ? user.avatarImage : url}
                   sx={{ width: "5rem", height: "5rem", cursor: "pointer" }}
                 />
               </label>

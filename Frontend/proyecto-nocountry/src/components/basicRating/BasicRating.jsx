@@ -3,11 +3,32 @@ import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
+import axios from "axios";
+import { useSelector } from "react-redux";
 
-export default function BasicRating({handleRating, status }) {
+export default function BasicRating({idUser, idSale}) {
     const [value, setValue] = React.useState()
     const [review, setReview] = React.useState()
     const [voted, setVoted] = React.useState(false)
+    const user = useSelector(state => state.user)
+
+    const handleRating = () => {
+        setVoted(true)
+        axios.post("https://c12-21-m-java-react-ecommerce.onrender.com/ratings", {
+            ratingValue: value,
+            review: review,
+            idSale: idSale,
+            idUser: idUser
+        },
+        {
+            headers: {
+                Authorization: `Bearer ${user.jwtToken}`,
+            }
+        }
+        )
+        .then(response => console.log(response.data))
+        .catch(error => console.log(error))
+    }
     return (
         <Box
             sx={{
@@ -29,7 +50,7 @@ export default function BasicRating({handleRating, status }) {
                     <textarea placeholder="Escribe una reseña" value={review} rows={4} onChange={(event) => {
                             setReview(event.target.value);
                         }} className="card-textarea"></textarea>
-                    <Button variant='contained' onClick={() => {setVoted(true); handleRating(value, review)}}>Enviar</Button>
+                    <Button variant='contained' onClick={handleRating}>Enviar</Button>
                 </>
                 
             ) : (
