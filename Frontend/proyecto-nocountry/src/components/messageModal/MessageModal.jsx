@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import './messageModal-style.css'
 import axios from 'axios';
 import { Button } from '@mui/material';
-import Spinner from '../spinner/Spinner';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 const style = {
     position: 'absolute',
     top: '50%',
@@ -22,13 +22,13 @@ export default function MessageModal({ open, setOpen, id, buyer }) {
     const user = useSelector(state => state.user);
     const handleClose = () => setOpen(false);
     const [messages, setMessages] = useState()
-    const [valueText, setValueText] = useState()
+    const [valueText, setValueText] = useState("")
     const [isLoading, setIsLoading] = useState(false);
     const [reload, setReload] = useState(false)
     const handleSubmit = (e) => {
         const currentDate = new Date();
         const messageDateTime = currentDate.toISOString();
-        console.log(valueText)
+        
         e.preventDefault()
         axios.post("https://c12-21-m-java-react-ecommerce.onrender.com/messages", {
             idSale: id,
@@ -41,8 +41,8 @@ export default function MessageModal({ open, setOpen, id, buyer }) {
                     Authorization: `Bearer ${user.jwtToken}`,
                 },
             })
-            .then(response => {
-                setValueText()
+            .then(() => {
+                setValueText("")
                 setReload(true)
             })
     }
@@ -56,7 +56,6 @@ export default function MessageModal({ open, setOpen, id, buyer }) {
                 }
             })
             .then(response => {
-                console.log(response.data);
                 setMessages(response.data)
 
             })
@@ -76,6 +75,7 @@ export default function MessageModal({ open, setOpen, id, buyer }) {
             >
                 <Box sx={style}>
                     <div className='modal-header'>
+                        <HighlightOffIcon onClick={() => setOpen(false)} sx={{cursor: "pointer", position: "absolute", right: 0, top: 0, margin: "0.2em", fontSize: "2em"}}/>
                         <h5>Notas</h5>
                         <p>{buyer}</p>
                     </div>

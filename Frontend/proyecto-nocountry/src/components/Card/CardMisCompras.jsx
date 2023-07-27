@@ -3,36 +3,13 @@ import { Box, Link } from "@mui/material"
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useState } from "react";
 import MessageModal from "../messageModal/MessageModal";
-import axios from "axios";
-import { useSelector } from "react-redux";
+
 import BasicRating from "../basicRating/BasicRating";
 
 const CardMisCompras = ({ product }) => {
-    console.log(product)
     const [openModal, setOpenModal] = useState(false)
-    const user = useSelector(state => state.user)
-    const [rating, setRating] = useState();
-    const [review, setReview] = useState()
-    const handleRating = (value, reviewvalue) => {
-        setRating(parseInt(value))
-        setReview(reviewvalue)
-        console.log(value)
-        console.log(review)
-        axios.post("https://c12-21-m-java-react-ecommerce.onrender.com/ratings", {
-            ratingValue: rating,
-            review: "vacio",
-            idSale: product.idSale,
-            idUser: product.details[0]?.product?.user?.idUser
-        },
-        {
-            headers: {
-                Authorization: `Bearer ${user.jwtToken}`,
-            }
-        }
-        )
-        .then(response => console.log(response.data))
-        .catch(error => console.log(error))
-    }
+    
+    
     return (
         <div>
             {openModal && <MessageModal setOpen={setOpenModal} open={openModal} id={product?.idSale} buyer={product?.idUserBuyer?.userPerson?.firstName} />}
@@ -51,7 +28,7 @@ const CardMisCompras = ({ product }) => {
                 </div>
                 <div style={{ gridArea: "right", alignSelf: "end" }}>
                     {product.status !== "RESERVADO"? (
-                    <BasicRating  handleRating={handleRating} status={product.status}/>
+                    <BasicRating  product={product} idUser={product.details[0].product.user.idUser} idSale={product.idSale}/>
                     ): (
                     
                     <button className="card-button" onClick={() => setOpenModal(true)}>Notas con el vendedor <BorderColorIcon sx={{ fontSize: "1.2em" }}></BorderColorIcon></button>

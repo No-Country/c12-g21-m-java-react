@@ -47,9 +47,8 @@ const CardProdVendidos = ({ product }) => {
                 <div style={{ gridArea: "left" }}>
                     <b>Detalle de producto: </b>
                     <p>{product?.details[0]?.product?.title}</p>
-                    <p>Id del producto: #{product?.details[0]?.product?.idProduct}</p>
-                    <p>Id de venta: {product?.idSale}</p>
-                    <p>Fecha de venta: {product?.saleDate}</p>
+                    <p>Numero de reserva: {product?.idSale}</p>
+                    <p>Fecha de reserva: {product?.saleDate}</p>
                     <p>Comprador: {product?.idUserBuyer?.userPerson?.firstName}</p>
                     <div className="d-flex flex-column justify-content-around">
                         <b>Estado del producto: </b>
