@@ -31,7 +31,6 @@ public class RatingController {
     @Operation(summary="Registra una calificacion de una venta")
     @PostMapping( )
     public ResponseEntity<RatingDTO> save(@Valid @RequestBody RatingDTO dto) {
-       // System.out.println(this.convertToEntity(dto).getUser().getIdUser());
        Integer sal = dto.getIdSale();
         Rating obj =   service.save(this.convertToEntity(dto), sal);
         return new ResponseEntity<>(this.convertToDTO(obj), HttpStatus.OK);

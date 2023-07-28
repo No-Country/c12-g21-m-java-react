@@ -1,5 +1,6 @@
 package nocountry.ecommerce.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import nocountry.ecommerce.dto.ProductDTO;
@@ -30,14 +31,14 @@ public class MessageController {
 
     @Qualifier("defaultMapper")
     private final ModelMapper mapper;
-
+    @Operation(summary="Registra un mensaje")
     @PostMapping
     public ResponseEntity<Void> save(@Valid @RequestBody MessageDTO dto){
         Message obj = service.save(this.convertToEntity(dto));
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdMessage()).toUri();
         return ResponseEntity.created(location).build();
     }
-
+    @Operation(summary="Lista todos los mensajes de una venta")
     @GetMapping("/sale/{id}")
     public ResponseEntity<List<MessageDTO>> findBySale(@PathVariable("id") Integer id){
         List<MessageDTO> list = service.findBySale(id).stream().map(this::convertToDto).collect(Collectors.toList());
