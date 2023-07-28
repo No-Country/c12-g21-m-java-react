@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import './messageModal-style.css'
 import axios from 'axios';
 import { Button } from '@mui/material';
+import SendSharpIcon from '@mui/icons-material/SendSharp';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 const style = {
     position: 'absolute',
@@ -16,6 +17,7 @@ const style = {
     borderRadius: "1em",
     bgcolor: 'background.paper',
     boxShadow: 24,
+    maxWidth: "90vw"
 };
 
 export default function MessageModal({ open, setOpen, id, buyer }) {
@@ -107,7 +109,7 @@ export default function MessageModal({ open, setOpen, id, buyer }) {
                         <textarea onChange={(e) => setValueText(e.target.value)} type='text' placeholder='Escribir nota' value={valueText} className='footer-input'></textarea>
                         <div className='footer-button'>
                             <div className='modal-input-seller'>{user.firstName[0]}</div>
-                            <Button onClick={handleSubmit} variant="contained" sx={{ background: "#fff", borderRadius: "2em" }}>Enviar</Button>
+                            <Button onClick={handleSubmit} variant="contained" sx={{ background: "#fff", borderRadius: "50%", padding:"1em", height: "4em"}}><SendSharpIcon fontSize='small'/></Button>
                         </div>
                     </div>
                 </Box>
