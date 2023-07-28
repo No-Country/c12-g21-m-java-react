@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.w3c.dom.Text;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -22,7 +24,7 @@ public class Product {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
-    @Column(columnDefinition = "decimal(6,2)" , nullable = false)
+    @Column(columnDefinition = "decimal(18,2)" , nullable = false)
     private double price;
 
     @Column(length = 50, nullable = false)
@@ -30,6 +32,9 @@ public class Product {
 
     @Column(nullable = false)
     private boolean active;
+
+    @Column(columnDefinition = "boolean default false")
+    private boolean highlight;
 
     @ManyToOne
     @JoinColumn(name = "id_category_house_rooms", nullable = false, foreignKey = @ForeignKey(name= "FK_Product_Category_house_rooms"))
@@ -51,5 +56,7 @@ public class Product {
     @JoinColumn(name = "id_user_seller", nullable = false, foreignKey = @ForeignKey(name= "FK_Product_User"))
     private User user;
 
-
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<ProductImage> photos;
 }
+
