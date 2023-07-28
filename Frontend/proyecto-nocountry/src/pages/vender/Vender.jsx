@@ -286,7 +286,7 @@ export default function Vender() {
             sx={{
               display: "flex",
               justifyContent: "center",
-              margin: "1rem",
+              m: "2rem"                           
             }}
           >
             <Button type="submit" variant="contained" size="large">

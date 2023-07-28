@@ -6,8 +6,6 @@
     flex-direction: column;
 }
 
-
-
 .detail-container {
     height: 100%;
     display: flex;
@@ -26,8 +24,6 @@
 .detail-data-container {
     width: 60%;
 }
-
-
 
 .detail-product-container {
     display: flex;
