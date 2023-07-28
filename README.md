@@ -19,7 +19,10 @@ Sofía Allegretti **(UX/UI)**
 
 ------------
 
-### Stack/Tecnologías 
+### 🛠 Stack/Tecnologías 
+
+https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot
+
 Java, Spring Boot, PostgreSQL
 
 React, Vite, React-Bootstrap, Material ui, Redux, Axios, React-Router 
