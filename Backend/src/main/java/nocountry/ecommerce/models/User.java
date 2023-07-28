@@ -1,10 +1,16 @@
 package nocountry.ecommerce.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.Constraint;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import nocountry.ecommerce.annotations.UniqueEmail;
+import nocountry.ecommerce.annotations.UniqueEmailValidator;
 
 import java.util.List;
 
@@ -16,21 +22,25 @@ import java.util.List;
 @Table(name = "user_data")
 public class User {
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer idUser;
 
-    @Column(length = 50, nullable = false)
-    private String username;
-
-    @Column(length = 50, nullable = false)
+    @Email
+    @Column(length = 50, nullable = false, unique=true)
     private String email;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(length = 60, nullable = false)
     private String password;
 
-    @OneToOne(mappedBy = "user")
+    // @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_user_person" , referencedColumnName = "idUserPerson")
     private UserPerson userPerson;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "id_user", referencedColumnName = "idUser"),
