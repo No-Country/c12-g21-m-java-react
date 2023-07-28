@@ -9,15 +9,12 @@ De una manera muy sencilla te podrás registrar y vender aquel mueble usado que 
 ------------
 
 ### Equipo de desarrollo
-Pablo Aquino **(Frontend)**
+| <img src="https://avatars.githubusercontent.com/u/116224713?v=4" width=50>| <img src="https://avatars.githubusercontent.com/u/95319442?v=4" width=50>|<img src="https://avatars.githubusercontent.com/u/104572840?v=4" width=50>|<img src="" width=50>|
+|:-:|:-:|:-:|:-:|
+| **Pablo Aquino (Frontend)**| **Gustavo Torres (Frontend)**|**Natalia Potaves (Backend)**|**Sofia Allegretti (UX/UI)**|
+| <a href="https://github.com/WebDevCod"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href=""><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://github.com/betogus"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href=""><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |<a href="https://github.com/npotaves"><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.linkedin.com/in/natalia-potaves/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |<a href=""><img src="https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a> <a href=""><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
 
-Gustavo Torres **(Frontend)**
-
-Natalia Potaves **(Backend)**
-
-Sofía Allegretti **(UX/UI)**
-
-------------
+<hr/>
 
 ### 🛠 Stack/Tecnologías 
 
