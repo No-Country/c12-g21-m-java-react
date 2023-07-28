@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class GlobalErrorHandler {
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<CustomErrorResponse> handleAllException(Exception ex, WebRequest req) {
+    public ResponseEntity<CustomErrorResponse> handleAllException(Exception ex, WebRequest req){
         CustomErrorResponse res = new CustomErrorResponse(LocalDateTime.now(), ex.getMessage(), req.getDescription(false));
         return new ResponseEntity<>(res, HttpStatus.INTERNAL_SERVER_ERROR);
     }
