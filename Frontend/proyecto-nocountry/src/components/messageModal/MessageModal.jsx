@@ -59,7 +59,7 @@ export default function MessageModal({ open, setOpen, id, buyer }) {
                 setMessages(response.data)
 
             })
-            .catch(error => console.log(error))
+            .catch()
        setTimeout(() => {
         setIsLoading(false)
        }, 1000)

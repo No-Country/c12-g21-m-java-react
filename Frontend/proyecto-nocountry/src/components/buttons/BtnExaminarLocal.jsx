@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useEffect } from "react";
 import { Box, Button, Avatar } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -25,7 +24,7 @@ const BtnExaminarLocal = ({
             },
             {
               headers: {
-                "Content-Type": "multipart/form-data", // Asegúrate de establecer el encabezado adecuado para archivos
+                "Content-Type": "multipart/form-data", 
               },
             }
           )
@@ -40,16 +39,14 @@ const BtnExaminarLocal = ({
               photos: [{ imagePath: imageUrl, first: true }],
             }));            
           })
-          .catch((error) => {
-            console.log(error);
-          });
+          .catch();
       });
     }
   };
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
-    setSelectedFiles((prevSelectedFiles) => [...prevSelectedFiles, ...files]); // Actualizar la variable de estado con las imágenes seleccionadas
-    onFileChange([...selectedFiles, ...files]); // Pasar las imágenes seleccionadas al componente padre
+    setSelectedFiles((prevSelectedFiles) => [...prevSelectedFiles, ...files]); 
+    onFileChange([...selectedFiles, ...files]); 
   
   };
 
@@ -96,7 +93,7 @@ const BtnExaminarLocal = ({
             name="examinar"
             id="examinar"
             hidden
-            multiple // Permitir seleccionar múltiples archivos
+            multiple 
             onChange={handleFileChange}
           />
         </label>

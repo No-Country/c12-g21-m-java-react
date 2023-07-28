@@ -36,7 +36,6 @@ export const userSlice = createSlice({
             state.postalCode = action.payload.userPerson.postalCode;
             state.jwtToken = action.payload.jwtToken;
             state.logueado = true;
-            state.avatarImage = action.payload;
         },
         cerrarSesion: (state) => {
             state.email = ""

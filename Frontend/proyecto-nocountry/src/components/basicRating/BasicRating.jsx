@@ -26,8 +26,8 @@ export default function BasicRating({idUser, idSale}) {
             }
         }
         )
-        .then(response => console.log(response.data))
-        .catch(error => console.log(error))
+        .then()
+        .catch()
     }
     return (
         <Box

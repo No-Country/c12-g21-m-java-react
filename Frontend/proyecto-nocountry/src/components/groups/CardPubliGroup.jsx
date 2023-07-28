@@ -1,7 +1,6 @@
 import CardPublicacion from "../Card/CardPublicacion"
 import "../groups/groups.css"
 
-
 const CardPubliGroup = ({products}) => {
 
   return (

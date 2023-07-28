@@ -3,7 +3,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import RangeSlider from "../rangeSlider/RangeSlider";
 
-// eslint-disable-next-line react/prop-types
 const ProductFilter = ({ setOptions }) => {
   const [selectedHouseRoom, setSelectedHouseRoom] = useState();
   const [selectedCategory, setSelectedCategory] = useState();
@@ -46,10 +45,8 @@ const ProductFilter = ({ setOptions }) => {
           setCategoryHouseRoomsList(roomsData);
         })
       )
-      .catch((error) => {
-        console.error("Error al hacer la solicitud:", error);
-      });
-  }, []);
+      .catch()
+}, []);
 
   useEffect(() => {
     setOptions((prevOptions) => ({
@@ -66,7 +63,6 @@ const ProductFilter = ({ setOptions }) => {
       <b>Precio</b>
 
       <RangeSlider setOptions={setOptions} />
-      {/* houseRoom */}
       <b>Habitación</b>
       <FormGroup>
         <RadioGroup
@@ -87,7 +83,6 @@ const ProductFilter = ({ setOptions }) => {
         </RadioGroup>
       </FormGroup>
 
-      {/* category */}
       <b>Categoría</b>
       <FormGroup>
         <RadioGroup
@@ -108,7 +103,6 @@ const ProductFilter = ({ setOptions }) => {
         </RadioGroup>
       </FormGroup>
 
-      {/* condition */}
       <b>Condición</b>
       <FormGroup>
         <RadioGroup

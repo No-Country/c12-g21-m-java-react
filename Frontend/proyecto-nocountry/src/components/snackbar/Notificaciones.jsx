@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
@@ -11,7 +10,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function Notificaciones(props) {
   const [open, setOpen] = React.useState(false);
 
-  // Utiliza la prop booleana para controlar la visibilidad del Snackbar
   React.useEffect(() => {
     setOpen(props.mostrarSnackbar);
   }, [props.mostrarSnackbar]);

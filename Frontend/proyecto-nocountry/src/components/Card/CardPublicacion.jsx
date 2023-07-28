@@ -2,7 +2,6 @@ import { Box } from "@mui/material"
 import axios from "axios";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-
 import { theme } from "../../assets/styles";
 
 
@@ -23,9 +22,8 @@ const CardPublicacion = ({ product }) => {
         .then(() => {
             setIsPublished(!isPublished) })
        
-            .catch(error => console.log(error))
+            .catch()
     }
-
 
     return (
         <div className="card-publicacion">

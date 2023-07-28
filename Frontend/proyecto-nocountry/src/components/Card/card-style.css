@@ -2,6 +2,7 @@
     height: 20em;
     display: flex;
     margin: 1em 0;
+    max-width: 80vw;
     border-radius: 1rem;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -80,9 +81,9 @@
 .card-image img {
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
-    max-height: 100%;
-    min-width: 100%;
-    object-fit: fill;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 .avatar-container {
     display: flex;

@@ -1,4 +1,4 @@
-import { Box, Link } from "@mui/material"
+import { Box } from "@mui/material"
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useState } from "react";
 import MessageModal from "../messageModal/MessageModal";
@@ -19,9 +19,8 @@ const CardProdVendidos = ({ product }) => {
             }
         }
         )
-            .then(response => {
+            .then(() => {
                 setFinalizado(true)
-                console.log(response.data)
             })
     }
 
@@ -33,9 +32,8 @@ const CardProdVendidos = ({ product }) => {
                 Authorization: `Bearer ${user.jwtToken}`,
             }
         })
-            .then(response => {
+            .then(() => {
                 setCancelado(true)
-                console.log(response.data)
             })
     }
 

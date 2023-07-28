@@ -2,17 +2,14 @@ import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 
-// Función para formatear el valor del precio
 function valuetext(value) {
   return `$${value}`;
 }
 
-// Rango mínimo y máximo de precios
 const MIN_PRICE = 0;
 const MAX_PRICE = 100000;
 
 
-// eslint-disable-next-line react/prop-types
 export default function PriceRangeSlider({ setOptions }) {
   const [value, setValue] = useState([MIN_PRICE, MAX_PRICE]);
 
