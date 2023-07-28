@@ -73,13 +73,10 @@ public class ProductController {
         List<ProductDTO> list = service.findByHighlightAndActive(true, true).stream().map(this::convertToDTOProduct).collect(Collectors.toList());
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
-   // @PostMapping(value = "/saveProduct", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-
     @Operation(summary="Inserta un nuevo producto")
     @PostMapping( "/saveProduct")
     public ResponseEntity<ProductDTO> save(@Valid @RequestBody ProductDTO dto) {
          Product prod =   service.save(this.convertToProduct(dto));
-        System.out.println(prod);
         List<ProductImage> fotos = mapper.map(dto.getPhotos(), new TypeToken<List<ProductImage>>(){}.getType());
         Product obj = service.saveTransactional(prod, fotos);
         return new ResponseEntity<>(this.convertToDTOProduct(obj), HttpStatus.OK);
@@ -92,15 +89,7 @@ public class ProductController {
         Product obj = service.update(this.convertToProduct(dto), id);
         return new ResponseEntity<>(this.convertToDTOProduct(obj), HttpStatus.OK);
     }
-
-
-    /*
-    @GetMapping("/list")
-    public ResponseEntity<List<Imagen>> list(){
-        List<Imagen> list = imagenService.list();
-        return new ResponseEntity(list, HttpStatus.OK);
-    }
-*/
+    @Operation(summary="Realiza el upload de una imagen de producto a Cloudinary")
     @PostMapping("/upload")
     public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile)throws IOException {
         BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
@@ -108,22 +97,15 @@ public class ProductController {
             CustomErrorResponse errorResponse = new CustomErrorResponse(LocalDateTime.now(), "imagen no valida", null);
         }
         Map result = cloudinaryService.upload(multipartFile);
-      //  System.out.println(result.get("original_filename"));
-       // System.out.println(result.get("url"));
-       // System.out.println(result.get("public_id"));
-
          return new ResponseEntity(result, HttpStatus.OK);
     }
+    @Operation(summary="Lista los productos publicados por el usuario enviado.")
     @GetMapping("/publishedlist/{id}")
     public ResponseEntity<List<ProductDTO>> findListPublish(@PathVariable("id") Integer id){
-        // List<SaleDTO> dto = this.convertToDto(service.findByStatus("RESERVADO"));
         List<ProductDTO> dto = service.findPublish(id).stream().map(this::convertToDTOProduct).collect(Collectors.toList());
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    private ProductResponseDTO convertToDto(Product obj) {
-        return mapper.map(obj, ProductResponseDTO.class);
-    }
     private Product convertToProduct(ProductDTO obj) {
         return mapper.map(obj, Product.class);
     }
@@ -131,9 +113,7 @@ public class ProductController {
         return mapper.map(obj, ProductDTO.class);
     }
 
-    private Product convertRequestToEntity(ProductRequestDTO obj) {
-        return mapper.map(obj, Product.class);
-    }
+
 
 
 }

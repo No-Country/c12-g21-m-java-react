@@ -58,8 +58,6 @@ User check = service.findByEmail(obj1.getEmail());
             String exceptionMsg = "User exists";
             CustomErrorResponse errorResponse = new CustomErrorResponse(LocalDateTime.now(), exceptionMsg, null);
         }
-
-        //User obj1 = this.convertToEntity(dto);
         int strength = 10; // work factor of bcrypt
         BCryptPasswordEncoder bCryptPasswordEncoder =
                 new BCryptPasswordEncoder(strength, new SecureRandom());
@@ -82,7 +80,7 @@ User check = service.findByEmail(obj1.getEmail());
         UserDTO obj = this.convertToDto(service.findByEmail(dto.getEmail()));
         return new ResponseEntity<>(obj, HttpStatus.OK);
     }
-
+    @Operation(summary="Agrega un avatar al usuario")
     @PostMapping("/uploadavatar")
     public ResponseEntity<UserDTO> uploadAvatar(@RequestParam MultipartFile multipartFile, @RequestParam Integer idUser)throws IOException {
         BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
@@ -90,11 +88,7 @@ User check = service.findByEmail(obj1.getEmail());
             CustomErrorResponse errorResponse = new CustomErrorResponse(LocalDateTime.now(), "imagen no valida", null);
         }
         Map result = cloudinaryService.upload(multipartFile);
-        //  System.out.println(result.get("original_filename"));
-        // System.out.println(result.get("url"));
-        // System.out.println(result.get("public_id"));
         User user = service.findById(idUser);
-        //user.saveAvatar(result.get("url").toString());
         User us = service.saveAvatar(user,result.get("url").toString());
         User us1 = service.findById(idUser);
         return new ResponseEntity(convertToDto(us1), HttpStatus.OK);
