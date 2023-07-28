@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { MyButton } from "../../assets/styles";
+import { Box } from "@mui/system";
 
 
 const Home = () => {
@@ -79,42 +80,24 @@ const Home = () => {
             "https://www.unclaimedfurnitureupstate.com/wp-content/uploads/2023/03/Living-Room-Category-Page-Photo.webp"
           }
         />
-        <div className="destacados-contenedor mt-5">
-          <h2>Destacados</h2>
-          <div className="contenedor-principal">
-            <button
-              role="button"
-              id="flecha-izquierda"
-              onClick={scrollIzquierda}
-              className="flecha-izquierda"
-            >
-              {"<"}
-            </button>
-            <div ref={filaRef} className="contenedor-carousel">
-              {products.map((element) => (
-
-                <Link
-                  to={`/detail/${element.idProduct}`}
-                  key={element.idProduct}
-                  className="imagen link"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  <img
-                    src={element.photos[0]?.imagePath}
-                    alt=""
-                  />
-                </Link>
-              ))}
-            </div>
-
-            <button
-              role="button"
-              onClick={scrollDerecha}
-              id="flecha-derecha"
-              className="flecha-derecha"
-            >
-              {">"}
-            </button>
+        
+      </div>
+      <div className="preguntas-frecuentes w-100 bg-white">
+        <div className="row w-100 ">
+          <div className="col-md-6 col-sm-4">
+            <b>Preguntas frecuentes</b>
+            <p>Consulta aca tus dudas</p>
+          </div>
+          <div className="col-md-3 col-sm-4">
+            <b>informacion de contacto</b>
+            <p>Rehouse@gmail.com</p>
+            <p>8799, La Plata, Argentina</p>
+            <p>+54 988 79845</p>
+          </div>
+          <div className="col-md-3 col-sm-4">
+            <b>Sobre nosotros</b>
+            <p>¿Quienes somos?</p>
+            <p>¿Que hacemos en Re House?</p>
           </div>
         </div>
       </div>

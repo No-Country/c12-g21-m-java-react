@@ -22,7 +22,7 @@ const CardMisCompras = ({ product }) => {
                     <p>Fecha de reserva: {product?.saleDate}</p>
                     <div className="d-flex flex-column justify-content-around">
                         <b>Estado de la reserva: </b>
-                        <button className="card-button">{product?.status}</button>
+                        <button style={{cursor: "none"}} className="card-button">{product?.status}</button>
                     </div>
                 </div>
                 <div style={{ gridArea: "right", alignSelf: "end" }}>

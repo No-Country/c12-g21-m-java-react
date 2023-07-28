@@ -10,7 +10,8 @@
 
 .home-container {
     width: 100%;
-    left: 0;    
+    left: 0;   
+    height: 100%; 
 }
 
 .container {
@@ -32,6 +33,9 @@
         height: 200px;
 
     }
+    .preguntas-frecuentes {
+        display: none;
+    }
     
 }
 
@@ -51,21 +55,14 @@
     float: left;
     border: none;
     padding-bottom: 10px;
-    background: #000;
     font-size: 40px;
     height: 100%;
     line-height: 40px;
     width: 90px;
-    color: #fff;
     cursor: pointer;
     z-index: 500;
     transition: .2s ease all;
 }
-
-.flecha-izquierda:hover {
-    background: rgba(0, 0, 0, 1);
-}
-
 
 .flecha-derecha {
     float: right;
@@ -106,7 +103,11 @@
     padding: 10px;
 }
 
-
+@media screen and (max-width: 768px) {
+    .contenedor-carousel .imagen {
+      width: 50%;
+    }
+  }
 
 .imagen-contenido h4 {
     font-size: 1em;
