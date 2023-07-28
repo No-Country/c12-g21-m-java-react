@@ -50,7 +50,7 @@ const CardProdVendidos = ({ product }) => {
                     <p>Comprador: {product?.idUserBuyer?.userPerson?.firstName}</p>
                     <div className="d-flex flex-column justify-content-around">
                         <b>Estado del producto: </b>
-                        <button className="card-button">{finalizado ? "CERRADO" : (cancelado ? "CANCELADO" : product.status)}</button>
+                        <button style={{cursor: "none"}} className="card-button">{finalizado ? "CERRADO" : (cancelado ? "CANCELADO" : product.status)}</button>
                         {(!finalizado && !cancelado) && (
                             <p onClick={handleCancelar} style={{ margin: 0, cursor: "pointer", textDecoration: "underline" }}>Cancelar reserva</p>
 
