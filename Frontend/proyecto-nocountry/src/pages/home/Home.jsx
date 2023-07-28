@@ -99,8 +99,6 @@ const Home = () => {
                   className="imagen link"
                   style={{ textDecoration: "none", color: "black" }}
                 >
-                  {console.log(element)}
-                  <h4>{element.title}</h4>
                   <img
                     src={element.photos[0]?.imagePath}
                     alt=""

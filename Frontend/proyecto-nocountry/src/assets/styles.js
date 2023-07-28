@@ -35,5 +35,6 @@ export const MyButton = styled(Button)({
     width: "18em",
     height: "3em",
     fontSize: "1.2em",
+    marginBottom: "1em"
     
 });

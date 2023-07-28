@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   Avatar,
   Card,
@@ -44,9 +43,7 @@ const CardProfile = () => {
           dispatch(actualizarImagen(response.data.userPerson.avatarPath))
           setUrl(response.data.userPerson.avatarPath)
         })
-        .catch((error) => {
-          console.log(error);
-        });
+        .catch();
     }
   };
   

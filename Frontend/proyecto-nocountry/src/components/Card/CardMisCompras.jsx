@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import { Box, Link } from "@mui/material"
+import { Box } from "@mui/material"
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useState } from "react";
 import MessageModal from "../messageModal/MessageModal";
