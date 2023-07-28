@@ -21,7 +21,7 @@ Sofía Allegretti **(UX/UI)**
 
 ### 🛠 Stack/Tecnologías 
 
-https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot
+[https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)
 
 Java, Spring Boot, PostgreSQL
 
