@@ -1,0 +1,52 @@
+.item-component {
+    width: 12em;
+    height: 20em;
+    border-radius: 0.5em;
+    background-color: white;
+    margin: 1em 1em;
+    padding-bottom: 1rem;
+    box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.item-text {
+    background-color: white;
+    color: black;
+    padding: 0.5em;
+
+}
+
+.item-img-container {
+    width: 100%;
+    height: 10rem;
+
+}
+
+.item-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+}
+
+.item-text {
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+}
+
+.item-text h3 {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+.item-text h4 {
+    font-size: 0.9rem;
+    padding: 1rem;
+    font-weight: 300;
+}
+
+.item-text p {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}

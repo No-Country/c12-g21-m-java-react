@@ -1,0 +1,83 @@
+{
+  "hash": "beb6e875",
+  "browserHash": "51f68b7f",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "10c2f8a4",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "1bc6aefe",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "9d770eba",
+      "needsInterop": false
+    },
+    "@mui/icons-material/Home": {
+      "src": "../../node_modules/@mui/icons-material/Home.js",
+      "file": "@mui_icons-material_Home.js",
+      "fileHash": "5a8d2ade",
+      "needsInterop": true
+    },
+    "@mui/icons-material/MonetizationOn": {
+      "src": "../../node_modules/@mui/icons-material/MonetizationOn.js",
+      "file": "@mui_icons-material_MonetizationOn.js",
+      "fileHash": "447792bf",
+      "needsInterop": true
+    },
+    "@mui/icons-material/Storefront": {
+      "src": "../../node_modules/@mui/icons-material/Storefront.js",
+      "file": "@mui_icons-material_Storefront.js",
+      "fileHash": "d8085c69",
+      "needsInterop": true
+    },
+    "@mui/icons-material/Login": {
+      "src": "../../node_modules/@mui/icons-material/Login.js",
+      "file": "@mui_icons-material_Login.js",
+      "fileHash": "0122883d",
+      "needsInterop": true
+    },
+    "@mui/material": {
+      "src": "../../node_modules/@mui/material/index.js",
+      "file": "@mui_material.js",
+      "fileHash": "eba36449",
+      "needsInterop": false
+    },
+    "@mui/icons-material/Menu": {
+      "src": "../../node_modules/@mui/icons-material/Menu.js",
+      "file": "@mui_icons-material_Menu.js",
+      "fileHash": "b3c155c4",
+      "needsInterop": true
+    },
+    "@mui/system": {
+      "src": "../../node_modules/@mui/system/esm/index.js",
+      "file": "@mui_system.js",
+      "fileHash": "3012098c",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-K4TUVIXZ": {
+      "file": "chunk-K4TUVIXZ.js"
+    },
+    "chunk-VWAL4DSF": {
+      "file": "chunk-VWAL4DSF.js"
+    },
+    "chunk-PB3UPP2X": {
+      "file": "chunk-PB3UPP2X.js"
+    },
+    "chunk-JVFU7BZX": {
+      "file": "chunk-JVFU7BZX.js"
+    },
+    "chunk-HS7GO4I2": {
+      "file": "chunk-HS7GO4I2.js"
+    }
+  }
+}
