@@ -1,4 +1,4 @@
-# Re-House 
+# Re-House <img class="header-logo" src="https://rehouseweb.onrender.com/assets/logo-09bf9a2e.png" alt="logo">
 
 Bienvenidos al repositorio de **[Re-House](https://rehouseweb.onrender.com/)**. Nuestro sitio web fue desarrollado para facilitar la venta y compra de muebles usados. Contribuyendo con el cuidado de nuestro planeta haciendo recircular productos.
 
