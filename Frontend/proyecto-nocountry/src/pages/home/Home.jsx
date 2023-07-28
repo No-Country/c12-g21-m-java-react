@@ -48,7 +48,7 @@ const Home = () => {
   
   return (
     <div className="home-container">
-      <div className="container">
+      <div className="container pb-5">
         <div className="options-container">
           <div className="options-button-container">
               <MyButton onClick={() => navigate('/compras')}>
@@ -82,9 +82,9 @@ const Home = () => {
         />
         
       </div>
-      <div className="preguntas-frecuentes w-100 bg-white">
+      <div className="preguntas-frecuentes mt-5 w-100 bg-white px-5 pt-5">
         <div className="row w-100 ">
-          <div className="col-md-6 col-sm-4">
+          <div className="col-md-6 col-sm-4 text-center">
             <b>Preguntas frecuentes</b>
             <p>Consulta aca tus dudas</p>
           </div>
