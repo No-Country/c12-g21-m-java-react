@@ -10,10 +10,8 @@ const BtnExaminarLocal = ({
   setPhotos,
   setProductData,
   selectedFiles,
-  setSelectedFiles
+  setSelectedFiles,
 }) => {
- 
-  
   const handleUploadFiles = async () => {
     if (selectedFiles.length > 0) {
       selectedFiles.map((file) => {
@@ -25,7 +23,7 @@ const BtnExaminarLocal = ({
             },
             {
               headers: {
-                "Content-Type": "multipart/form-data", // Asegúrate de establecer el encabezado adecuado para archivos
+                "Content-Type": "multipart/form-data",
               },
             }
           )
@@ -38,7 +36,7 @@ const BtnExaminarLocal = ({
             setProductData((prevData) => ({
               ...prevData,
               photos: [{ imagePath: imageUrl, first: true }],
-            }));            
+            }));
           })
           .catch((error) => {
             console.log(error);
@@ -48,21 +46,19 @@ const BtnExaminarLocal = ({
   };
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
-    setSelectedFiles((prevSelectedFiles) => [...prevSelectedFiles, ...files]); // Actualizar la variable de estado con las imágenes seleccionadas
-    onFileChange([...selectedFiles, ...files]); // Pasar las imágenes seleccionadas al componente padre
-  
+    setSelectedFiles((prevSelectedFiles) => [...prevSelectedFiles, ...files]);
+    onFileChange([...selectedFiles, ...files]);
   };
 
   useEffect(() => {
     handleUploadFiles();
-  }, [selectedFiles])
-  
+  }, [selectedFiles]);
 
   return (
     <div>
       <Box
         sx={{
-          height: 270,
+          height: "13rem",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -81,12 +77,14 @@ const BtnExaminarLocal = ({
             />
           ))}
         </Box>
+        
+        <Box>
         <label htmlFor="examinar">
           <Button
             variant="contained"
             component="span"
-            startIcon={<SearchIcon />}
-            sx={{ mb: "2rem" }}
+            startIcon={<SearchIcon />} 
+            sx={{m: "1rem"}}          
           >
             SUBIR FOTOS
           </Button>
@@ -96,22 +94,14 @@ const BtnExaminarLocal = ({
             name="examinar"
             id="examinar"
             hidden
-            multiple // Permitir seleccionar múltiples archivos
+            multiple
             onChange={handleFileChange}
           />
+          <Button>
+            <DeleteIcon onClick={() => setSelectedFiles([])} />
+          </Button>
         </label>
-        
-          <Box sx={{margin: "1rem"}}>
-            <Button
-              variant="contained"
-              component="span"
-              startIcon={<DeleteIcon />}
-              onClick={() => setSelectedFiles([])}
-            >
-              ELIMINAR FOTOS
-            </Button>            
-          </Box>
-        
+        </Box>        
       </Box>
     </div>
   );

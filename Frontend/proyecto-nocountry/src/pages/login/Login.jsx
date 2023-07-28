@@ -27,13 +27,13 @@ export default function Login() {
   };
 
   const handleLogin = () => {
-    // Verificar si el email o la contraseña están vacíos
+    
     if (!email.trim() || !password.trim()) {
       setError(true);
       setTimeout(() => {
         setError(false);
       }, 5000);
-      return; // Evitar enviar la solicitud si hay campos vacíos
+      return; 
     }
 
     const usuario = {

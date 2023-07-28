@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { cerrarSesion } from "../../features/userSlice";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../../components/spinner/Spinner";
+import { Box } from "@mui/material";
 
 const CerrarSesion = () => {
   const dispatch = useDispatch();
@@ -13,9 +15,20 @@ const CerrarSesion = () => {
     }, 2000);
   });
   return (
-    <div className="d-flex justify-content-center align-items-center" >
-      <h3>Cerrando sesion</h3>
-    </div>
+    <>
+      <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingTop: "2rem"        
+      }}
+    >
+      <h3>Cerrando sesión...</h3>
+      <Spinner />
+    </Box>
+    </>
   );
 };
 

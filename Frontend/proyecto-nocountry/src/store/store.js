@@ -4,18 +4,16 @@ import userSlice  from "../features/userSlice";
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-
-
 const productPersistConfig = {
     key: 'favorite',
     storage,
-    blacklist: [], // Puedes especificar los campos que no deseas persistir aquí
+    blacklist: [], 
 };
 
 const userPersistConfig = {
     key: 'user',
     storage,
-    blacklist: [], // Excluye el campo 'logueado' de la persistencia
+    blacklist: [], 
 };
 
 const persistedProductReducer = persistReducer(productPersistConfig, productSlice);
