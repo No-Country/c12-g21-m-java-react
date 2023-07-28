@@ -20,4 +20,4 @@ Sofía Allegretti **(UX/UI)**
 ------------
 
 ### Stack/Tecnologías 
-Java, React, Figma
+Java, Spring Boot, PostgreSQL, React, Figma
