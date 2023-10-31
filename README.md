@@ -5,7 +5,7 @@ Bienvenidos al repositorio de **[Re-House](https://rehouseweb.onrender.com/)**. 
 De una manera muy sencilla te podrás registrar y vender aquel mueble usado que ya no usas, así como también podrás hacer compras. Con nuestro sistema de mensajería interna luego de reservar el producto te podrás contactar con el vendedor para coordinar la transacción y entrega.
 Pueden ingresar al sitio en:
 <p align="center"><a href="https://rehouseweb.onrender.com/">https://rehouseweb.onrender.com/</a></p>
-<p  align="center" ><a href="" target="_blank" rel="noopener noreferrer"> <img src="https://img.shields.io/badge/Video Preview%20-%23FF0000.svg?&style=for-the-badge&logo=YouTube&logoColor=white"/></a></p>
+<p  align="center" ><a href="https://dms.licdn.com/playlist/vid/D5605AQHg58tjmRGyHA/mp4-720p-30fp-crf28/0/1691073171882?e=1699365600&v=beta&t=QvIpnRsRdfLCiJtHmHN6UCjWkn6pODYcdLeBfT9J4cg" target="_blank" rel="noopener noreferrer"> <img src="https://img.shields.io/badge/Video" Preview%20-%23FF0000.svg?&style=for-the-badge&logo=YouTube&logoColor=white"/></a></p>
 
 ## 🚀Equipo de desarrollo
 
